@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.svg">
-    <home msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="/"><img src="./assets/logo.svg" width="300" /></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link home" :class="[{ 'active' : $route.name === 'home' }]" href="/"><img src="./assets/home-icon.svg" alt="" class="homeicon" /></a>
+              <a class="nav-item nav-link" :class="[{ 'active' : $route.name === 'sendxrp' }]" href="sendxrp">SEND XRP</a>
+              <a class="nav-item nav-link" :class="[{ 'active' : $route.name === 'faq' }]" href="faq">FAQ</a>
+              <a class="nav-item nav-link" :class="[{ 'active' : $route.name === 'support' }]" href="support">SUPPORT</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+    <router-view/>
+    <footer>
+      <img src="./assets/bird-icon.svg" class="bird" />
+      <img src="./assets/footer-black.svg" class="dark" />
+      <img src="./assets/footer-light.svg" class="light" />
+    </footer>
   </div>
 </template>
 
-<script>
-import Home from './components/pageHome.vue'
-
-export default {
-  name: 'app',
-  components: {
-    Home
-  }
-}
-</script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import './assets/scss/xrparrot.css';
+  @import './assets/fontawesome/fontawesome.css';
 </style>
