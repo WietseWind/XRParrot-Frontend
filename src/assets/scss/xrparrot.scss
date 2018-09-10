@@ -1,0 +1,130 @@
+$dark: #2C3142;
+$light: #E9ECF6;
+$pink: #EF566C;
+$blue: #32A9F5;
+$orange: #FFAE00;
+$lightgrey: #FBFBFB;
+
+$primary: $blue;
+
+html, body, h1 { font-family: 'Rubik', sans-serif; font-weight: 400; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+p, small { font-family: 'Roboto', sans-serif; font-weight: 300; }
+small { font-family: 'Roboto', sans-serif; font-weight: 700; display: inline-block; padding-bottom: 10px; }
+
+.btn-primary { background:$primary; border-color:$primary; }
+.btn-primary:hover { background:darken($primary, 15%); border-color:darken($primary, 15%); }
+
+
+
+body {
+    background:$lightgrey;
+}
+
+nav {
+    padding:1.5rem 1rem !important; 
+    .navbar-nav .nav-item { font-weight:500; margin-left:50px; line-height:20px; padding:0.7rem 1rem 0.5rem 1rem !important; color:$dark; }
+    .navbar-nav .nav-item.home { padding:0.5rem 1rem 0.5rem 1rem !important; }
+    .navbar-nav .nav-item img { height:20px; vertical-align:-3px; display:inline-block; }
+    .navbar-nav .nav-item.active { background:$light; border-radius:100px; }
+    .navbar-nav .nav-item:hover { color:$pink; }
+    .navbar-nav .nav-item:hover img { fill:$pink; }
+}
+
+.btn {
+    padding:0.65rem 3rem 0.55rem 3rem; font-weight:500; font-size:18px;  margin-bottom:40px;
+    border-radius:50px;
+    span { margin-left:-50px; transition:all 0.15s ease-in-out; }
+    &:hover {
+        span { margin-left:0px; transition:all 0.15s ease-in-out; }
+    }
+}
+
+input {
+     font-weight:500; font-size:20px; color:$blue !important;
+}
+
+div.headlines {
+    h2 { margin-top:40px; font-size:25px; }
+    h2 b { width:43px; height:43px; display:inline-block; background:$light; border-radius:100px; line-height:43px; margin-right:10px; }
+}
+div.cta {
+    padding-top:100px; padding-bottom:100px;
+    a.btn {
+        padding:1rem 3rem 0.8rem 3rem; font-weight:500; font-size:18px; width:280px; margin-bottom:40px;
+        border-radius:50px;
+        img { height:16px; vertical-align:-2px; margin-right:40px; opacity:0; transition:all 0.15s ease-in-out; }
+        span { margin-left:-50px; transition:all 0.15s ease-in-out; }
+        &:hover {
+            img { margin-right:10px; opacity:1; transition:all 0.15s ease-in-out; }
+            span { margin-left:0px; transition:all 0.15s ease-in-out; }
+        }
+    }
+}
+
+footer {
+    width:100%;
+    position:fixed; bottom:0; left:0;
+    img.bird { position:absolute; left:40px; bottom:44px; z-index:100;}
+    img.dark { position:absolute; left:0px; bottom:0px; }
+    img.light { position:absolute; right:0px; bottom:0px; }
+}
+
+
+// SEND XRP
+
+div.sendnav {
+    .link { 
+        color:$dark; font-size:20px; font-weight:500; text-decoration:none; padding:1rem 0.3rem; cursor:pointer;
+        b { font-size:30px; vertical-align:-3px; margin-right:15px; }
+        &.active { color:$orange; border-bottom:3px solid $orange; }
+        &:not(.active):hover  { color:$dark; border-bottom:3px solid $light; }
+    }
+}
+
+
+div.prephone {
+    width:130px; position:relative; margin-right:15px; 
+    input { padding-left:50px; font-weight:500; font-size:20px; }
+    i.fa { position:absolute; left:15px; top:11px; font-size:28px; color:$dark; }
+}
+div.phonenumber {
+    position:relative; margin-right:15px; 
+    input { padding-left:15px; padding-right:15px; font-weight:500; font-size:20px; text-align:center; }
+}
+div.phonecode {
+    width:160px; position:relative; margin-right:15px; 
+    input { text-align:center; font-weight:500; font-size:20px;  }
+}
+div.iban {
+    position:relative; margin-right:15px;
+    input { width:300px; }
+}
+button.sendsms { margin:0; }
+button.next { margin:0; }
+
+// FAQ
+div.faqlist {
+    margin-bottom:200px;
+}
+div.faq-item {
+    background:#fff; box-shadow: 0 4px 12px 0 rgba(0,0,0,0.15); border-radius: 6px;
+    margin-bottom:3rem; padding-left:0; padding-right:0;
+    input { display:none !important; }
+    input:checked ~ label.faq-header i { color:$dark; transform:rotate(180deg); }
+    input:checked ~ div.faq-body { height:auto; overflow:visible; padding:1.333rem; transition:all 0.3s ease-in-out; }
+
+    label.faq-header {
+        width:100%; display:block;
+        top:inherit; font-size:inherit; position:relative; pointer-events:inherit; cursor:pointer; border-radius: 6px;
+        padding:1.333rem 5.333rem 1rem 1.333rem; margin-bottom:0; left:0 !important;
+        h4 { color:$pink; font-weight:bold; }
+        i.fa { position:absolute; right: 2rem; top: 1.5rem; font-size: 1.7em; color:$blue; }
+    }
+    div.faq-body {
+        height:0px; overflow:hidden; padding:0 1.333rem; transition:all 0.15s ease-in-out; 
+    }
+    &:hover {
+        label.faq-header { background:#f9f9f9; }
+        input:checked ~ label.faq-header { background:#fff; }
+    }
+}
