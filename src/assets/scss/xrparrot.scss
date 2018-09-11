@@ -27,6 +27,7 @@ nav {
     .navbar-nav .nav-item.active { background:$light; border-radius:100px; }
     .navbar-nav .nav-item:hover { color:$pink; }
     .navbar-nav .nav-item:hover img { fill:$pink; }
+    .navbar-collapse { flex-direction: row-reverse; }
 }
 
 .btn {
@@ -137,14 +138,32 @@ div.phonecode {
 }
 div.iban {
     position:relative; margin-right:15px;
-    input { width:300px; }
+    input { width:350px; }
+}
+div.tag {
+    position:relative; margin-right:15px;
+    input { width:200px; }
+}
+div.destinationtag {
+  p { margin:0; }
+}
+div.confirm {
+  p b { font-size:1.5rem; }
 }
 button.sendsms { margin:1rem 0 !important; font-size:1rem !important; }
 button.next { margin:0 !important; }
 
+
+
+
 div.nextnav {
   position: absolute; bottom:0px; 
 }
+
+
+
+
+
 // FAQ
 div.faqlist {
     margin-bottom:200px;
@@ -170,4 +189,24 @@ div.faq-item {
         label.faq-header { background:#f9f9f9; }
         input:checked ~ label.faq-header { background:#fff; }
     }
+}
+
+
+
+
+
+@media (max-width: 767.98px) {
+  .navbar-nav { 
+    margin-top:20px !important;
+    padding: 8px;
+    border-radius: 25px;
+    background: #d4d9e630;
+    // position: absolute;
+    // width: calc(100% - 2rem);
+    // top: 100px;
+  }
+  .navbar-nav .nav-item { margin-left:0.5rem !important; text-align:center; }
+
+  .page.pt-5 , .page.mt-5 { margin-top:0 !important; padding-top:0 !important; }
+  img.visual { max-width:100%; }
 }

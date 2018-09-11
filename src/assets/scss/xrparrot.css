@@ -47,6 +47,11 @@ nav {
     color: #EF566C; }
   nav .navbar-nav .nav-item:hover img {
     fill: #EF566C; }
+  nav .navbar-collapse {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse; }
 
 .btn {
   padding: 0.65rem 3rem 0.55rem 3rem !important;
@@ -233,7 +238,19 @@ div.iban {
   position: relative;
   margin-right: 15px; }
   div.iban input {
-    width: 300px; }
+    width: 350px; }
+
+div.tag {
+  position: relative;
+  margin-right: 15px; }
+  div.tag input {
+    width: 200px; }
+
+div.destinationtag p {
+  margin: 0; }
+
+div.confirm p b {
+  font-size: 1.5rem; }
 
 button.sendsms {
   margin: 1rem 0 !important;
@@ -303,3 +320,18 @@ div.faq-item {
     background: #f9f9f9; }
   div.faq-item:hover input:checked ~ label.faq-header {
     background: #fff; }
+
+@media (max-width: 767.98px) {
+  .navbar-nav {
+    margin-top: 20px !important;
+    padding: 8px;
+    border-radius: 25px;
+    background: #d4d9e630; }
+  .navbar-nav .nav-item {
+    margin-left: 0.5rem !important;
+    text-align: center; }
+  .page.pt-5, .page.mt-5 {
+    margin-top: 0 !important;
+    padding-top: 0 !important; }
+  img.visual {
+    max-width: 100%; } }

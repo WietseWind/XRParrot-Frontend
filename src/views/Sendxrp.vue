@@ -50,16 +50,24 @@
             <div class="d-lg-flex justify-content-center align-items-center text-center">
                 <div class="iban">
                   <input type="text" class="form-control form-control-lg" placeholder="Destination address" v-model="destination">
+                </div>
+                <div class="tag">
                   <input type="text" class="form-control form-control-lg" placeholder="Tag" v-model="tag">
                 </div>
                 <button class="btn btn-primary next" @click="changePage('confirm', 3)">OK</button>
             </div>
         </div>
-        <div v-if="activePage === 'confirm'" class="innerpage">
-           <p class="text-center">You entered this as the destination:</p>
-           <p class="text-center"><b>{{ destination }}</b></p>
-           <p class="text-center">And this as the IBAN:</p>
-           <p class="text-center"><b>{{ iban }}</b></p>
+        <div v-if="activePage === 'confirm'" class="innerpage text-center confirm">
+          <div class="destinationtag">
+            <p class="text-center">You entered this as the destination:</p>
+            <p class="text-center"><b>{{ destination }}</b></p>
+            <p class="text-center" v-if="tag.length > 0">Tag:<small>{{ tag }}</small></p>
+          </div>
+          <div class="ibanconf">
+            <p class="text-center">And this as the IBAN:</p>
+            <p class="text-center"><b>{{ iban }}</b></p>
+          </div>
+          <button class="btn btn-success next" @click="sendTransfer('confirm', 3)">Confirm &amp; Send</button>
         </div>
     </div>
 </div>

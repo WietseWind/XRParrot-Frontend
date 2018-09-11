@@ -4,9 +4,9 @@
         <div class="container">
           <a class="navbar-brand" href="/"><img src="./assets/logo.svg" width="300" /></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="fa fa-bars"></i>
           </button>
-          <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNavAltMarkup">
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-item nav-link home" :class="[{ 'active' : $route.name === 'home' }]" href="/"><img src="./assets/home-icon.svg" alt="" class="homeicon" /></a>
               <a class="nav-item nav-link" :class="[{ 'active' : $route.name === 'sendxrp' }]" href="sendxrp">SEND XRP</a>

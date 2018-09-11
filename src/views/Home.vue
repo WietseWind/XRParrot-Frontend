@@ -1,9 +1,9 @@
 <template>
-  <div class="container mt-5 pt-5">
+  <div class="container page mt-5 pt-5">
     <div class="d-lg-flex justify-content-around align-items-center text-center visuals">
-      <div class="col-12 col-lg-4"><img src="../assets/visual-form.svg" alt="" class="visual" /></div>
-      <div class="col-12 col-lg-4"><img src="../assets/visual-iban.svg" alt="" class="visual" /></div>
-      <div class="col-12 col-lg-4"><img src="../assets/visual-xrp.svg" alt="" class="visual" /></div>
+      <div class="col-4"><img src="../assets/visual-form.svg" alt="" class="visual" /></div>
+      <div class="col-4"><img src="../assets/visual-iban.svg" alt="" class="visual" /></div>
+      <div class="col-4"><img src="../assets/visual-xrp.svg" alt="" class="visual" /></div>
     </div>
     <div class="d-lg-flex justify-content-around align-items-center text-center headlines">
       <h2 class="col-12 col-lg-4"><b>1</b> Fill Form</h2>
