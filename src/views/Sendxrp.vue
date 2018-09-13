@@ -2,10 +2,26 @@
  <div class="container mt-1 pt-5 page">
     
     <div class="d-lg-flex justify-content-around align-items-center text-center sendnav">
-        <div class="col-12 col-lg-3"><span @click="changePage('verify', 0)" class="link verify" :class="[{ 'active' : activePage === 'verify' }]"><b>1</b> Verify phone <i v-if="pageStep > 0 && phoneNumber.length !== 0" class="fa fa-check-circle"></i></span></div>
-        <div class="col-12 col-lg-3"><span @click="changePage('iban', 1)" class="link iban" :class="[{ 'active' : activePage === 'iban' }]"><b>2</b> Enter source IBAN <i v-if="pageStep > 1" class="fa fa-check-circle"></i></span></div>
-        <div class="col-12 col-lg-3"><span @click="changePage('destination', 2)" class="link destination" :class="[{ 'active' : activePage === 'destination' }]"><b>3</b> Destination <i v-if="pageStep > 2" class="fa fa-check-circle"></i></span></div>
-        <div class="col-12 col-lg-3"><span @click="changePage('confirm', 3)" class="link confirm" :class="[{ 'active' : activePage === 'confirm' }]"><b>4</b> Confirm & Transfer <i v-if="pageStep > 3" class="fa fa-check-circle"></i></span></div>
+        <span @click="changePage('verify', 0)" class="link verify" :class="[{ 'active' : activePage === 'verify' , 'history' : pageStep > 0 }]">
+            <b>1</b>
+            <span>Verify phone</span>
+            <i v-if="pageStep > 0 && phoneNumber.length !== 0" class="fa fa-check-circle"></i>
+        </span>
+        <span @click="changePage('iban', 1)" class="link iban" :class="[{ 'active' : activePage === 'iban' , 'history' : pageStep > 1 }]">
+            <b>2</b>
+            <span>Enter source IBAN</span>
+            <i v-if="pageStep > 1" class="fa fa-check-circle"></i>
+        </span>
+        <span @click="changePage('destination', 2)" class="link destination" :class="[{ 'active' : activePage === 'destination' , 'history' : pageStep > 2 }]">
+            <b>3</b>
+            <span>Destination</span>
+            <i v-if="pageStep > 2" class="fa fa-check-circle"></i>
+        </span>
+        <span @click="changePage('confirm', 3)" class="link confirm" :class="[{ 'active' : activePage === 'confirm' , 'history' : pageStep > 3 }]">
+            <b>4</b>
+            <span>Confirm &amp; Transfer</span>
+            <i v-if="pageStep > 3" class="fa fa-check-circle"></i>
+        </span>
     </div>
     
     <div class="mt-5 pt-5 sendflow">
@@ -17,22 +33,24 @@
                     <vue-tel-input v-model="phoneNumber" :preferredCountries="prefCountry" placeholder="Phonenumber" class="phonenumber"></vue-tel-input>
                     <button class="btn btn-success sendsms" @click="sendSMS()">Send sms</button>
                 </div>
-                <div class="nextnav text-center">
+                <!-- <div class="nextnav text-center">
                   <button class="btn btn-primary" disabled>NEXT <i class="fa fa-angle-right"></i></button>
-                </div>
+                </div> -->
             </div>
             
             <div v-if="phonestep === 1">
                 <p class="text-center">Enter the verification code:</p>
                 <div class="d-lg-flex justify-content-center align-items-center text-center">
+                    
                     <div class="phonecode">
                       <input type="text" class="form-control form-control-lg" placeholder="12345">
                     </div>
-                    <button class="btn btn-light sendsms" @click="phonestep = 0, phoneNumber = ''"><i class="fa fa-redo fa-sm fa-flip-horizontal"></i> Retry</button>
+                    <button class="btn btn-primary next" @click="changePage('iban', 1)">NEXT <i class="fa fa-angle-right"></i></button>
+                    <button class="btn btn-light retrysms" @click="phonestep = 0, phoneNumber = ''"><i class="fa fa-redo fa-sm fa-flip-horizontal"></i> Retry</button>
                 </div>
-                <div class="nextnav text-center">
+                <!-- <div class="nextnav text-center">
                   <button class="btn btn-primary next" @click="changePage('iban', 1)">NEXT <i class="fa fa-angle-right"></i></button>
-                </div>
+                </div> -->
             </div>
             
         </div>

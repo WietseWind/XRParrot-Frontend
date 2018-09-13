@@ -73,7 +73,8 @@ nav {
 input {
   font-weight: 500;
   font-size: 20px;
-  color: #32A9F5 !important; }
+  color: #32A9F5 !important;
+  border-radius: 50px !important; }
   input::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     font-size: 1rem;
@@ -97,6 +98,10 @@ div.innerpage {
 
 div.nextnav {
   width: 100%; }
+
+div.sendflow {
+  display: block;
+  clear: both; }
 
 div.headlines h2 {
   margin-top: 40px;
@@ -165,35 +170,34 @@ footer {
     right: 0px;
     bottom: 0px; }
 
-div.sendnav .link {
-  color: #2C3142;
-  font-size: 20px;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 1rem 0.3rem;
-  cursor: pointer; }
-  div.sendnav .link b {
-    font-size: 30px;
-    vertical-align: -3px;
-    margin-right: 15px; }
-  div.sendnav .link.active {
-    color: #FFAE00;
-    border-bottom: 3px solid #FFAE00; }
-  div.sendnav .link:not(.active):hover {
-    color: #2C3142;
-    border-bottom: 3px solid #E9ECF6; }
-  div.sendnav .link i.fa-check-circle {
-    color: #8AD455;
-    position: absolute; }
-  div.sendnav .link.verify i.fa-check-circle {
-    right: 33px;
-    top: 0px; }
-  div.sendnav .link.iban i.fa-check-circle {
-    right: 7px;
-    top: 0px; }
-  div.sendnav .link.destination i.fa-check-circle {
-    right: 30px;
-    top: 0px; }
+div.sendnav {
+  display: block;
+  position: relative; }
+  div.sendnav .link {
+    position: relative;
+    color: #99a0bb;
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 1rem 0.3rem 0.3rem 0.3rem;
+    cursor: pointer; }
+    div.sendnav .link b {
+      font-size: 30px;
+      vertical-align: -3px;
+      margin-right: 15px; }
+    div.sendnav .link.active {
+      color: #FFAE00;
+      border-bottom: 3px solid #FFAE00; }
+    div.sendnav .link.history {
+      color: #2C3142; }
+      div.sendnav .link.history span {
+        color: #2C3142; }
+    div.sendnav .link:not(.active):hover {
+      color: #2C3142;
+      border-bottom: 3px solid #E9ECF6; }
+    div.sendnav .link i.fa-check-circle {
+      color: #8AD455;
+      position: absolute; }
 
 div.vue-tel-input {
   width: 360px;
@@ -201,7 +205,8 @@ div.vue-tel-input {
   margin-right: 15px;
   padding: .5rem 1rem .5rem .5rem;
   font-weight: 500;
-  font-size: 20px; }
+  font-size: 20px;
+  border-radius: 50px !important; }
   div.vue-tel-input div.dropdown {
     z-index: 9999;
     outline: none !important; }
@@ -209,12 +214,17 @@ div.vue-tel-input {
       width: 360px;
       left: -9px;
       top: 45px;
-      border-radius: 3px;
+      border-radius: 25px;
       outline: none !important; }
     div.vue-tel-input div.dropdown li.dropdown-item {
       font-size: 1rem; }
     div.vue-tel-input div.dropdown li.dropdown-item strong {
       font-weight: 500; }
+    div.vue-tel-input div.dropdown li.preferred {
+      padding-top: 8px;
+      padding-bottom: 4px; }
+    div.vue-tel-input div.dropdown:hover, div.vue-tel-input div.dropdown.open {
+      border-radius: 15px; }
 
 div.phonenumber {
   position: relative;
@@ -253,8 +263,12 @@ div.confirm p b {
   font-size: 1.5rem; }
 
 button.sendsms {
-  margin: 1rem 0 !important;
-  font-size: 1rem !important; }
+  margin: 1rem 0 !important; }
+
+button.retrysms {
+  margin: 1rem 1rem 1rem 0 !important;
+  font-size: 1rem !important;
+  padding: 0.65rem 1.5rem 0.55rem 1.5rem !important; }
 
 button.next {
   margin: 0 !important; }
@@ -322,6 +336,11 @@ div.faq-item {
     background: #fff; }
 
 @media (max-width: 767.98px) {
+  .navbar-brand img {
+    max-width: 250px;
+    margin-left: 10px; }
+  .navbar-toggler i {
+    font-size: 1.5rem; }
   .navbar-nav {
     margin-top: 20px !important;
     padding: 8px;
@@ -330,8 +349,117 @@ div.faq-item {
   .navbar-nav .nav-item {
     margin-left: 0.5rem !important;
     text-align: center; }
+  div.sendnav {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+    div.sendnav .link {
+      font-size: 20px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 0.4rem 0.3rem;
+      cursor: pointer;
+      display: block;
+      float: left;
+      margin: 0;
+      width: calc(25% - 10px);
+      margin-right: 5px;
+      margin-left: 5px;
+      -webkit-transition: all 0.15s ease-in-out;
+      -o-transition: all 0.15s ease-in-out;
+      transition: all 0.15s ease-in-out; }
+      div.sendnav .link b {
+        font-size: 20px;
+        margin-left: 10px;
+        margin-right: 10px; }
+      div.sendnav .link span {
+        position: absolute;
+        top: 92%;
+        font-size: 10px;
+        left: -10%;
+        color: #5f6a8f;
+        width: 120%; }
+      div.sendnav .link i.fa-check-circle {
+        left: 2px !important;
+        top: 2px !important;
+        color: #8AD455 !important;
+        right: inherit !important; }
+      div.sendnav .link.active {
+        color: #ffffff;
+        color: #FFAE00;
+        border-bottom: none;
+        -webkit-transition: all 0.15s ease-in-out;
+        -o-transition: all 0.15s ease-in-out;
+        transition: all 0.15s ease-in-out; }
+        div.sendnav .link.active b {
+          font-size: 23px;
+          line-height: 43px;
+          vertical-align: middle;
+          background: #ffae00;
+          width: 40px;
+          display: block;
+          height: 40px;
+          border-radius: 50px;
+          color: #fff;
+          margin: 0 auto;
+          -webkit-transition: all 0.15s ease-in-out;
+          -o-transition: all 0.15s ease-in-out;
+          transition: all 0.15s ease-in-out; }
+        div.sendnav .link.active span {
+          color: #FFAE00;
+          top: 105%; }
+  input {
+    text-align: center; }
+  div.phonecode {
+    width: 100%;
+    margin-right: 0 !important;
+    margin-bottom: 1rem; }
+  div.phonenumber {
+    width: 100%;
+    margin-right: 0 !important; }
+  div.phonenumber input {
+    padding-left: 0px;
+    padding-right: 45px; }
+  div.iban {
+    width: 100%;
+    margin-right: 0 !important; }
+  div.iban input {
+    width: 100%;
+    margin-right: 0 !important;
+    margin-bottom: 1rem; }
+  div.tag {
+    width: 100%;
+    margin-right: 0 !important; }
+  div.tag input {
+    width: 100%;
+    margin-right: 0 !important;
+    margin-bottom: 1rem; }
+  .dropdown ul {
+    max-width: 330px !important;
+    overflow: hidden; }
+  .btn {
+    width: 100%; }
   .page.pt-5, .page.mt-5 {
     margin-top: 0 !important;
     padding-top: 0 !important; }
+  .headlines {
+    width: 80%;
+    margin: 0 auto; }
+  .headlines h2 {
+    margin-top: 20px !important;
+    text-align: left; }
+  .headlines h2 b {
+    text-align: center; }
   img.visual {
-    max-width: 100%; } }
+    max-width: 100%; }
+  div.cta {
+    padding-top: 50px;
+    padding-bottom: 0px; }
+  footer {
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.7);
+    -webkit-transform-origin: bottom left;
+    -ms-transform-origin: bottom left;
+    transform-origin: bottom left; } }

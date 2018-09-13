@@ -1,9 +1,6 @@
 <template>
   <div class="container">
-    <div class="col-6 offset-3">
-      <br>
-      <br>
-      <br>
+    <div class="col-12 offset-md-3 col-md-6 pt-3">
       <form>
         <div class="form-group">
           <label for="inputName">Name</label>
@@ -14,7 +11,7 @@
           <textarea type="text" class="form-control form-control-lg" id="inputMessage" placeholder="Got any questions?" rows="5"></textarea>
         </div>
         <div class="form-group text-center">
-          <button type="submit" class="btn btn-primary">Send support question</button>
+          <button type="submit" class="btn btn-block btn-primary">Send support question</button>
         </div>
       </form>
     </div>
