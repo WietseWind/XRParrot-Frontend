@@ -70,27 +70,35 @@ nav {
     -o-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out; }
 
+textarea,
 input {
   font-weight: 500;
   font-size: 20px;
   color: #32A9F5 !important;
   border-radius: 50px !important; }
+  textarea::-webkit-input-placeholder,
   input::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     font-size: 1rem;
     text-transform: uppercase; }
+  textarea::-moz-placeholder,
   input::-moz-placeholder {
     /* Firefox 19+ */
     font-size: 1rem;
     text-transform: uppercase; }
+  textarea:-ms-input-placeholder,
   input:-ms-input-placeholder {
     /* IE 10+ */
     font-size: 1rem;
     text-transform: uppercase; }
+  textarea:-moz-placeholder,
   input:-moz-placeholder {
     /* Firefox 18- */
     font-size: 1rem;
     text-transform: uppercase; }
+
+textarea {
+  border-radius: 20px !important; }
 
 div.innerpage {
   position: relative;
@@ -180,11 +188,16 @@ div.sendnav {
     font-weight: 500;
     text-decoration: none;
     padding: 1rem 0.3rem 0.3rem 0.3rem;
-    cursor: pointer; }
+    cursor: pointer;
+    padding-top: 33px !important; }
     div.sendnav .link b {
       font-size: 30px;
-      vertical-align: -3px;
-      margin-right: 15px; }
+      position: absolute;
+      top: 0;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%); }
     div.sendnav .link.active {
       color: #FFAE00;
       border-bottom: 3px solid #FFAE00; }
@@ -255,9 +268,63 @@ div.tag {
   margin-right: 15px; }
   div.tag input {
     width: 200px; }
+  div.tag ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 8px;
+    left: 8px; }
+    div.tag ul .tgl {
+      display: none; }
+    div.tag ul .tgl, div.tag ul .tgl:after, div.tag ul .tgl:before, div.tag ul .tgl *, div.tag ul .tgl *:after, div.tag ul .tgl *:before, div.tag ul .tgl + .tgl-btn {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box; }
+    div.tag ul .tgl::-moz-selection, div.tag ul .tgl:after::-moz-selection, div.tag ul .tgl:before::-moz-selection, div.tag ul .tgl *::-moz-selection, div.tag ul .tgl *:after::-moz-selection, div.tag ul .tgl *:before::-moz-selection, div.tag ul .tgl + .tgl-btn::-moz-selection {
+      background: none; }
+    div.tag ul .tgl::selection, div.tag ul .tgl:after::selection, div.tag ul .tgl:before::selection, div.tag ul .tgl *::selection, div.tag ul .tgl *:after::selection, div.tag ul .tgl *:before::selection, div.tag ul .tgl + .tgl-btn::selection {
+      background: none; }
+    div.tag ul .tgl + .tgl-btn {
+      outline: 0;
+      display: block;
+      width: 4em;
+      height: 2em;
+      position: relative;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none; }
+    div.tag ul .tgl + .tgl-btn:after, div.tag ul .tgl + .tgl-btn:before {
+      position: relative;
+      display: block;
+      content: "";
+      width: 50%;
+      height: 100%; }
+    div.tag ul .tgl + .tgl-btn:after {
+      left: 0; }
+    div.tag ul .tgl + .tgl-btn:before {
+      display: none; }
+    div.tag ul .tgl:checked + .tgl-btn:after {
+      left: 50%; }
+    div.tag ul .tgl-light + .tgl-btn {
+      background: #d7dde2;
+      border-radius: 2em;
+      padding: 2px;
+      -webkit-transition: all .4s ease;
+      -o-transition: all .4s ease;
+      transition: all .4s ease; }
+    div.tag ul .tgl-light + .tgl-btn:after {
+      border-radius: 50%;
+      background: #fff;
+      -webkit-transition: all .2s ease;
+      -o-transition: all .2s ease;
+      transition: all .2s ease; }
+    div.tag ul .tgl-light:checked + .tgl-btn {
+      background: #8AD455; }
 
-div.destinationtag p {
-  margin: 0; }
+div.tag input {
+  padding-left: 80px; }
 
 div.confirm p b {
   font-size: 1.5rem; }
@@ -285,7 +352,7 @@ div.faq-item {
   -webkit-box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
   border-radius: 6px;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   padding-left: 0;
   padding-right: 0; }
   div.faq-item input {
@@ -311,16 +378,18 @@ div.faq-item {
     pointer-events: inherit;
     cursor: pointer;
     border-radius: 6px;
-    padding: 1.333rem 5.333rem 1rem 1.333rem;
+    padding: 1.5rem 5.333rem 0.5rem 1.333rem;
     margin-bottom: 0;
     left: 0 !important; }
     div.faq-item label.faq-header h4 {
-      color: #EF566C;
-      font-weight: bold; }
+      color: #2C3142;
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 1.5rem; }
     div.faq-item label.faq-header i.fa {
       position: absolute;
-      right: 2rem;
-      top: 1.5rem;
+      right: 1.5rem;
+      top: 1.2rem;
       font-size: 1.7em;
       color: #32A9F5; }
   div.faq-item div.faq-body {
@@ -338,22 +407,51 @@ div.faq-item {
 @media (max-width: 767.98px) {
   .navbar-brand img {
     max-width: 250px;
-    margin-left: 10px; }
+    margin-left: 10px;
+    position: relative;
+    z-index: 999999999 !important; }
   .navbar-toggler i {
-    font-size: 1.5rem; }
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 999999999 !important; }
   .navbar-nav {
-    margin-top: 20px !important;
-    padding: 8px;
-    border-radius: 25px;
-    background: #d4d9e630; }
+    padding: 110px 15px 0px 15px;
+    background: #ffffff;
+    height: 100%; }
   .navbar-nav .nav-item {
-    margin-left: 0.5rem !important;
-    text-align: center; }
+    margin-left: 1rem !important;
+    text-align: center;
+    line-height: 50px !important; }
+  .collapsing {
+    position: fixed !important;
+    height: 100% !important;
+    width: 100% !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    overflow: visible;
+    opacity: 1;
+    z-index: 99999999 !important;
+    -webkit-transition: opacity .35s ease;
+    -o-transition: opacity .35s ease;
+    transition: opacity .35s ease; }
+  .navbar-collapse.show {
+    -webkit-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    z-index: 99999999 !important; }
   div.sendnav {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none; }
+    user-select: none;
+    margin-top: 20px; }
     div.sendnav .link {
       font-size: 20px;
       font-weight: 500;
@@ -370,16 +468,14 @@ div.faq-item {
       -o-transition: all 0.15s ease-in-out;
       transition: all 0.15s ease-in-out; }
       div.sendnav .link b {
-        font-size: 20px;
-        margin-left: 10px;
-        margin-right: 10px; }
+        font-size: 20px; }
       div.sendnav .link span {
         position: absolute;
         top: 92%;
         font-size: 10px;
         left: -10%;
         color: #5f6a8f;
-        width: 120%; }
+        width: 115%; }
       div.sendnav .link i.fa-check-circle {
         left: 2px !important;
         top: 2px !important;
@@ -387,27 +483,33 @@ div.faq-item {
         right: inherit !important; }
       div.sendnav .link.active {
         color: #ffffff;
-        color: #FFAE00;
+        color: #2C3142;
         border-bottom: none;
+        padding-top: 29px !important;
         -webkit-transition: all 0.15s ease-in-out;
         -o-transition: all 0.15s ease-in-out;
         transition: all 0.15s ease-in-out; }
         div.sendnav .link.active b {
-          font-size: 23px;
-          line-height: 43px;
-          vertical-align: middle;
-          background: #ffae00;
+          font-size: 22px;
+          line-height: 41px;
+          background: #2C3142;
           width: 40px;
           display: block;
           height: 40px;
           border-radius: 50px;
           color: #fff;
           margin: 0 auto;
+          position: absolute;
+          top: -10px;
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
           -webkit-transition: all 0.15s ease-in-out;
           -o-transition: all 0.15s ease-in-out;
           transition: all 0.15s ease-in-out; }
         div.sendnav .link.active span {
-          color: #FFAE00;
+          color: #2C3142;
           top: 105%; }
   input {
     text-align: center; }

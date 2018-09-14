@@ -1,8 +1,5 @@
 <template>
   <div class="container">
-    <br>
-    <br>
-    <br>
     <div class="col-12 faqlist">
         <div class="faq-item">
             <input id="ac-1" type="checkbox" checked />

@@ -14,7 +14,7 @@
         </span>
         <span @click="changePage('destination', 2)" class="link destination" :class="[{ 'active' : activePage === 'destination' , 'history' : pageStep > 2 }]">
             <b>3</b>
-            <span>Destination</span>
+            <span>Destination &amp; Tag</span>
             <i v-if="pageStep > 2" class="fa fa-check-circle"></i>
         </span>
         <span @click="changePage('confirm', 3)" class="link confirm" :class="[{ 'active' : activePage === 'confirm' , 'history' : pageStep > 3 }]">
@@ -31,7 +31,7 @@
                 <p class="text-center">Please verify your phone first</p>
                 <div class="d-lg-flex justify-content-center align-items-center text-center">
                     <vue-tel-input v-model="phoneNumber" :preferredCountries="prefCountry" placeholder="Phonenumber" class="phonenumber"></vue-tel-input>
-                    <button class="btn btn-success sendsms" @click="sendSMS()">Send sms</button>
+                    <button class="btn btn-primary sendsms" @click="sendSMS()">Send sms</button>
                 </div>
                 <!-- <div class="nextnav text-center">
                   <button class="btn btn-primary" disabled>NEXT <i class="fa fa-angle-right"></i></button>
@@ -70,7 +70,13 @@
                   <input type="text" class="form-control form-control-lg" placeholder="Destination address" v-model="destination">
                 </div>
                 <div class="tag">
-                  <input type="text" class="form-control form-control-lg" placeholder="Tag" v-model="tag">
+                  <ul class="tg-list">
+                    <li class="tg-list-item">
+                      <input class="tgl tgl-light" id="cb1" type="checkbox" v-model="tagtoggle" />
+                      <label class="tgl-btn" for="cb1"></label>
+                    </li>
+                  </ul>
+                  <input type="text" class="form-control form-control-lg" :disabled="!tagtoggle" placeholder="Tag" v-model="tag">
                 </div>
                 <button class="btn btn-primary next" @click="changePage('confirm', 3)">OK</button>
             </div>
@@ -79,13 +85,16 @@
           <div class="destinationtag">
             <p class="text-center">You entered this as the destination:</p>
             <p class="text-center"><b>{{ destination }}</b></p>
-            <p class="text-center" v-if="tag.length > 0">Tag:<small>{{ tag }}</small></p>
+            <p class="text-center" v-if="tag.length > 0">
+              Tag: <span class="badge badge-primary">{{ tag }}</span>
+            </p>
           </div>
           <div class="ibanconf">
+            <hr>
             <p class="text-center">And this as the IBAN:</p>
             <p class="text-center"><b>{{ iban }}</b></p>
           </div>
-          <button class="btn btn-success next" @click="sendTransfer('confirm', 3)">Confirm &amp; Send</button>
+          <!-- <button class="btn btn-dark next" @click="sendTransfer('confirm', 3)">Confirm &amp; Send</button> -->
         </div>
     </div>
 </div>
@@ -104,6 +113,7 @@ export default {
       phoneNumber: '',
       prefCountry: ['nl'],
       destination: '',
+      tagtoggle: false,
       tag: '',
       iban: ''
     }
