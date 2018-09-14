@@ -210,7 +210,13 @@ div.sendnav {
       border-bottom: 3px solid #E9ECF6; }
     div.sendnav .link i.fa-check-circle {
       color: #8AD455;
-      position: absolute; }
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+      margin-left: -27px; }
 
 div.vue-tel-input {
   width: 360px;
@@ -267,7 +273,9 @@ div.tag {
   position: relative;
   margin-right: 15px; }
   div.tag input {
-    width: 200px; }
+    width: 200px;
+    padding-left: 80px;
+    padding-right: 80px; }
   div.tag ul {
     list-style: none;
     margin: 0;
@@ -322,9 +330,6 @@ div.tag {
       transition: all .2s ease; }
     div.tag ul .tgl-light:checked + .tgl-btn {
       background: #8AD455; }
-
-div.tag input {
-  padding-left: 80px; }
 
 div.confirm p b {
   font-size: 1.5rem; }
@@ -477,10 +482,10 @@ div.faq-item {
         color: #5f6a8f;
         width: 115%; }
       div.sendnav .link i.fa-check-circle {
-        left: 2px !important;
-        top: 2px !important;
+        top: 5px !important;
         color: #8AD455 !important;
-        right: inherit !important; }
+        right: inherit !important;
+        margin-left: -24px; }
       div.sendnav .link.active {
         color: #ffffff;
         color: #2C3142;
