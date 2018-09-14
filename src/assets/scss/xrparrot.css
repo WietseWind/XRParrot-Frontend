@@ -274,8 +274,7 @@ div.tag {
   margin-right: 15px; }
   div.tag input {
     width: 200px;
-    padding-left: 80px;
-    padding-right: 80px; }
+    padding-left: 80px; }
   div.tag ul {
     list-style: none;
     margin: 0;
@@ -540,7 +539,7 @@ div.faq-item {
     margin-right: 0 !important; }
   div.tag input {
     width: 100%;
-    margin-right: 0 !important;
+    padding-right: 80px !important;
     margin-bottom: 1rem; }
   .dropdown ul {
     max-width: 330px !important;

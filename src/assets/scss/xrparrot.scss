@@ -173,7 +173,7 @@ div.iban {
 }
 div.tag {
     position:relative; margin-right:15px;
-    input { width:200px; padding-left:80px; padding-right: 80px; }
+    input { width:200px; padding-left:80px; }
     ul {
       list-style: none; margin:0; padding:0;
       position:absolute; top:8px; left:8px;
@@ -373,7 +373,7 @@ div.faq-item {
   div.iban { width:100%; margin-right:0 !important;  }
   div.iban input { width:100%; margin-right:0 !important; margin-bottom:1rem; }
   div.tag { width:100%; margin-right:0 !important;  }
-  div.tag input { width:100%; margin-right:0 !important; margin-bottom:1rem; }
+  div.tag input { width:100%; padding-right:80px !important; margin-bottom:1rem; }
 
   .dropdown ul { 
     // position:absolute; width: calc(100% - 2rem) !important; 
