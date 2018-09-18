@@ -70,6 +70,15 @@ nav {
     -o-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out; }
 
+.modal .modal-body {
+  padding: 2rem; }
+
+.modal .modal-footer .btn {
+  margin-bottom: 0 !important;
+  max-width: 200px;
+  float: none !important;
+  margin: 0 auto; }
+
 textarea,
 input {
   font-weight: 500;
