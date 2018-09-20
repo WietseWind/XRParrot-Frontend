@@ -27,5 +27,10 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      if (window.navigator.userAgent.match(/rv:/) && !window.navigator.userAgent.match(/Edge/)) {
+        document.body.innerHTML += '<div style="width:50%; margin:200px 0 0 25%; text-align:center; font-family:arial;"><strong>We\'re sorry but xrparrot doesn\'t work properly on an older browser.</strong><br>Please use a more modern browser like the latest version of Google Chrome, Firefox or IE Edge.</div>'
+      }
+    </script>
   </body>
 </html>

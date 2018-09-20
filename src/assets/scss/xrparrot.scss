@@ -257,12 +257,6 @@ button.next { margin:0 !important; }
 
 
 
-div.nextnav {
-  position: absolute; bottom:0px; 
-}
-
-
-
 
 
 // FAQ
@@ -270,7 +264,10 @@ div.faqlist {
     margin-bottom:200px;
 }
 div.faq-item {
-    background:#fff; box-shadow: 0 4px 12px 0 rgba(0,0,0,0.15); border-radius: 6px;
+    background:#fff; 
+    //box-shadow: 0 4px 12px 0 rgba(0,0,0,0.15); 
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
     margin-bottom:1rem; padding-left:0; padding-right:0;
     input { display:none !important; }
     input:checked ~ label.faq-header i { color:$dark; transform:rotate(180deg); }

@@ -108,13 +108,14 @@
 
 <script>
 import 'vue-tel-input/dist/vue-tel-input.css'
+
 const endpoint = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3001/api/' : 'https://xrparrot.com/api/'
 
 export default {
   name: 'home',
   data () {
     return {
-      awaitingCaptcha: true,
+      awaitingCaptcha: false,
       isBot: false,
       loading: true,
       pageStep: 0,
