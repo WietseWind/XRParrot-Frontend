@@ -2,16 +2,16 @@
   <div id="app" class="container-fluid p-0">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="/"><img src="./assets/logo.svg" width="300" /></a>
+          <router-link class="navbar-brand" to="/"><img src="./assets/logo.svg" width="300" /></router-link>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars"></i>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-item nav-link home" :class="[{ 'active' : $route.name === 'home' }]" href="/"><img src="./assets/home-icon.svg" alt="" class="homeicon" /></a>
-              <a class="nav-item nav-link" :class="[{ 'active' : $route.name === 'sendxrp' }]" href="sendxrp">SEND XRP</a>
-              <a class="nav-item nav-link" :class="[{ 'active' : $route.name === 'faq' }]" href="faq">FAQ</a>
-              <a class="nav-item nav-link" :class="[{ 'active' : $route.name === 'support' }]" href="support">SUPPORT</a>
+              <router-link class="nav-item nav-link home" :class="[{ 'active' : $route.name === 'home' }]" to="/"><img src="./assets/home-icon.svg" alt="" class="homeicon" /></router-link>
+              <router-link class="nav-item nav-link" :class="[{ 'active' : $route.name === 'sendxrp' }]" to="sendxrp">SEND XRP</router-link>
+              <router-link class="nav-item nav-link" :class="[{ 'active' : $route.name === 'faq' }]" to="faq">FAQ</router-link>
+              <router-link class="nav-item nav-link" :class="[{ 'active' : $route.name === 'support' }]" to="support">SUPPORT</router-link>
             </div>
           </div>
         </div>
