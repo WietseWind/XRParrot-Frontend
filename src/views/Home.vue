@@ -77,7 +77,7 @@
                 </p>
               </div>
             </div>
-            
+
             <div class="list-item" @click="checkDoubt = !checkDoubt">
               <div class="list-item__checkbox" :class="[{ 'list-item__checkbox--active' : checkDoubt }]"></div>
               <div class="list-item__description">
@@ -112,9 +112,9 @@ export default {
       checkDoubt: false
     }
   },
-  created: function() {
+  created () {
   },
-  mounted: function() {
+  mounted () {
     this.loading = false
   },
   methods: {
