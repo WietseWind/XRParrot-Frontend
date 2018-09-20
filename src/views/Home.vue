@@ -22,7 +22,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+            <h5 class="modal-title" id="exampleModalLabel">Checklist</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -77,7 +77,7 @@
                 </p>
               </div>
             </div>
-            
+
             <div class="list-item" @click="checkDoubt = !checkDoubt">
               <div class="list-item__checkbox" :class="[{ 'list-item__checkbox--active' : checkDoubt }]"></div>
               <div class="list-item__description">
@@ -87,10 +87,9 @@
                 </p>
               </div>
             </div>
-
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn-block">Ok</button>
+            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal" @click="checkAndGo()">Ok continue</button>
           </div>
         </div>
       </div>
@@ -112,12 +111,17 @@ export default {
       checkDoubt: false
     }
   },
-  created: function() {
+  created () {
   },
-  mounted: function() {
+  mounted () {
     this.loading = false
   },
   methods: {
+    checkAndGo () {
+      setTimeout(x => {
+        this.$router.push({ name: 'sendxrp' })
+      }, 300)
+    }
   },
   computed: {
   },
@@ -128,11 +132,22 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+  .modal-dialog {
+    max-width:600px !important;
+  }
+  button.close { margin:2px 5px 0 0 !important; padding:0.2rem !important; }
   .list-item {
-  padding-left: 5rem;
-  position: relative;
-  margin-bottom: 1.3rem; }
+    padding-left: 5rem;
+    position: relative;
+    // margin-bottom: 1.3rem;
+    margin-bottom:0;
+    padding:0.5rem 1rem 0.5rem 5rem;
+    cursor:pointer;
+    border-radius:5px;
+    p { margin-bottom:0px; }
+    &:hover { background:#e0eaff; }
+  }
   .list-item .list-item__checkbox {
     width: 2rem;
     height: 2rem;
@@ -141,7 +156,7 @@ export default {
     cursor: pointer;
     position: absolute;
     left: 1rem;
-    top: 3px;
+    top: 18px;
     -webkit-box-shadow: 0px 0px 0px 0px #105bfb;
     box-shadow: 0px 0px 0px 0px #105bfb;
     -webkit-transition: -webkit-box-shadow 100ms ease-in-out 50ms;

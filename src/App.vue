@@ -25,6 +25,25 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'home',
+  data () {
+    return {}
+  },
+  created () {},
+  mounted () {},
+  methods: {
+  },
+  computed: {
+  },
+  watch: {
+  },
+  filters: {
+  }
+}
+</script>
+
 <style>
   @import './assets/scss/xrparrot.css';
   @import './assets/fontawesome/fontawesome.css';

@@ -1,6 +1,5 @@
 <template>
  <div class="container mt-1 pt-5 page">
-    
     <div class="d-lg-flex justify-content-around align-items-center text-center sendnav">
         <span @click="changePage('verify', 0)" class="link verify" :class="[{ 'active' : activePage === 'verify' , 'history' : pageStep > 0 }]">
             <b>1</b>
@@ -23,36 +22,27 @@
             <i v-if="pageStep > 3" class="fa fa-check-circle"></i>
         </span>
     </div>
-    
+
     <div class="mt-5 pt-5 sendflow">
         <div v-if="activePage === 'verify'" class="innerpage">
-        
             <div v-if="phonestep === 0">
                 <p class="text-center">Please verify your phone first</p>
                 <div class="d-lg-flex justify-content-center align-items-center text-center">
                     <vue-tel-input v-model="phoneNumber" :preferredCountries="prefCountry" placeholder="Phonenumber" class="phonenumber"></vue-tel-input>
                     <button class="btn btn-primary sendsms" @click="sendSMS()">Send sms</button>
                 </div>
-                <!-- <div class="nextnav text-center">
-                  <button class="btn btn-primary" disabled>NEXT <i class="fa fa-angle-right"></i></button>
-                </div> -->
             </div>
-            
+
             <div v-if="phonestep === 1">
                 <p class="text-center">Enter the verification code:</p>
                 <div class="d-lg-flex justify-content-center align-items-center text-center">
-                    
                     <div class="phonecode">
                       <input type="text" class="form-control form-control-lg" placeholder="12345">
                     </div>
                     <button class="btn btn-primary next" @click="changePage('iban', 1)">NEXT <i class="fa fa-angle-right"></i></button>
                     <button class="btn btn-light retrysms" @click="phonestep = 0, phoneNumber = ''"><i class="fa fa-redo fa-sm fa-flip-horizontal"></i> Retry</button>
                 </div>
-                <!-- <div class="nextnav text-center">
-                  <button class="btn btn-primary next" @click="changePage('iban', 1)">NEXT <i class="fa fa-angle-right"></i></button>
-                </div> -->
             </div>
-            
         </div>
         <div v-if="activePage === 'iban'" class="innerpage">
             <p class="text-center">Please enter the IBAN:</p>
@@ -101,7 +91,7 @@
 </template>
 
 <script>
-import 'vue-tel-input/dist/vue-tel-input.css';
+import 'vue-tel-input/dist/vue-tel-input.css'
 export default {
   name: 'home',
   data () {
@@ -118,9 +108,9 @@ export default {
       iban: ''
     }
   },
-  created: function() {
+  created () {
   },
-  mounted: function() {
+  mounted () {
     this.loading = false
   },
   methods: {
@@ -144,4 +134,3 @@ export default {
 <style lang="scss">
   // h1 { color:$primary !important; }
 </style>
-
