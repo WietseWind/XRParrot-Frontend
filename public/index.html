@@ -19,18 +19,15 @@
     <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
 
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,es6,Object.assign,fetch,Promise"></script>
     <title>XRPARROT</title>
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but xrparrot doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
+    <div id="app">
+      <noscript>
+        <strong>We're sorry but XRPARROT doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      </noscript>      
+    </div>
     <!-- built files will be auto injected -->
-    <script>
-      if (window.navigator.userAgent.match(/rv:/) && !window.navigator.userAgent.match(/Edge/)) {
-        document.body.innerHTML += '<div style="width:50%; margin:200px 0 0 25%; text-align:center; font-family:arial;"><strong>We\'re sorry but xrparrot doesn\'t work properly on an older browser.</strong><br>Please use a more modern browser like the latest version of Google Chrome, Firefox or IE Edge.</div>'
-      }
-    </script>
   </body>
 </html>
