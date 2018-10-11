@@ -64,5 +64,5 @@ export default {
 
 <style>
   @import './assets/scss/xrparrot.css';
-  @import './assets/fontawesome/fontawesome.css';
+  @import './assets/fontawesome/all.min.css';
 </style>
