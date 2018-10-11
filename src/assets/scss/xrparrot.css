@@ -272,6 +272,12 @@ div.phonecode {
     font-weight: 500;
     font-size: 20px; }
 
+div.raddress {
+  position: relative;
+  margin-right: 15px; }
+  div.raddress input {
+    width: 500px; }
+
 div.iban {
   position: relative;
   margin-right: 15px; }
@@ -353,17 +359,13 @@ button.retrysms {
 button.next {
   margin: 0 !important; }
 
-div.nextnav {
-  position: absolute;
-  bottom: 0px; }
-
 div.faqlist {
   margin-bottom: 200px; }
 
 div.faq-item {
   background: #fff;
-  -webkit-box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
   border-radius: 6px;
   margin-bottom: 1rem;
   padding-left: 0;
@@ -417,7 +419,11 @@ div.faq-item {
   div.faq-item:hover input:checked ~ label.faq-header {
     background: #fff; }
 
-@media (max-width: 767.98px) {
+@media (max-width: 576px) {
+  div.raddress input {
+    font-size: 13px; } }
+
+@media (max-width: 992px) {
   .navbar-brand img {
     max-width: 250px;
     margin-left: 10px;
@@ -536,6 +542,13 @@ div.faq-item {
   div.phonenumber input {
     padding-left: 0px;
     padding-right: 45px; }
+  div.raddress {
+    width: 100%;
+    margin-right: 0 !important; }
+  div.raddress input {
+    width: 100%;
+    margin-right: 0 !important;
+    margin-bottom: 1rem; }
   div.iban {
     width: 100%;
     margin-right: 0 !important; }

@@ -52,7 +52,7 @@
               you enter your (destination) tag.
             </p>
             <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
-              <div class="iban" v-if="!awaiting">
+              <div class="raddress" v-if="!awaiting">
                 <input type="text" class="form-control form-control-lg" placeholder="Destination XRP address" v-model="destination">
               </div>
               <div class="tag" @click="tagFocus()" v-if="!awaiting">
