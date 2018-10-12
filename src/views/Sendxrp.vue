@@ -189,28 +189,77 @@ export default {
       window.fetch(`${endpoint}xrpl-destination`, {
         credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
         method: 'POST',
-        body: JSON.stringify({ account: this.destination, tag: this.tag }),
+        body: JSON.stringify({ account: this.destination, tag: this.tagtoggle ? this.tag : null }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       })
         .then(r => r.json())
         .then(r => {
-          window.console.log('Destination response', r)
-          swal({
-            title: 'Good job!',
-            text: 'You clicked the button!',
-            closeOnClickOutside: false,
-            closeOnEsc: false,
-            icon: 'error', // warning, error, success, info
-            // dangerMode: true,
-            button: {
-              text: `× Close`,
-              value: null,
-              closeModal: true
+          console.log(r.response)
+          if (r.response.valid) {
+            const continueValid = async (p) => {
+              if (p === null) { // Prev cancel
+                this.awaiting = false
+                return
+              }
+              let goToNextPage = true
+              if (!this.tagtoggle && r.response.incomingTxCountWithTag && r.response.incomingTxCountWithTag > 5) {
+                await swal({
+                  title: 'Continue without tag?',
+                  text: `This destination account recently received multiple transactions WITH a destination tag.\n\nAre you sure you want to continue without a tag?`,
+                  closeOnClickOutside: false,
+                  closeOnEsc: false,
+                  icon: 'info',
+                  buttons: {
+                    cancel: `× No, cancel`,
+                    next: { text: `Yes, continue →`, value: 'next', closeModal: true }
+                  }
+                }).then(s => {
+                  if (s === null) goToNextPage = false
+                })
+              }
+              this.awaiting = false
+              if (goToNextPage) this.changePage('iban', 1)
             }
-          }).then(s => {
-            this.awaiting = false
-          })
-          // this.changePage('iban', 1)
+            if (!r.response.accountActivated) {
+              swal({
+                title: 'Account not activated',
+                text: `The destination account:\n${r.response.account}\n\n... is not yet activated, and will be activated upon deposit.\n\nShould your XRP be sent here? Only continue if you know what this means, and wish to continue.`,
+                closeOnClickOutside: false,
+                closeOnEsc: false,
+                icon: 'warning',
+                buttons: {
+                  cancel: `× Cancel`,
+                  next: { text: `Continue →`, value: 'next', closeModal: true }
+                }
+              }).then(continueValid)
+            } else if (r.response.accountNameInfo && typeof r.response.accountNameInfo.name !== 'undefined') {
+              swal({
+                title: 'Please confirm account',
+                text: `The destination account:\n${r.response.account}\n\n... is known as: \n"${r.response.accountNameInfo.name.toUpperCase()}"\n\nShould your XRP be sent here?`,
+                closeOnClickOutside: false,
+                closeOnEsc: false,
+                icon: 'info',
+                buttons: {
+                  cancel: `× No, cancel`,
+                  next: { text: `Yes, continue →`, value: 'next', closeModal: true }
+                }
+              }).then(continueValid)
+            } else {
+              continueValid()
+            }
+          } else {
+            let text = `Something is not OK.`
+            if (!r.response.addressValid) {
+              text = `The destination account is invalid.`
+            } else if (r.response.tagRequired && !r.response.tagValid) {
+              text = `Entering a (destination) tag is mandatory for this destination account.`
+            } else if (r.response.doNotSendXrp) {
+              text = `The destination account doesn't allow XRP to be deposited.`
+            }
+            swal({ title: 'Oops!', text: text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
+              this.awaiting = false
+            })
+          }
         })
     },
     removeCaptcha () {
@@ -249,8 +298,10 @@ export default {
       document.querySelector('body').appendChild(script)
     },
     changePage (page, step) {
-      this.activePage = page
-      this.pageStep = step
+      if (!this.awaiting) {
+        this.activePage = page
+        this.pageStep = step
+      }
     },
     sendSMS () {
       this.phonestep = 1
