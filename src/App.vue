@@ -4,8 +4,8 @@
         <div class="container">
           <router-link class="navbar-brand" to="/">
             <img src="./assets/bird-icon.svg" width="58" style="float:left;" />
-            <h1 style="color:#333; font-size:45px; float:left; display:block; margin:-6px 0 0 5px;">XRPARROT</h1>
-            <h2 style="color:#333; text-transform:uppercase; font-size:12.5px; float:left; display:block; clear:both; margin:-20px 0 0 65px; font-weight:400;">Send xrp using IBAN Bank transfer</h2>
+            <h1>XRPARROT</h1>
+            <h2>Send XRP by SEPA (IBAN) transfer</h2>
           </router-link>
           <button v-if="userAgentValid" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars"></i>
@@ -65,6 +65,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .navbar-brand {
+    h1 {
+      color:#333; font-size:45px; float:left; display:block; margin:-6px 0 0 5px;
+    }
+    h2 {
+      color:#333; text-transform:uppercase; font-size:12.5px; float:left; display:block; clear:both; margin:-20px 0 0 65px; font-weight:400;
+    }
+  }
+</style>
 
 <style>
   @import './assets/scss/xrparrot.css';

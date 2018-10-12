@@ -194,7 +194,6 @@ export default {
       })
         .then(r => r.json())
         .then(r => {
-          console.log(r.response)
           if (r.response.valid) {
             const continueValid = async (p) => {
               if (p === null) { // Prev cancel
@@ -285,7 +284,6 @@ export default {
             })
               .then(r => r.json())
               .then(r => {
-                window.console.log('Captcha Response', r, r.response.score)
                 this.awaitingCaptcha = false
                 if (r.response.score <= 0.5) {
                   this.isBot = true
