@@ -2,7 +2,11 @@
   <div id="app" class="container-fluid p-0">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <router-link class="navbar-brand" to="/"><img src="./assets/logo.svg" width="300" /></router-link>
+          <router-link class="navbar-brand" to="/">
+            <img src="./assets/bird-icon.svg" width="58" style="float:left;" />
+            <h1 style="color:#333; font-size:45px; float:left; display:block; margin:-6px 0 0 5px;">XRPARROT</h1>
+            <h2 style="color:#333; text-transform:uppercase; font-size:12.5px; float:left; display:block; clear:both; margin:-20px 0 0 65px; font-weight:400;">Send xrp using IBAN Bank transfer</h2>
+          </router-link>
           <button v-if="userAgentValid" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars"></i>
           </button>
