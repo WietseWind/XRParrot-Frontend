@@ -257,10 +257,16 @@ div.vue-tel-input {
       padding-bottom: 4px; }
     div.vue-tel-input div.dropdown:hover, div.vue-tel-input div.dropdown.open {
       border-radius: 15px; }
+  div.vue-tel-input:focus-within {
+    border-color: #80bdff !important;
+    outline: 0 !important;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important; }
 
 div.phonenumber {
   position: relative;
-  margin-right: 15px; }
+  margin-right: 15px;
+  border: 1px solid #ced4da !important; }
   div.phonenumber input {
     padding-left: 15px;
     padding-right: 15px;
