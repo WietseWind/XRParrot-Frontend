@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-5">
+  <div id="getxrp" class="pb-5">
     <div class="container mt-1 pt-5 page" v-if="awaitingCaptcha">
       <div class="alert alert-warning text-center pb-5 pt-5">
         <i class="fas fa-spinner-third fa-spin"></i>
@@ -331,6 +331,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  #getxrp { z-index: 99; position: relative; }
+</style>
 
 <style lang="scss" scoped>
   // h1 { color:$primary !important; }
