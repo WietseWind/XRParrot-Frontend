@@ -13,20 +13,26 @@
           <div v-if="userAgentValid" class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <router-link class="nav-item nav-link home" :class="[{ 'active' : $route.name === 'home' }]" to="/"><img src="./assets/home-icon.svg" alt="" class="homeicon" /></router-link>
-              <router-link class="nav-item nav-link" :class="[{ 'active' : $route.name === 'sendxrp' }]" to="sendxrp">SEND XRP</router-link>
+
+              <router-link v-if="$route.name === 'sendxrp' || getAccepted()" class="nav-item nav-link" :class="[{ 'active' : $route.name === 'sendxrp' }]" to="sendxrp">GET XRP</router-link>
+              <a v-else href="#getXRP" class="nav-item nav-link" :class="[{ 'active' : $route.name === 'sendxrp' }]" to="sendxrp" data-toggle="modal" data-target="#getXRPModal">GET XRP</a>
+
               <router-link class="nav-item nav-link" :class="[{ 'active' : $route.name === 'faq' }]" to="faq">FAQ</router-link>
               <router-link class="nav-item nav-link" :class="[{ 'active' : $route.name === 'support' }]" to="support">SUPPORT</router-link>
             </div>
           </div>
         </div>
     </nav>
-    <router-view v-if="userAgentValid"/>
+    <router-view v-if="userAgentValid && !awaitingAccept"/>
     <div v-else>
-      <div style="width:50%; margin:200px 0 0 25%; text-align:center;">
+      <div v-if="!userAgentValid" style="width:50%; margin:200px 0 0 25%; text-align:center;">
         <h1>Error</h1>
         <strong>We're sorry but xrparrot doesn't work properly on an older browser.</strong>
         <br/>
         Please use a more modern browser like the latest version of Google Chrome, Firefox or IE Edge.
+      </div>
+      <div v-else style="width:50%; margin:200px 0 0 25%; text-align:center;">
+        <!-- awaitingAccept -->
       </div>
     </div>
     <footer>
@@ -34,19 +40,25 @@
       <img src="./assets/footer-black.svg" class="dark" />
       <img src="./assets/footer-light.svg" class="light" />
     </footer>
+    <Modal :onAccept="modalAccept" />
   </div>
 </template>
 
 <script>
+import Modal from '@/views/Modal.vue'
 const { detect } = require('detect-browser')
 const browser = detect()
 
 export default {
   name: 'home',
+  components: {
+    Modal
+  },
   data () {
     return {
       userAgentValid: true,
-      browser: browser
+      browser: browser,
+      awaitingAccept: true
     }
   },
   created () {},
@@ -54,8 +66,25 @@ export default {
     if (browser.name && browser.version && browser.name === 'ie' && parseInt(browser.version.split('.')[0]) < 11) {
       this.userAgentValid = false
     }
+    if (this.$route.name !== 'sendxrp') {
+      this.awaitingAccept = false
+    } else {
+      // Send XRP
+      if (typeof window.localStorage['accept'] === 'string') {
+        this.awaitingAccept = false
+      } else {
+        window.jQuery('#getXRPModal').modal({ keyboard: false, show: true, backdrop: 'static' })
+      }
+    }
   },
   methods: {
+    modalAccept () {
+      this.awaitingAccept = false
+      window.localStorage['accept'] = 'true'
+    },
+    getAccepted () {
+      return typeof window.localStorage.getItem('accept') === 'string'
+    }
   },
   computed: {
   },
