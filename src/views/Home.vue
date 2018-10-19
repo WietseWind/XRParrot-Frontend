@@ -54,9 +54,6 @@ export default {
 
 <style lang="scss">
   div.container.cta {
-    a {
-      position: relative;
-      z-index: 99;
-    }
+    a { position: relative; z-index: 99; }
   }
 </style>
