@@ -53,7 +53,7 @@
             </p>
             <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
               <div class="raddress" v-if="!awaiting">
-                <input type="text" class="form-control form-control-lg" placeholder="Destination XRP address" v-model="destination">
+                <input type="text" spellcheck="false" class="form-control form-control-lg" placeholder="Destination XRP address" v-model="destination">
               </div>
               <div class="tag" @click="tagFocus()" v-if="!awaiting">
                 <ul class="tg-list">
@@ -62,7 +62,7 @@
                     <label class="tgl-btn" for="cb1"></label>
                   </li>
                 </ul>
-                <input type="text" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" :disabled="!tagtoggle" placeholder="Tag" v-model="tag">
+                <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" :disabled="!tagtoggle" placeholder="Tag" v-model="tag">
               </div>
               <button class="btn btn-primary next" :disabled="awaiting || !simpleDestinationCheck" @click="checkDestination()">
                 <div v-if="!awaiting">OK</div>
@@ -75,21 +75,38 @@
           </div>
 
           <div v-if="activePage === 'iban'" class="innerpage">
-              <p class="text-center">Please enter the IBAN:</p>
+              <p class="text-center">Please enter the IBAN account you will be sending your deposit from:</p>
               <div class="d-lg-flex justify-content-center align-items-center text-center">
-                  <div class="iban">
-                      <input type="text" class="form-control form-control-lg" placeholder="NL 12 ABCD 012345678" v-model="iban">
+                  <div class="iban" v-if="!awaiting">
+                    <input type="text" spellcheck="false" class="uppercase form-control form-control-lg" placeholder="NL 12 ABCD 012345678" v-model="iban">
                   </div>
-                  <button class="btn btn-primary next" @click="changePage('verify', 2)">OK</button>
+                  <button class="btn btn-primary next" :disabled="awaiting || !simpleIbanCheck" @click="checkIBAN()">
+                    <div v-if="!awaiting">OK</div>
+                    <div v-else>
+                      <i class="fas fa-spinner-third fa-spin"></i>
+                      Checking...
+                    </div>
+                  </button>
               </div>
           </div>
 
           <div v-if="activePage === 'verify'" class="innerpage">
               <div v-if="phonestep === 0">
-                  <p class="text-center">Please verify your phone first</p>
+                  <p class="text-center">
+                    Please enter your mobile phone number.
+                  </p>
+                  <p class="text-center">
+                    You'll receive a text message with a confirmation code.
+                  </p>
                   <div class="d-lg-flex justify-content-center align-items-center text-center">
                       <vue-tel-input v-model="phoneNumber" :preferredCountries="prefCountry" placeholder="Phonenumber" class="phonenumber"></vue-tel-input>
-                      <button class="btn btn-primary sendsms" @click="sendSMS()">Send sms</button>
+                      <button class="btn btn-primary sendsms" :disabled="awaiting || !simplePhonecheck" @click="sendSMS()">
+                        <div v-if="!awaiting">Verify</div>
+                        <div v-else>
+                          <i class="fas fa-spinner-third fa-spin"></i>
+                          Checking...
+                        </div>
+                      </button>
                   </div>
                   <!-- <div class="nextnav text-center">
                     <button class="btn btn-primary" disabled>NEXT <i class="fa fa-angle-right"></i></button>
@@ -100,14 +117,16 @@
                   <p class="text-center">Enter the verification code:</p>
                   <div class="d-lg-flex justify-content-center align-items-center text-center">
                       <div class="phonecode">
-                        <input type="text" class="form-control form-control-lg" placeholder="12345">
+                        <input type="text" spellcheck="false" class="form-control form-control-lg" placeholder="12345">
                       </div>
                       <button class="btn btn-primary next" @click="changePage('confirm', 3)">Verify <i class="fa fa-angle-right"></i></button>
                   </div>
                   <br />
-                  <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
+                  <div class="mt-3 d-lg-flex justify-content-center align-items-center text-center">
                     <span class="text-muted pr-2">Or...</span>
-                    <button class="btn btn-sm btn-light retrysms" @click="phonestep = 0, phoneNumber = ''"><i class="fa fa-arrow-left fa-sm xfa-flip-horizontal"></i> Go back (change number)</button>
+                    <button class="btn btn-sm btn-outline-light bg-light text-secondary retrysms" @click="phonestep=0;inputFocus()">
+                      <i class="fa fa-arrow-left fa-sm xfa-flip-horizontal"></i> Go back (change number)
+                    </button>
                   </div>
                   <!-- <div class="nextnav text-center">
                     <button class="btn btn-primary next" @click="changePage('iban', 1)">NEXT <i class="fa fa-angle-right"></i></button>
@@ -169,6 +188,12 @@ export default {
   created () {
   },
   computed: {
+    simplePhonecheck () {
+      return this.phoneNumber.trim().match(/[0-9 -]{5,}/)
+    },
+    simpleIbanCheck () {
+      return this.iban.trim().match(/^[a-z]{2}[a-z0-9 ]{6,}/i)
+    },
     simpleDestinationCheck () {
       const destinationCheck = typeof this.destination === 'string' && this.destination.trim().match(/^r/) && this.destination.trim().length > 20
       const tagCheck = !this.tagtoggle || (this.tagtoggle && (this.tag + '').trim().match(/^[0-9]{1,10}$/) && !isNaN(parseInt(this.tag)) && parseInt(this.tag) <= 4294967295)
@@ -179,11 +204,75 @@ export default {
     this.loading = false
     this.loadCaptcha()
     if (swal.getState().isOpen) swal.close()
+
+    if (typeof window.localStorage['destination'] === 'string') {
+      const destination = window.localStorage['destination'].split(':')
+      this.destination = destination[0]
+      if (destination.length > 1) {
+        this.tag = destination[1]
+        this.tagtoggle = true
+      }
+    }
+
+    if (typeof window.localStorage['iban'] === 'string') {
+      this.iban = window.localStorage['iban']
+    }
+
+    if (typeof window.localStorage['phone'] === 'string') {
+      this.phoneNumber = window.localStorage['phone']
+    }
   },
   destroyed () {
     this.removeCaptcha()
   },
   methods: {
+    sendSMS () {
+      this.awaiting = true
+      window.fetch(`${endpoint}phone`, {
+        credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
+        method: 'POST',
+        body: JSON.stringify({ phone: this.phoneNumber }),
+        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      })
+        .then(r => r.json())
+        .then(r => {
+          if (r.valid) {
+            window.localStorage['phone'] = r.parsedNumber
+            this.awaiting = false
+            this.phonestep = 1
+            this.inputFocus()
+          } else {
+            const text = 'The entered phone number seems to be invalid:' + `\n\n${r.error}`
+            swal({ title: 'Oops!', text: text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
+              this.awaiting = false
+              this.phonestep = 0
+              this.inputFocus()
+            })
+          }
+        })
+    },
+    checkIBAN () {
+      this.awaiting = true
+      window.fetch(`${endpoint}iban`, {
+        credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
+        method: 'POST',
+        body: JSON.stringify({ iban: this.iban }),
+        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      })
+        .then(r => r.json())
+        .then(r => {
+          if (r.valid) {
+            window.localStorage['iban'] = r.iban
+            this.awaiting = false
+            this.changePage('verify', 2)
+          } else {
+            const text = 'The entered IBAN account number seems to be invalid.'
+            swal({ title: 'Oops!', text: text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
+              this.awaiting = false
+            })
+          }
+        })
+    },
     checkDestination () {
       this.awaiting = true
       window.fetch(`${endpoint}xrpl-destination`, {
@@ -217,7 +306,10 @@ export default {
                 })
               }
               this.awaiting = false
-              if (goToNextPage) this.changePage('iban', 1)
+              if (goToNextPage) {
+                this.changePage('iban', 1)
+                window.localStorage['destination'] = this.destination + (this.tagtoggle ? ':' + this.tag : '')
+              }
             }
             if (!r.response.accountActivated) {
               swal({
@@ -295,14 +387,18 @@ export default {
       }
       document.querySelector('body').appendChild(script)
     },
+    inputFocus () {
+      this.$nextTick(() => {
+        const input = document.querySelector('input')
+        if (input) input.focus()
+      })
+    },
     changePage (page, step) {
       if (!this.awaiting) {
         this.activePage = page
         this.pageStep = step
+        this.inputFocus()
       }
-    },
-    sendSMS () {
-      this.phonestep = 1
     },
     tagFocus () {
       if (this.tagtoggle === false) {
@@ -322,7 +418,7 @@ export default {
       }
     },
     tagtoggle () {
-      if (this.tagtoggle) {
+      if (this.tagtoggle && typeof this.$refs.dtag !== 'undefined') {
         this.$nextTick(() => this.$refs.dtag.focus())
       }
     }
@@ -342,4 +438,6 @@ export default {
     cursor: default;
     pointer-events: none;
   }
+
+  .uppercase { text-transform: uppercase }
 </style>
