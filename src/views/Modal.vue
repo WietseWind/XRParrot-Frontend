@@ -72,7 +72,7 @@
           </div>
         </div>
         <div class="modal-footer text-center" v-if="!disabled">
-          <button type="button" class="btn btn-primary btn-block" @click="checkAndGo()">Continue <i class="fa fa-arrow-right"></i></button>
+          <button type="button" class="btn btn-primary" @click="checkAndGo()">Continue <i class="fa fa-arrow-right"></i></button>
         </div>
       </div>
     </div>

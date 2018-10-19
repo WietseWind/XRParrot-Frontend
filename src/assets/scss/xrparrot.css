@@ -73,11 +73,15 @@ nav {
 .modal .modal-body {
   padding: 2rem; }
 
-.modal .modal-footer .btn {
-  margin-bottom: 0 !important;
-  max-width: 200px;
-  float: none !important;
-  margin: 0 auto; }
+.modal .modal-footer {
+  text-align: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+  .modal .modal-footer .btn {
+    margin-bottom: 0 !important;
+    max-width: 200px;
+    float: none !important; }
 
 textarea,
 input {
