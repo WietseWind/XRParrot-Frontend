@@ -114,12 +114,12 @@
               </div>
 
               <div v-if="phonestep === 1">
-                  <p class="text-center">Enter the verification code:</p>
+                  <p class="text-center">Enter the verification code sent to your phone:</p>
                   <div class="d-lg-flex justify-content-center align-items-center text-center">
-                      <div class="phonecode">
-                        <input type="text" spellcheck="false" class="form-control form-control-lg" placeholder="12345">
-                      </div>
-                      <button class="btn btn-primary next" @click="changePage('confirm', 3)">Verify <i class="fa fa-angle-right"></i></button>
+                    <div class="phonecode">
+                      <input maxlength="6" type="text" spellcheck="false" v-model="phoneCheck" class="form-control form-control-lg" placeholder="12345">
+                    </div>
+                    <button class="btn btn-primary next" :disabled="awaiting || !simpleVerifycheck" @click="verifySMS()">Verify <i class="fa fa-angle-right"></i></button>
                   </div>
                   <br />
                   <div class="mt-3 d-lg-flex justify-content-center align-items-center text-center">
@@ -148,7 +148,8 @@
               <p class="text-center">And this as the IBAN:</p>
               <p class="text-center"><b>{{ iban }}</b></p>
             </div>
-            <!-- <button class="btn btn-dark next" @click="sendTransfer('confirm', 3)">Confirm &amp; Send</button> -->
+            <br /><br /><br />
+            <button class="mt-5 btn btn-dark next" @click="cleanup()"><i class="fas fa-undo"></i> Start over</button>
           </div>
       </div>
     </div>
@@ -177,6 +178,7 @@ export default {
       activePage: 'destination',
       phonestep: 0,
       phoneNumber: '',
+      phoneCheck: '',
       prefCountry: ['nl'],
       destination: '',
       tagtoggle: false,
@@ -188,6 +190,9 @@ export default {
   created () {
   },
   computed: {
+    simpleVerifycheck () {
+      return this.phoneCheck.trim().match(/^[0-9]{6}$/)
+    },
     simplePhonecheck () {
       return this.phoneNumber.trim().match(/[0-9 -]{5,}/)
     },
@@ -226,6 +231,37 @@ export default {
     this.removeCaptcha()
   },
   methods: {
+    cleanup () {
+      Object.keys(window.localStorage).forEach(k => {
+        delete window.localStorage[k]
+      })
+      document.location.reload()
+    },
+    verifySMS () {
+      this.awaiting = true
+      window.fetch(`${endpoint}finish`, {
+        credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
+        method: 'POST',
+        body: JSON.stringify({ verify: this.phoneCheck }),
+        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      })
+        .then(r => r.json())
+        .then(r => {
+          if (r.valid) {
+            this.phonestep = 0
+            this.awaiting = false
+            window.console.log('GENERATE TRANSFER DETAILS @ BACKEND, AND MOVE TO CONFIRM')
+            this.changePage('confirm', 3)
+          } else {
+            this.awaiting = false
+            const text = `Sorry, but your verification code seems to be invalid. Please enter the number that was sent to the phone number you entered.`
+            swal({ title: 'Oops!', text: r.msg !== '' ? r.msg : text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
+              this.phoneCheck = ''
+              this.inputFocus()
+            })
+          }
+        })
+    },
     sendSMS () {
       this.awaiting = true
       window.fetch(`${endpoint}phone`, {
@@ -236,14 +272,17 @@ export default {
       })
         .then(r => r.json())
         .then(r => {
-          if (r.valid) {
+          if (r.valid || (typeof r.existingNumbers !== 'undefined' && typeof r.parsedNumber !== 'undefined' && r.existingNumbers.indexOf(r.parsedNumber) > -1)) {
             window.localStorage['phone'] = r.parsedNumber
             this.awaiting = false
             this.phonestep = 1
             this.inputFocus()
+            if (r.verified || false) {
+              this.verifySMS()
+            }
           } else {
             const text = 'The entered phone number seems to be invalid:' + `\n\n${r.error}`
-            swal({ title: 'Oops!', text: text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
+            swal({ title: 'Oops!', text: typeof r.invalidNo !== 'undefined' ? text : r.error, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
               this.awaiting = false
               this.phonestep = 0
               this.inputFocus()
