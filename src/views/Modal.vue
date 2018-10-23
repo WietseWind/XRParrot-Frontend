@@ -4,12 +4,13 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="getXRPModalLabel">Please verify...</h5>
+          <h5 class="modal-title" id="getXRPModalLabel">Please read and confirm you agree...</h5>
           <button v-if="$route.name !== 'sendxrp'" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
+          <h6 class="text-primary mt-0 pt-0 pb-3 text-center"><i class="fa fa-check"></i> Please check the boxes.</h6>
           <div class="list-item" @click="checkStranger = !checkStranger">
             <div class="list-item__checkbox" :class="[{ 'list-item__checkbox--active' : checkStranger }]"></div>
             <div class="list-item__description">
@@ -66,7 +67,18 @@
               <p>
                 <strong>Your deposit may be returned</strong> <br>
                 When your deposit exceeds the limits or at uncertainty about the origin of your deposit,
-                your funds <span class="text-primary">minus 1&euro;</span> will be returned to your IBAN account.
+                your funds will be returned to your IBAN account.
+              </p>
+            </div>
+          </div>
+
+          <div class="list-item" @click="checkFees = !checkFees">
+            <div class="list-item__checkbox" :class="[{ 'list-item__checkbox--active' : checkFees }]"></div>
+            <div class="list-item__description">
+              <p>
+                <strong>Fees apply</strong> <br>
+                You will be charged <span class="text-primary">€1 per deposit</span> and <span class="text-primary">0.5&percnt;</span>
+                for the exchange of your funds.
               </p>
             </div>
           </div>
@@ -90,7 +102,8 @@ export default {
       checkAge: false,
       checkFunds: false,
       checkRate: false,
-      checkDoubt: false
+      checkDoubt: false,
+      checkFees: false
     }
   },
   created () {
@@ -110,7 +123,7 @@ export default {
   },
   computed: {
     disabled () {
-      return !this.checkLimits || !this.checkStranger || !this.checkAge || !this.checkFunds || !this.checkRate || !this.checkDoubt
+      return !this.checkLimits || !this.checkStranger || !this.checkAge || !this.checkFunds || !this.checkRate || !this.checkDoubt || !this.checkFees
     }
   },
   watch: {
