@@ -35,7 +35,7 @@
           <span :disabled="pageComplete < 3" @click="changePage('confirm', 3)" class="link confirm" :class="[{ 'active' : activePage === 'confirm' , 'history' : pageStep > 3 }]">
               <b>4</b>
               <span>Confirm &amp; Transfer</span>
-              <i v-if="pageComplete > 3" class="fa fa-check-circle"></i>
+              <i v-if="pageComplete >= 3" class="fa fa-check-circle"></i>
           </span>
       </div>
 
@@ -136,18 +136,54 @@
           </div>
 
           <div v-if="activePage === 'confirm'" class="innerpage text-center confirm">
-            <div class="destinationtag">
+            <div class="row equal">
+              <div class="col-sm-6 mb-4">
+                <div class="card h">
+                  <div class="card-header"><b>1. Verify</b></div>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><code>{{ iban }}</code></p>
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><code>{{ destination }}</code> Destination Tag <code>{{ tag }}</code></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 mb-4">
+                <div class="card h">
+                  <div class="card-header"><b>2. Transfer money</b></div>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><code>NL39BUNQ2291418335</code></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 mb-4 ">
+                <div class="card text-white bg-primary">
+                  <div class="card-header"><b><i class="fal fa-lightbulb-on"></i> Did you know...</b></div>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="destinationtag">
               <p class="text-center">You entered this as the destination:</p>
               <p class="text-center"><b>{{ destination }}</b></p>
               <p class="text-center" v-if="tag.length > 0">
-                Tag: <span class="badge badge-primary">{{ tag }}</span>
+                Tag: <span class="badge badge-primary">{{  }}</span>
               </p>
-            </div>
-            <div class="ibanconf">
+            </div> -->
+            <!-- <div class="ibanconf">
               <hr>
               <p class="text-center">And this as the IBAN:</p>
-              <p class="text-center"><b>{{ iban }}</b></p>
-            </div>
+              <p class="text-center"><b></b></p>
+              <p class="text-center"><b>NL39BUNQ2291418335</b></p>
+            </div> -->
             <br /><br /><br />
             <button class="mt-5 btn btn-dark next" @click="cleanup()"><i class="fas fa-undo"></i> Start over</button>
           </div>
@@ -479,4 +515,10 @@ export default {
   }
 
   .uppercase { text-transform: uppercase }
+
+  div.equal {
+    div.card.h {
+      height: 100%;
+    }
+  }
 </style>
