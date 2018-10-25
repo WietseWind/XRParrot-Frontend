@@ -235,7 +235,7 @@ import swal from 'sweetalert'
 
 Vue.use(VueTelInput)
 
-const endpoint = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3001/api/' : 'https://xrparrot.com/api/'
+const endpoint = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3001/api/' : 'https://api.xrparrot.com/api/'
 
 export default {
   name: 'home',

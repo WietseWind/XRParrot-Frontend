@@ -21,3 +21,4 @@ yarn-error.log*
 *.sw*
 /src/assets/svgs
 /src/assets/metadata/sponsors.yml
+/deploy.sh
