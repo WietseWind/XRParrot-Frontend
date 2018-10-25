@@ -77,8 +77,16 @@
             <div class="list-item__description">
               <p>
                 <strong>Fees apply</strong> <br>
-                You will be charged <span class="text-primary">€1 per deposit</span> and <span class="text-primary">0.5&percnt;</span>
-                for the exchange of your funds.
+                After receiving your funds <span class="text-primary">0.5&percnt; with a minimum of €1</span>
+                will be charged. The remaining amount will be exchanged and sent to your XRP destination account.
+                <br />
+                <small class="mt-2">
+                  <b>Samples:</b>
+                  <br />
+                  <code class="text-muted">Deposit: </code><code>&nbsp;€75</code><code class="text-muted">, Fee: </code><code>&nbsp;€75 * 0.5&percnt; <span class="text-muted"> = </span> <span class="text-info">€0.375 (&lt; €1)</span> <span class="text-muted"> = </span></code><code class="text-primary"><b>€1</b></code>
+                  <br />
+                  <code class="text-muted">Deposit: </code><code>€250</code><code class="text-muted">, Fee: </code><code>€250 * 0.5&percnt; <span class="text-muted"> = </span></code><code class="text-primary"><b>€1.25</b></code>
+                </small>
               </p>
             </div>
           </div>

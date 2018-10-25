@@ -14,7 +14,25 @@
         <small class="text-muted">Ref: <code class="bg-light text-muted pl-1 pr-1">#GCBT01</code></small>
       </div>
     </div>
-    <div class="container mt-1 pt-5 page" v-if="!awaitingCaptcha && !isBot">
+    <div class="container mt-1 pt-5 page" v-if="!awaitingCaptcha && !isBot && !betaApproved">
+      <div class="innerpage">
+        <h4 class="text-center">Awesome!</h4>
+        <p class="text-center">Please enter your BETA invitation code:</p>
+        <div class="d-lg-flex justify-content-center align-items-center text-center">
+          <div class="iban" v-if="!awaiting">
+            <input type="text" spellcheck="false" class="uppercase form-control form-control-lg" placeholder="..." v-model="betaCode">
+          </div>
+          <button class="btn btn-primary next" :disabled="awaiting" @click="checkBETA()">
+            <div v-if="!awaiting">OK</div>
+            <div v-else>
+              <i class="fas fa-spinner-third fa-spin"></i>
+              Checking...
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-1 pt-5 page" v-if="!awaitingCaptcha && !isBot && betaApproved">
       <div class="d-lg-flex justify-content-around align-items-center text-center sendnav">
           <span @click="changePage('destination', 0)" class="link destination" :class="[{ 'active' : activePage === 'destination' , 'history' : pageStep > 0 }]">
               <b>1</b>
@@ -40,153 +58,153 @@
       </div>
 
       <div class="mt-5 pt-5 sendflow">
-          <div v-if="activePage === 'destination'" class="innerpage">
-            <p class="text-center">
-              Please enter the destination account (wallet address) your XRP should be delivered to.
-            </p>
-            <p class="text-center">
-              The destination XRP address should start with a lowercase <code class="alert-primary pl-1 pr-1">r</code>.
-            </p>
-            <p class="text-center alert alert-warning">
-              If you want to send your XRP to a third party (shared wallet, platform, exchange, ...) make sure
-              you enter your (destination) tag.
-            </p>
-            <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
-              <div class="raddress" v-if="!awaiting">
-                <input type="text" spellcheck="false" class="form-control form-control-lg" placeholder="Destination XRP address" v-model="destination">
-              </div>
-              <div class="tag" @click="tagFocus()" v-if="!awaiting">
-                <ul class="tg-list">
-                  <li class="tg-list-item">
-                    <input class="tgl tgl-light" id="cb1" type="checkbox" v-model="tagtoggle" />
-                    <label class="tgl-btn" for="cb1"></label>
-                  </li>
-                </ul>
-                <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" :disabled="!tagtoggle" placeholder="Tag" v-model="tag">
-              </div>
-              <button class="btn btn-primary next" :disabled="awaiting || !simpleDestinationCheck" @click="checkDestination()">
-                <div v-if="!awaiting">OK</div>
-                <div v-else>
-                  <i class="fas fa-spinner-third fa-spin"></i>
-                  Checking...
-                </div>
-              </button>
+        <div v-if="activePage === 'destination'" class="innerpage">
+          <p class="text-center">
+            Please enter the destination account (wallet address) your XRP should be delivered to.
+          </p>
+          <p class="text-center">
+            The destination XRP address should start with a lowercase <code class="alert-primary pl-1 pr-1">r</code>.
+          </p>
+          <p class="text-center alert alert-warning">
+            If you want to send your XRP to a third party (shared wallet, platform, exchange, ...) make sure
+            you enter your (destination) tag.
+          </p>
+          <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
+            <div class="raddress" v-if="!awaiting">
+              <input type="text" spellcheck="false" class="form-control form-control-lg" placeholder="Destination XRP address" v-model="destination">
             </div>
-          </div>
-
-          <div v-if="activePage === 'iban'" class="innerpage">
-              <p class="text-center">Please enter the IBAN account you will be sending your deposit from:</p>
-              <div class="d-lg-flex justify-content-center align-items-center text-center">
-                  <div class="iban" v-if="!awaiting">
-                    <input type="text" spellcheck="false" class="uppercase form-control form-control-lg" placeholder="NL 12 ABCD 012345678" v-model="iban">
-                  </div>
-                  <button class="btn btn-primary next" :disabled="awaiting || !simpleIbanCheck" @click="checkIBAN()">
-                    <div v-if="!awaiting">OK</div>
-                    <div v-else>
-                      <i class="fas fa-spinner-third fa-spin"></i>
-                      Checking...
-                    </div>
-                  </button>
+            <div class="tag" @click="tagFocus()" v-if="!awaiting">
+              <ul class="tg-list">
+                <li class="tg-list-item">
+                  <input class="tgl tgl-light" id="cb1" type="checkbox" v-model="tagtoggle" />
+                  <label class="tgl-btn" for="cb1"></label>
+                </li>
+              </ul>
+              <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" :disabled="!tagtoggle" placeholder="Tag" v-model="tag">
+            </div>
+            <button class="btn btn-primary next" :disabled="awaiting || !simpleDestinationCheck" @click="checkDestination()">
+              <div v-if="!awaiting">OK</div>
+              <div v-else>
+                <i class="fas fa-spinner-third fa-spin"></i>
+                Checking...
               </div>
+            </button>
           </div>
+        </div>
 
-          <div v-if="activePage === 'verify'" class="innerpage">
-              <div v-if="phonestep === 0">
-                  <p class="text-center">
-                    Please enter your mobile phone number.
-                  </p>
-                  <p class="text-center">
-                    You'll receive a text message with a confirmation code.
-                  </p>
-                  <div class="d-lg-flex justify-content-center align-items-center text-center">
-                      <vue-tel-input v-model="phoneNumber" :preferredCountries="prefCountry" placeholder="Phonenumber" class="phonenumber"></vue-tel-input>
-                      <button class="btn btn-primary sendsms" :disabled="awaiting || !simplePhonecheck" @click="sendSMS()">
-                        <div v-if="!awaiting">Verify</div>
-                        <div v-else>
-                          <i class="fas fa-spinner-third fa-spin"></i>
-                          Checking...
-                        </div>
-                      </button>
-                  </div>
-                  <!-- <div class="nextnav text-center">
-                    <button class="btn btn-primary" disabled>NEXT <i class="fa fa-angle-right"></i></button>
-                  </div> -->
+        <div v-if="activePage === 'iban'" class="innerpage">
+          <p class="text-center">Please enter the IBAN account you will be sending your deposit from:</p>
+          <div class="d-lg-flex justify-content-center align-items-center text-center">
+            <div class="iban" v-if="!awaiting">
+              <input type="text" spellcheck="false" class="uppercase form-control form-control-lg" placeholder="NL 12 ABCD 012345678" v-model="iban">
+            </div>
+            <button class="btn btn-primary next" :disabled="awaiting || !simpleIbanCheck" @click="checkIBAN()">
+              <div v-if="!awaiting">OK</div>
+              <div v-else>
+                <i class="fas fa-spinner-third fa-spin"></i>
+                Checking...
               </div>
+            </button>
+          </div>
+        </div>
 
-              <div v-if="phonestep === 1">
-                  <p class="text-center">Enter the verification code sent to your phone:</p>
-                  <div class="d-lg-flex justify-content-center align-items-center text-center">
-                    <div class="phonecode">
-                      <input maxlength="6" type="text" spellcheck="false" v-model="phoneCheck" class="form-control form-control-lg" placeholder="12345">
-                    </div>
-                    <button class="btn btn-primary next" :disabled="awaiting || !simpleVerifycheck" @click="verifySMS()">Verify <i class="fa fa-angle-right"></i></button>
-                  </div>
-                  <br />
-                  <div class="mt-3 d-lg-flex justify-content-center align-items-center text-center">
-                    <span class="text-muted pr-2">Or...</span>
-                    <button class="btn btn-sm btn-outline-light bg-light text-secondary retrysms" @click="phonestep=0;inputFocus()">
-                      <i class="fa fa-arrow-left fa-sm xfa-flip-horizontal"></i> Go back (change number)
+        <div v-if="activePage === 'verify'" class="innerpage">
+            <div v-if="phonestep === 0">
+                <p class="text-center">
+                  Please enter your mobile phone number.
+                </p>
+                <p class="text-center">
+                  You'll receive a text message with a confirmation code.
+                </p>
+                <div class="d-lg-flex justify-content-center align-items-center text-center">
+                    <vue-tel-input v-model="phoneNumber" :preferredCountries="prefCountry" placeholder="Phonenumber" class="phonenumber"></vue-tel-input>
+                    <button class="btn btn-primary sendsms" :disabled="awaiting || !simplePhonecheck" @click="sendSMS()">
+                      <div v-if="!awaiting">Verify</div>
+                      <div v-else>
+                        <i class="fas fa-spinner-third fa-spin"></i>
+                        Checking...
+                      </div>
                     </button>
-                  </div>
-                  <!-- <div class="nextnav text-center">
-                    <button class="btn btn-primary next" @click="changePage('iban', 1)">NEXT <i class="fa fa-angle-right"></i></button>
-                  </div> -->
-              </div>
-
-          </div>
-
-          <div v-if="activePage === 'confirm'" class="innerpage text-center confirm">
-            <div class="row equal">
-              <div class="col-sm-6 mb-4">
-                <div class="card h">
-                  <div class="card-header"><b>1. Verify</b></div>
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><code>{{ iban }}</code></p>
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><code>{{ destination }}</code> Destination Tag <code>{{ tag }}</code></p>
-                  </div>
                 </div>
-              </div>
-              <div class="col-sm-6 mb-4">
-                <div class="card h">
-                  <div class="card-header"><b>2. Transfer money</b></div>
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <p class="card-text"><code>NL39BUNQ2291418335</code></p>
+                <!-- <div class="nextnav text-center">
+                  <button class="btn btn-primary" disabled>NEXT <i class="fa fa-angle-right"></i></button>
+                </div> -->
+            </div>
+
+            <div v-if="phonestep === 1">
+                <p class="text-center">Enter the verification code sent to your phone:</p>
+                <div class="d-lg-flex justify-content-center align-items-center text-center">
+                  <div class="phonecode">
+                    <input maxlength="6" type="text" spellcheck="false" v-model="phoneCheck" class="form-control form-control-lg" placeholder="12345">
                   </div>
+                  <button class="btn btn-primary next" :disabled="awaiting || !simpleVerifycheck" @click="verifySMS()">Verify <i class="fa fa-angle-right"></i></button>
                 </div>
-              </div>
-              <div class="col-sm-12 mb-4 ">
-                <div class="card text-white bg-primary">
-                  <div class="card-header"><b><i class="fal fa-lightbulb-on"></i> Did you know...</b></div>
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  </div>
+                <br />
+                <div class="mt-3 d-lg-flex justify-content-center align-items-center text-center">
+                  <span class="text-muted pr-2">Or...</span>
+                  <button class="btn btn-sm btn-outline-light bg-light text-secondary retrysms" @click="phonestep=0;inputFocus()">
+                    <i class="fa fa-arrow-left fa-sm xfa-flip-horizontal"></i> Go back (change number)
+                  </button>
+                </div>
+                <!-- <div class="nextnav text-center">
+                  <button class="btn btn-primary next" @click="changePage('iban', 1)">NEXT <i class="fa fa-angle-right"></i></button>
+                </div> -->
+            </div>
+
+        </div>
+
+        <div v-if="activePage === 'confirm'" class="innerpage text-center confirm">
+          <div class="row equal">
+            <div class="col-sm-6 mb-4">
+              <div class="card h">
+                <div class="card-header"><b>1. Verify</b></div>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <p class="card-text"><code>{{ iban }}</code></p>
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <p class="card-text"><code>{{ destination }}</code> Destination Tag <code>{{ tag }}</code></p>
                 </div>
               </div>
             </div>
-
-            <!-- <div class="destinationtag">
-              <p class="text-center">You entered this as the destination:</p>
-              <p class="text-center"><b>{{ destination }}</b></p>
-              <p class="text-center" v-if="tag.length > 0">
-                Tag: <span class="badge badge-primary">{{  }}</span>
-              </p>
-            </div> -->
-            <!-- <div class="ibanconf">
-              <hr>
-              <p class="text-center">And this as the IBAN:</p>
-              <p class="text-center"><b></b></p>
-              <p class="text-center"><b>NL39BUNQ2291418335</b></p>
-            </div> -->
-            <br /><br /><br />
-            <button class="mt-5 btn btn-dark next" @click="cleanup()"><i class="fas fa-undo"></i> Start over</button>
+            <div class="col-sm-6 mb-4">
+              <div class="card h">
+                <div class="card-header"><b>2. Transfer money</b></div>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <p class="card-text"><code>NL39BUNQ2291418335</code></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 mb-4 ">
+              <div class="card text-white bg-primary">
+                <div class="card-header"><b><i class="fal fa-lightbulb-on"></i> Did you know...</b></div>
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <!-- <div class="destinationtag">
+            <p class="text-center">You entered this as the destination:</p>
+            <p class="text-center"><b>{{ destination }}</b></p>
+            <p class="text-center" v-if="tag.length > 0">
+              Tag: <span class="badge badge-primary">{{  }}</span>
+            </p>
+          </div> -->
+          <!-- <div class="ibanconf">
+            <hr>
+            <p class="text-center">And this as the IBAN:</p>
+            <p class="text-center"><b></b></p>
+            <p class="text-center"><b>NL39BUNQ2291418335</b></p>
+          </div> -->
+          <br /><br /><br />
+          <button class="mt-5 btn btn-dark next" @click="cleanup()"><i class="fas fa-undo"></i> Start over</button>
+        </div>
       </div>
     </div>
   </div>
@@ -206,6 +224,8 @@ export default {
   name: 'home',
   data () {
     return {
+      betaApproved: false,
+      betaCode: '',
       pageComplete: 0,
       awaitingCaptcha: true,
       isBot: false,
@@ -242,6 +262,10 @@ export default {
     }
   },
   mounted () {
+    if (typeof window.localStorage['betaApproved'] !== 'undefined') {
+      this.betaCode = window.localStorage['betaApproved']
+    }
+
     this.loading = false
     this.loadCaptcha()
     if (swal.getState().isOpen) swal.close()
@@ -267,6 +291,26 @@ export default {
     this.removeCaptcha()
   },
   methods: {
+    checkBETA () {
+      window.fetch(`${endpoint}beta`, {
+        credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
+        method: 'POST',
+        body: JSON.stringify({ code: this.betaCode.trim() }),
+        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+      })
+        .then(r => r.json())
+        .then(r => {
+          if (r.valid) {
+            this.betaApproved = true
+            window.localStorage['betaApproved'] = this.betaCode
+          } else {
+            swal({ title: 'Oops!', text: 'Invalid BETA invitation code, or already used.', closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
+              this.betaCode = ''
+              this.inputFocus()
+            })
+          }
+        })
+    },
     cleanup () {
       Object.keys(window.localStorage).forEach(k => {
         delete window.localStorage[k]
