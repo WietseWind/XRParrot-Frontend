@@ -148,6 +148,7 @@ export default {
 </script>
 
 <style lang="scss">
+  #getXRPModal { z-index: 999999999 }
   .modal-dialog {
     max-width:600px !important;
   }

@@ -63,6 +63,11 @@ export default {
   },
   created () {},
   mounted () {
+    window.jQuery(document).on('click', '.navbar-nav a', () => {
+      if (window.jQuery('.navbar-toggler').is(':visible')) {
+        window.jQuery('.navbar-toggler').click()
+      }
+    })
     if (browser.name && browser.version && browser.name === 'ie' && parseInt(browser.version.split('.')[0]) < 11) {
       this.userAgentValid = false
     }

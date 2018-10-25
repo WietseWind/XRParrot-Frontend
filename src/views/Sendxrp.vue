@@ -20,7 +20,7 @@
         <p class="text-center">Please enter your BETA invitation code:</p>
         <div class="d-lg-flex justify-content-center align-items-center text-center">
           <div class="iban" v-if="!awaiting">
-            <input type="text" spellcheck="false" class="uppercase form-control form-control-lg" placeholder="..." v-model="betaCode">
+            <input autofocus type="text" spellcheck="false" v-on:keydown.enter="checkBETA()" class="uppercase form-control form-control-lg" placeholder="..." v-model="betaCode">
           </div>
           <button class="btn btn-primary next" :disabled="awaiting" @click="checkBETA()">
             <div v-if="!awaiting">OK</div>
@@ -71,7 +71,7 @@
           </p>
           <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
             <div class="raddress" v-if="!awaiting">
-              <input type="text" spellcheck="false" class="form-control form-control-lg" placeholder="Destination XRP address" v-model="destination">
+              <input type="text" spellcheck="false" class="form-control form-control-lg" placeholder="Destination XRP address" v-on:keydown.enter="checkDestination()" v-model="destination">
             </div>
             <div class="tag" @click="tagFocus()" v-if="!awaiting">
               <ul class="tg-list">
@@ -80,7 +80,7 @@
                   <label class="tgl-btn" for="cb1"></label>
                 </li>
               </ul>
-              <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" :disabled="!tagtoggle" placeholder="Tag" v-model="tag">
+              <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" :disabled="!tagtoggle" v-on:keydown.enter="checkDestination()" placeholder="Tag" v-model="tag">
             </div>
             <button class="btn btn-primary next" :disabled="awaiting || !simpleDestinationCheck" @click="checkDestination()">
               <div v-if="!awaiting">OK</div>
@@ -96,7 +96,7 @@
           <p class="text-center">Please enter the IBAN account you will be sending your deposit from:</p>
           <div class="d-lg-flex justify-content-center align-items-center text-center">
             <div class="iban" v-if="!awaiting">
-              <input type="text" spellcheck="false" class="uppercase form-control form-control-lg" placeholder="NL 12 ABCD 012345678" v-model="iban">
+              <input type="text" spellcheck="false" v-on:keydown.enter="checkIBAN()" class="uppercase form-control form-control-lg" placeholder="NL 12 ABCD 012345678" v-model="iban">
             </div>
             <button class="btn btn-primary next" :disabled="awaiting || !simpleIbanCheck" @click="checkIBAN()">
               <div v-if="!awaiting">OK</div>
@@ -159,12 +159,17 @@
               <div class="card h">
                 <div class="card-header"><b>1. Verify</b></div>
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <p class="card-text"><code>{{ iban }}</code></p>
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <p class="card-text"><code>{{ destination }}</code> Destination Tag <code>{{ tag }}</code></p>
+                  <p class="card-text pb-0 mb-2">You will be sending your money <strong><u>from</u></strong>:</p>
+                  <h5 class="card-title"><code><b>{{ iban }}</b></code></h5>
+                  <p class="card-text pb-0 mb-2">Your money will be converted to XRP and will be sent <strong><u>to</u></strong>:</p>
+                  <h5 class="card-title"><code><b>{{ destination }}</b></code></h5>
+                  <div v-if="tagtoggle">
+                    <p class="card-text pb-0 mb-2">XRP deposit <strong><u>destination tag</u></strong>:</p>
+                    <h5 class="card-title pb-0 mb-0"><code><b>{{ tag }}</b></code></h5>
+                  </div>
+                  <div v-else>
+                    <p class="card-text alert alert-warning text-center">No destination tag will be used for the XRP deposit.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -172,18 +177,30 @@
               <div class="card h">
                 <div class="card-header"><b>2. Transfer money</b></div>
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <p class="card-text"><code>NL39BUNQ2291418335</code></p>
+                  <p class="card-text pb-0 mb-2">Send your money <strong><u>to</u></strong>:</p>
+                  <h5 class="card-title"><code class="text-primary bg-light"><b>NL39 BUNQ 2291 4183 35</b></code></h5>
+                  <p class="card-text">BIC / Swift code: <code class="text-primary bg-light"><strong>BUNQNL2A</strong></code></p>
+                  <div id="transfernote" class="alert alert-success card-title mt-2 pt-2 pb-2 mb-0 pb-2">
+                    <div class="card-text"><i class="far fa-exclamation-circle"></i> Add the following <strong><q><u>message</u></q></strong> or <strong><q><u>transfer description</u></q></strong> to your transfer:</div>
+                    <h5 class="card-title mt-3"><code class="text-white bg-success pt-1 pb-1 pl-4 pr-4"><b>{{ transfer.details.description }}</b></code></h5>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-sm-12 mb-4 ">
-              <div class="card text-white bg-primary">
+            <div class="col-sm-12 mb-4">
+              <div class="card">
                 <div class="card-header"><b><i class="fal fa-lightbulb-on"></i> Did you know...</b></div>
                 <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <h5 class="card-title">You can send recurring deposits to XRParrot:</h5>
+                  <p class="card-text">
+                    The IBAN deposit account and transfer description <strong class="text-primary">can be reused</strong>.
+                    You can send additional deposits whenever you like, as long as your deposit sum will not
+                    exceed <strong class="text-primary">€500 per calender month</strong>.
+                  </p>
+                  <p class="card-text">
+                    Any follow up deposits using your transfer description <code><strong>{{ transfer.details.description }}</strong></code>
+                    will be converted into XRP and sent to the destination account you specified.
+                  </p>
                 </div>
               </div>
             </div>
@@ -240,7 +257,8 @@ export default {
       tagtoggle: false,
       tag: '',
       iban: '',
-      awaiting: false
+      awaiting: false,
+      transfer: {}
     }
   },
   created () {
@@ -330,6 +348,7 @@ export default {
           if (r.valid) {
             this.phonestep = 0
             this.awaiting = false
+            this.transfer = r
             window.console.log('GENERATE TRANSFER DETAILS @ BACKEND, AND MOVE TO CONFIRM')
             this.changePage('confirm', 3)
           } else {
@@ -563,6 +582,28 @@ export default {
   div.equal {
     div.card.h {
       height: 100%;
+    }
+  }
+
+  @keyframes yourAnimation {
+    0% { }
+    100% { background-color: transparent; }
+  }
+  @-webkit-keyframes yourAnimation {
+    0% { }
+    100% { background-color: transparent; }
+  }
+  @-moz-keyframes yourAnimation {
+    0% { }
+    100% { background-color: transparent; }
+  }
+
+  #transfernote {
+    -webkit-animation: yourAnimation 0.8s infinite 1s ease-in;
+    -moz-animation: yourAnimation 0.8s infinite 1s ease-in;
+    animation: yourAnimation 0.8s infinite 1s ease-in;
+    code {
+      border-radius: 4px;
     }
   }
 </style>
