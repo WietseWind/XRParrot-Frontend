@@ -311,7 +311,7 @@ export default {
   methods: {
     checkBETA () {
       window.fetch(`${endpoint}beta`, {
-        credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
+        credentials: 'include',
         method: 'POST',
         body: JSON.stringify({ code: this.betaCode.trim() }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
@@ -338,7 +338,7 @@ export default {
     verifySMS () {
       this.awaiting = true
       window.fetch(`${endpoint}finish`, {
-        credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
+        credentials: 'include',
         method: 'POST',
         body: JSON.stringify({ verify: this.phoneCheck }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
@@ -364,7 +364,7 @@ export default {
     sendSMS () {
       this.awaiting = true
       window.fetch(`${endpoint}phone`, {
-        credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
+        credentials: 'include',
         method: 'POST',
         body: JSON.stringify({ phone: this.phoneNumber }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
@@ -392,7 +392,7 @@ export default {
     checkIBAN () {
       this.awaiting = true
       window.fetch(`${endpoint}iban`, {
-        credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
+        credentials: 'include',
         method: 'POST',
         body: JSON.stringify({ iban: this.iban }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
@@ -414,7 +414,7 @@ export default {
     checkDestination () {
       this.awaiting = true
       window.fetch(`${endpoint}xrpl-destination`, {
-        credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
+        credentials: 'include',
         method: 'POST',
         body: JSON.stringify({ account: this.destination, tag: this.tagtoggle ? this.tag : null }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
@@ -507,7 +507,7 @@ export default {
           window.grecaptcha.execute('6LeGRHEUAAAAAJnZ1aEnn3IcHYRkFqjRbOX2VFaS', { action: 'xrp' }).then(token => {
             // window.console.log('Captcha Token', token)
             window.fetch(`${endpoint}captcha`, {
-              credentials: process.env.NODE_ENV === 'development' ? 'include' : 'same-origin',
+              credentials: 'include',
               method: 'POST',
               body: JSON.stringify({ token: token }),
               headers: { 'Content-Type': 'application/json; charset=utf-8' }
