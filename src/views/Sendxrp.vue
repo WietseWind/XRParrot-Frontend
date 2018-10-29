@@ -135,7 +135,7 @@
                 <p class="text-center">Enter the verification code sent to your phone:</p>
                 <div class="d-lg-flex justify-content-center align-items-center text-center">
                   <div class="phonecode">
-                    <input maxlength="6" type="text" spellcheck="false" v-model="phoneCheck" class="form-control form-control-lg" placeholder="12345">
+                    <input maxlength="6" type="text" spellcheck="false" v-model="phoneCheck" class="form-control form-control-lg" placeholder="12345" v-on:keydown.enter="verifySMS()">
                   </div>
                   <button class="btn btn-primary next" :disabled="awaiting || !simpleVerifycheck" @click="verifySMS()">Verify <i class="fa fa-angle-right"></i></button>
                 </div>
@@ -160,12 +160,12 @@
                 <div class="card-header"><b>1. Verify</b></div>
                 <div class="card-body">
                   <p class="card-text pb-0 mb-2">You will be sending your money <strong><u>from</u></strong>:</p>
-                  <h5 class="card-title"><code><b>{{ iban }}</b></code></h5>
-                  <p class="card-text pb-0 mb-2">Your money will be converted to XRP and will be sent <strong><u>to</u></strong>:</p>
-                  <h5 class="card-title"><code><b>{{ destination }}</b></code></h5>
+                  <h5 class="mt-3 card-title"><code class="bg-light alert pt-1 pb-1"><b>{{ iban }}</b></code></h5>
+                  <p class="card-text pb-0 mb-2 mt-5">Your money will be converted to XRP and will be sent <strong><u>to</u></strong>:</p>
+                  <h5 class="mt-3 card-title"><code class="bg-light alert pt-1 pb-1"><b>{{ destination }}</b></code></h5>
                   <div v-if="tagtoggle">
-                    <p class="card-text pb-0 mb-2">XRP deposit <strong><u>destination tag</u></strong>:</p>
-                    <h5 class="card-title pb-0 mb-0"><code><b>{{ tag }}</b></code></h5>
+                    <p class="card-text pb-0 mb-2 mt-5">XRP deposit <strong><u>Destination Tag</u></strong>:</p>
+                    <h5 class="mt-3 card-title pb-0 mb-0"><code class="bg-light alert pt-1 pb-1"><b>{{ tag }}</b></code></h5>
                   </div>
                   <div v-else>
                     <p class="card-text alert alert-warning text-center">No destination tag will be used for the XRP deposit.</p>
@@ -178,9 +178,19 @@
                 <div class="card-header"><b>2. Transfer money</b></div>
                 <div class="card-body">
                   <p class="card-text pb-0 mb-2">Send your money <strong><u>to</u></strong>:</p>
-                  <h5 class="card-title"><code class="text-primary bg-light"><b>NL39 BUNQ 2291 4183 35</b></code></h5>
-                  <p class="card-text">BIC / Swift code: <code class="text-primary bg-light"><strong>BUNQNL2A</strong></code></p>
-                  <div id="transfernote" class="alert alert-success card-title mt-2 pt-2 pb-2 mb-0 pb-2">
+                  <h5 class="card-title"><code class="text-primary bg-light d-block alert"><b>NL39 BUNQ 2291 4183 35</b></code></h5>
+                  <!-- <hr /> -->
+                  <div class="row">
+                    <div class="col-12 mt-2 text-left">
+                      <div class="row">
+                        <small class="col-12 pb-0 col-lg-4">BIC / Swift code </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">BUNQNL2A</code></div>
+                        <small class="col-12 pb-0 col-lg-4">Account name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">XRParrot</code></div>
+                        <small class="col-12 pb-0 col-lg-4">Address, ZIP, City </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">Tolweg 5, 3741 LM, Baarn</code></div>
+                        <small class="col-12 pb-0 col-lg-4">Country </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">NL (The Netherlands)</code></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="transfernote" class="alert alert-success card-title mt-4 pt-2 pb-2 mb-0 pb-2">
                     <div class="card-text"><i class="far fa-exclamation-circle"></i> Add the following <strong><q><u>message</u></q></strong> or <strong><q><u>transfer description</u></q></strong> to your transfer:</div>
                     <h5 class="card-title mt-3"><code class="text-white bg-success pt-1 pb-1 pl-4 pr-4"><b>{{ transfer.details.description }}</b></code></h5>
                   </div>
