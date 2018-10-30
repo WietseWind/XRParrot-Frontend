@@ -87,6 +87,8 @@
                   <br />
                   <code class="text-muted">Deposit: </code><code>€250</code><code class="text-muted">, Fee: </code><code>€250 * 0.5&percnt; <span class="text-muted"> = </span></code><code class="text-primary"><b>€1.25</b></code>
                 </small>
+                <br />
+                <small class="text-muted">When sending <span class="text-primary">non-EUR</span> funds (like CHF, GBP) our bank also charges a currency conversion fee of <span class="text-primary">1.5&percnt;</span>.</small>
               </p>
             </div>
           </div>
