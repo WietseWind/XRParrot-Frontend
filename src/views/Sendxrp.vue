@@ -93,7 +93,15 @@
         </div>
 
         <div v-if="activePage === 'iban'" class="innerpage">
-          <p class="text-center">Please enter the IBAN account you will be sending your deposit from:</p>
+          <p class="text-center">Please enter the IBAN account you will be sending your deposit from.</p>
+          <!-- <p class="text-center"><b>Make sure the IBAN account is in <span class="text-primary">your name</span>.</b></p> -->
+          <p class="text-center pb-0 mb-0">
+            Your bank account will be used to verify your deposit when it comes in.
+          </p>
+          <p class="text-center text-muted mb-3 mt-0 pt-0">
+            <small>If your deposit comes in from another IBAN account, your transfer will
+            be cancelled and refunded.</small>
+          </p>
           <div class="d-lg-flex justify-content-center align-items-center text-center">
             <div class="iban" v-if="!awaiting">
               <input type="text" spellcheck="false" v-on:keydown.enter="checkIBAN()" class="uppercase form-control form-control-lg" placeholder="NL 12 ABCD 012345678" v-model="iban">
@@ -112,9 +120,11 @@
             <div v-if="phonestep === 0">
                 <p class="text-center">
                   Please enter your mobile phone number.
+                  You'll receive a text message with a confirmation code.
                 </p>
                 <p class="text-center">
-                  You'll receive a text message with a confirmation code.
+                  After verification, your phone number will be used to send you a
+                  text message when your deposit is processed.
                 </p>
                 <div class="d-lg-flex justify-content-center align-items-center text-center">
                     <vue-tel-input v-model="phoneNumber" :preferredCountries="prefCountry" placeholder="Phonenumber" class="phonenumber"></vue-tel-input>
@@ -159,12 +169,13 @@
               <div class="card h">
                 <div class="card-header"><b>1. Verify</b></div>
                 <div class="card-body">
-                  <p class="card-text pb-0 mb-2">You will be sending your money <strong><u>from</u></strong>:</p>
+                  <p class="card-text pb-0 mb-2">You will be sending your money from your account:</p>
                   <h5 class="mt-3 card-title"><code class="bg-light alert pt-1 pb-1"><b>{{ iban }}</b></code></h5>
-                  <p class="card-text pb-0 mb-2 mt-5">Your money will be converted to XRP and will be sent <strong><u>to</u></strong>:</p>
+                  <p class="card-text alert alert-warning text-center bg-white"><i class="fa fa-exclamation-triangle"></i> Please only send money from this account, or your transfer will be rejected and refunded.</p>
+                  <p class="card-text pb-0 mb-2 mt-4">Your money will be converted to XRP and will be sent to:</p>
                   <h5 class="mt-3 card-title"><code class="bg-light alert pt-1 pb-1"><b>{{ destination }}</b></code></h5>
                   <div v-if="tagtoggle">
-                    <p class="card-text pb-0 mb-2 mt-5">XRP deposit <strong><u>Destination Tag</u></strong>:</p>
+                    <p class="card-text pb-0 mb-2 mt-4">XRP deposit destination tag:</p>
                     <h5 class="mt-3 card-title pb-0 mb-0"><code class="bg-light alert pt-1 pb-1"><b>{{ tag }}</b></code></h5>
                   </div>
                   <div v-else>
@@ -177,7 +188,10 @@
               <div class="card h">
                 <div class="card-header"><b>2. Transfer money</b></div>
                 <div class="card-body">
-                  <p class="card-text pb-0 mb-2">Send your money <strong><u>to</u></strong>:</p>
+                  <p class="card-text pb-0 mb-2">
+                    Please use your existing online banking website/app and transfer your money (max. <span class="text-primary">&euro;500</span>) to:
+                  </p>
+                  <!-- Todo: max.: calculate based on existing limits -->
                   <h5 class="card-title"><code class="text-primary bg-light d-block alert"><b>NL39 BUNQ 2291 4183 35</b></code></h5>
                   <!-- <hr /> -->
                   <div class="row">
