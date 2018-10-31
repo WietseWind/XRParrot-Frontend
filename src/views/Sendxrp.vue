@@ -373,7 +373,7 @@ export default {
             this.phonestep = 0
             this.awaiting = false
             this.transfer = r
-            window.console.log('GENERATE TRANSFER DETAILS @ BACKEND, AND MOVE TO CONFIRM')
+            // window.console.log('GENERATE TRANSFER DETAILS @ BACKEND, AND MOVE TO CONFIRM')
             this.changePage('confirm', 3)
           } else {
             this.awaiting = false
