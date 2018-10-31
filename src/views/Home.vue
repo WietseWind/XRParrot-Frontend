@@ -1,14 +1,14 @@
 <template>
   <div class="container page mt-5 pt-5">
-    <div class="d-lg-flex justify-content-around align-items-center text-center visuals">
-      <div class="col-4 d-none d-sm-block"><img src="../assets/visual-form.svg" alt="" class="visual" /></div>
-      <div class="col-4 d-none d-sm-block"><img src="../assets/visual-iban.svg" alt="" class="visual" /></div>
-      <div class="col-4 d-none d-sm-block"><img src="../assets/visual-xrp.svg" alt="" class="visual" /></div>
+    <div class="d-none d-lg-flex justify-content-center align-items-center text-center visuals">
+      <div class="col-12 col-lg-4 d-none d-md-block"><img src="../assets/visual-form.svg" alt="" class="visual" /></div>
+      <div class="col-12 col-lg-4 d-none d-md-block"><img src="../assets/visual-iban.svg" alt="" class="visual" /></div>
+      <div class="col-12 col-lg-4 d-none d-md-block"><img src="../assets/visual-xrp.svg" alt="" class="visual" /></div>
     </div>
-    <div class="d-lg-flex justify-content-around align-items-center text-center headlines">
-      <h2 class="col-12 col-lg-4"><b>1</b> <i class="fa fa-pencil"></i> Enter details</h2>
-      <h2 class="col-12 col-lg-4"><b>2</b> <i class="fas fa-paper-plane"></i> Send <span class="text-primary">&euro;</span> to IBAN</h2>
-      <h2 class="col-12 col-lg-4"><b>3</b> 🎉 Receive XRP</h2>
+    <div class="d-lg-flex justify-content-center align-items-center text-center headlines">
+      <div class="col-12 col-lg-4"><h2><b>1</b> <i class="fa fa-pencil"></i> Enter details</h2></div>
+      <div class="col-12 col-lg-4"><h2><b>2</b> <i class="fas fa-paper-plane"></i> Send <span class="text-primary">&euro;</span> to IBAN</h2></div>
+      <div class="col-12 col-lg-4"><h2><b>3</b> 🎉 Receive XRP</h2></div>
     </div>
     <div class="container text-center cta">
       <router-link v-if="$parent.getAccepted()" class="btn btn-primary" to="sendxrp">

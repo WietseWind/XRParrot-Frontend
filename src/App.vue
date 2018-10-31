@@ -102,11 +102,15 @@ export default {
 
 <style lang="scss" scoped>
   .navbar-brand {
+    position: relative; display: block;
+    width: 315px; height: 75px;
     h1 {
-      color:#333; font-size:45px; float:left; display:block; margin:-6px 0 0 5px;
+      color:#333; font-size:45px; float:left; display:block; 
+      position: absolute; top:0; right:0;
     }
     h2 {
-      color:#333; text-transform:uppercase; font-size:12.5px; float:left; display:block; clear:both; margin:-20px 0 0 65px; font-weight:400;
+      color:#333; text-transform:uppercase; float:left; display:block; clear:both; 
+      font-size: 13px; position: absolute; right: 7px; bottom: 0px; font-weight: 400;
     }
   }
 </style>

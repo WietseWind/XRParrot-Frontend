@@ -13,7 +13,7 @@ small { font-family: 'Roboto', sans-serif; font-weight: 700; display: inline-blo
 .btn-primary { background:$primary; border-color:$primary; }
 .btn-primary:hover { background:darken($primary, 15%); border-color:darken($primary, 15%); }
 
-
+img.visual { max-width:100%; }
 
 body {
     background:$lightgrey;
@@ -42,6 +42,7 @@ nav {
 
 // Modal
 .modal {
+  z-index: 9999999999999 !important;
   .modal-body {
     padding:2rem;
   }
@@ -305,10 +306,11 @@ div.faq-item {
 
 
 @media (max-width: 576px) {
+  .navbar-brand { transform:scale(0.8); transform-origin: center left; z-index:9999999999 !important; }
+  .navbar-toggler { position:absolute; top:40px; right:20px; }
   div.raddress input { font-size:13px; }
 }
-
-@media (max-width: 992px) {
+@media (max-width: 960px) {
   .navbar-brand img { max-width:250px; margin-left:10px; position: relative; z-index: 999999999 !important;}
   .navbar-toggler i { font-size:1.5rem; position: relative; z-index: 999999999 !important; }
   
@@ -341,7 +343,6 @@ div.faq-item {
     opacity:1;
     z-index: 99999999 !important;
   }
-
   div.sendnav {
     user-select: none; margin-top:20px;
     .link { 
@@ -408,9 +409,9 @@ div.faq-item {
 
   .btn { width:100%; }
   .page.pt-5 , .page.mt-5 { margin-top:0 !important; padding-top:0 !important; }
-  .headlines { width:80%; margin:0 auto; }
-  .headlines h2 { margin-top:20px !important; text-align:left;  }
-  .headlines h2 b { text-align:center;  }
+  // .headlines { width:60% !important; margin:0 auto; }
+  // .headlines h2 { margin-top:20px !important; text-align:left;  }
+  // .headlines h2 b { text-align:center;  }
   img.visual { max-width:100%; }
   div.cta { padding-top:50px; padding-bottom:0px; }
   footer {

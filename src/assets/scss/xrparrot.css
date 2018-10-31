@@ -23,6 +23,9 @@ small {
   background: #0a83d0;
   border-color: #0a83d0; }
 
+img.visual {
+  max-width: 100%; }
+
 body {
   background: #FBFBFB; }
 
@@ -70,18 +73,19 @@ nav {
     -o-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out; }
 
-.modal .modal-body {
-  padding: 2rem; }
-
-.modal .modal-footer {
-  text-align: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center; }
-  .modal .modal-footer .btn {
-    margin-bottom: 0 !important;
-    max-width: 200px;
-    float: none !important; }
+.modal {
+  z-index: 9999999999999 !important; }
+  .modal .modal-body {
+    padding: 2rem; }
+  .modal .modal-footer {
+    text-align: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
+    .modal .modal-footer .btn {
+      margin-bottom: 0 !important;
+      max-width: 200px;
+      float: none !important; }
 
 textarea,
 input {
@@ -430,10 +434,22 @@ div.faq-item {
     background: #fff; }
 
 @media (max-width: 576px) {
+  .navbar-brand {
+    -webkit-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+    -webkit-transform-origin: center left;
+    -ms-transform-origin: center left;
+    transform-origin: center left;
+    z-index: 9999999999 !important; }
+  .navbar-toggler {
+    position: absolute;
+    top: 40px;
+    right: 20px; }
   div.raddress input {
     font-size: 13px; } }
 
-@media (max-width: 992px) {
+@media (max-width: 960px) {
   .navbar-brand img {
     max-width: 250px;
     margin-left: 10px;
@@ -581,14 +597,6 @@ div.faq-item {
   .page.pt-5, .page.mt-5 {
     margin-top: 0 !important;
     padding-top: 0 !important; }
-  .headlines {
-    width: 80%;
-    margin: 0 auto; }
-  .headlines h2 {
-    margin-top: 20px !important;
-    text-align: left; }
-  .headlines h2 b {
-    text-align: center; }
   img.visual {
     max-width: 100%; }
   div.cta {
