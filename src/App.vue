@@ -105,11 +105,11 @@ export default {
     position: relative; display: block;
     width: 315px; height: 75px;
     h1 {
-      color:#333; font-size:45px; float:left; display:block; 
+      color:#333; font-size:45px; float:left; display:block;
       position: absolute; top:0; right:0;
     }
     h2 {
-      color:#333; text-transform:uppercase; float:left; display:block; clear:both; 
+      color:#333; text-transform:uppercase; float:left; display:block; clear:both;
       font-size: 13px; position: absolute; right: 7px; bottom: 0px; font-weight: 400;
     }
   }
