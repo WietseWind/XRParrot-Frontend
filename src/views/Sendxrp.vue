@@ -82,7 +82,7 @@
               </ul>
               <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" :disabled="!tagtoggle" v-on:keydown.enter="checkDestination()" placeholder="Tag" v-model="tag">
             </div>
-            <button class="btn btn-primary next" :disabled="awaiting || !simpleDestinationCheck" @click="checkDestination()">
+            <button class="btn btn-primary next" :disabled="awaiting" @click="checkDestination()">
               <div v-if="!awaiting">OK</div>
               <div v-else>
                 <i class="fas fa-spinner-third fa-spin"></i>
@@ -106,7 +106,7 @@
             <div class="iban" v-if="!awaiting">
               <input type="text" spellcheck="false" v-on:keydown.enter="checkIBAN()" class="uppercase form-control form-control-lg" placeholder="NL 12 ABCD 012345678" v-model="iban">
             </div>
-            <button class="btn btn-primary next" :disabled="awaiting || !simpleIbanCheck" @click="checkIBAN()">
+            <button class="btn btn-primary next" :disabled="awaiting" @click="checkIBAN()">
               <div v-if="!awaiting">OK</div>
               <div v-else>
                 <i class="fas fa-spinner-third fa-spin"></i>
@@ -128,7 +128,7 @@
                 </p>
                 <div class="d-lg-flex justify-content-center align-items-center text-center">
                     <vue-tel-input v-model="phoneNumber" :preferredCountries="prefCountry" placeholder="Phonenumber" class="phonenumber"></vue-tel-input>
-                    <button class="btn btn-primary sendsms" :disabled="awaiting || !simplePhonecheck" @click="sendSMS()">
+                    <button class="btn btn-primary sendsms" :disabled="awaiting" @click="sendSMS()">
                       <div v-if="!awaiting">Verify</div>
                       <div v-else>
                         <i class="fas fa-spinner-third fa-spin"></i>
@@ -147,7 +147,7 @@
                   <div class="phonecode">
                     <input maxlength="6" type="text" spellcheck="false" v-model="phoneCheck" class="form-control form-control-lg" placeholder="12345" v-on:keydown.enter="verifySMS()">
                   </div>
-                  <button class="btn btn-primary next" :disabled="awaiting || !simpleVerifycheck" @click="verifySMS()">Verify <i class="fa fa-angle-right"></i></button>
+                  <button class="btn btn-primary next" :disabled="awaiting" @click="verifySMS()">Verify <i class="fa fa-angle-right"></i></button>
                 </div>
                 <br />
                 <div class="mt-3 d-lg-flex justify-content-center align-items-center text-center">
@@ -391,7 +391,7 @@ XRParrot`
       window.fetch(`${endpoint}finish`, {
         credentials: 'include',
         method: 'POST',
-        body: JSON.stringify({ verify: this.phoneCheck }),
+        body: JSON.stringify({ verify: this.phoneCheck.trim() }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       })
         .then(r => r.json())
@@ -416,7 +416,7 @@ XRParrot`
       window.fetch(`${endpoint}phone`, {
         credentials: 'include',
         method: 'POST',
-        body: JSON.stringify({ phone: this.phoneNumber }),
+        body: JSON.stringify({ phone: this.phoneNumber.trim() }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       })
         .then(r => r.json())
@@ -443,7 +443,7 @@ XRParrot`
       window.fetch(`${endpoint}iban`, {
         credentials: 'include',
         method: 'POST',
-        body: JSON.stringify({ iban: this.iban }),
+        body: JSON.stringify({ iban: this.iban.trim() }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       })
         .then(r => r.json())
@@ -463,7 +463,7 @@ XRParrot`
       window.fetch(`${endpoint}xrpl-destination`, {
         credentials: 'include',
         method: 'POST',
-        body: JSON.stringify({ account: this.destination, tag: this.tagtoggle ? this.tag : null }),
+        body: JSON.stringify({ account: this.destination.trim(), tag: this.tagtoggle ? this.tag.trim() : null }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       })
         .then(r => r.json())
