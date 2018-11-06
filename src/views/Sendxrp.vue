@@ -396,14 +396,13 @@ XRParrot`
       })
         .then(r => r.json())
         .then(r => {
+          this.awaiting = false
           if (r.valid) {
             this.phonestep = 0
-            this.awaiting = false
             this.transfer = r
             // window.console.log('GENERATE TRANSFER DETAILS @ BACKEND, AND MOVE TO CONFIRM')
             this.changePage('confirm', 3)
           } else {
-            this.awaiting = false
             const text = `Sorry, but your verification code seems to be invalid. Please enter the number that was sent to the phone number you entered.`
             swal({ title: 'Oops!', text: r.msg !== '' ? r.msg : text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
               this.phoneCheck = ''
@@ -422,9 +421,9 @@ XRParrot`
       })
         .then(r => r.json())
         .then(r => {
+          this.awaiting = false
           if (r.valid || (typeof r.existingNumbers !== 'undefined' && typeof r.parsedNumber !== 'undefined' && r.existingNumbers.indexOf(r.parsedNumber) > -1)) {
             window.localStorage['phone'] = r.parsedNumber
-            this.awaiting = false
             this.phonestep = 1
             this.inputFocus()
             if (r.verified || false) {
@@ -433,7 +432,6 @@ XRParrot`
           } else {
             const text = 'The entered phone number seems to be invalid:' + `\n\n${r.error}`
             swal({ title: 'Oops!', text: typeof r.invalidNo !== 'undefined' ? text : r.error, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
-              this.awaiting = false
               this.phonestep = 0
               this.inputFocus()
             })
@@ -450,15 +448,13 @@ XRParrot`
       })
         .then(r => r.json())
         .then(r => {
+          this.awaiting = false
           if (r.valid) {
             window.localStorage['iban'] = r.iban
-            this.awaiting = false
             this.changePage('verify', 2)
           } else {
             const text = 'The entered IBAN account number seems to be invalid.'
-            swal({ title: 'Oops!', text: text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
-              this.awaiting = false
-            })
+            swal({ title: 'Oops!', text: text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } })
           }
         })
     },
@@ -472,10 +468,10 @@ XRParrot`
       })
         .then(r => r.json())
         .then(r => {
+          this.awaiting = false
           if (r.response.valid) {
             const continueValid = async (p) => {
               if (p === null) { // Prev cancel
-                this.awaiting = false
                 return
               }
               let goToNextPage = true
@@ -494,7 +490,6 @@ XRParrot`
                   if (s === null) goToNextPage = false
                 })
               }
-              this.awaiting = false
               if (goToNextPage) {
                 this.changePage('iban', 1)
                 window.localStorage['destination'] = this.destination + (this.tagtoggle ? ':' + this.tag : '')
@@ -536,9 +531,7 @@ XRParrot`
             } else if (r.response.doNotSendXrp) {
               text = `The destination account doesn't allow XRP to be deposited.`
             }
-            swal({ title: 'Oops!', text: text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {
-              this.awaiting = false
-            })
+            swal({ title: 'Oops!', text: text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } })
           }
         })
     },
