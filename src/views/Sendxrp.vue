@@ -450,7 +450,7 @@ XRParrot`
         .then(r => {
           this.awaiting = false
           if (r.valid) {
-            window.localStorage['iban'] = r.iban
+            window.localStorage['iban'] = r.iban.trim()
             this.changePage('verify', 2)
           } else {
             const text = 'The entered IBAN account number seems to be invalid.'
