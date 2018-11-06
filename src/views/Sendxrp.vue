@@ -189,14 +189,22 @@
                 <div class="card-header"><b>2. Transfer money</b></div>
                 <div class="card-body">
                   <p class="card-text pb-0 mb-2">
+                    <!-- Todo: max.: calculate based on existing limits -->
                     Please use your existing online banking website/app and transfer your money (max. <span class="text-primary">&euro;500</span>) to:
                   </p>
-                  <!-- Todo: max.: calculate based on existing limits -->
-                  <h5 class="card-title"><code class="text-primary bg-light d-block alert"><b>NL39 BUNQ 2291 4183 35</b></code></h5>
-                  <!-- <hr /> -->
-                  <div class="row">
+                  <div class="alert text-center mb-0 pb-0" v-if="sepaQR">
+                    <qrcode-vue :value="qrValue" size="150" level="H"></qrcode-vue>
+                    <small class="btn-qr"><button @click="sepaQR=false" class="btn btn-sm btn-primary"><i class="fa fa-arrow-left"></i> Show details</button></small>
+                  </div>
+                  <div class="row" v-else>
                     <div class="col-12 mt-2 text-left">
                       <div class="row">
+                        <span class="col-12 pb-0 col-lg-4 mt-2"><b class="">IBAN</b></span> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 text-center pt-2">
+                          <h6 class="card-title pb-2 mb-0">
+                            <b>NL39 BUNQ 2291 4183 35</b>
+                          </h6>
+                          <small class="btn-qr"><button @click="sepaQR=true" class="btn btn-sm btn-outline-dark bg-white text-dark"><i class="text-dark fas fa-qrcode"></i> Show QR</button></small>
+                        </code></div>
                         <small class="col-12 pb-0 col-lg-4">BIC / Swift code </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">BUNQNL2A</code></div>
                         <small class="col-12 pb-0 col-lg-4">Account name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">XRParrot</code></div>
                         <small class="col-12 pb-0 col-lg-4">Address, ZIP, City </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">Tolweg 5, 3741 LM, Baarn</code></div>
@@ -204,9 +212,9 @@
                       </div>
                     </div>
                   </div>
-                  <div id="transfernote" class="alert alert-success card-title mt-4 pt-2 pb-2 mb-0 pb-2">
-                    <div class="card-text"><i class="far fa-exclamation-circle"></i> Add the following <strong><q><u>message</u></q></strong> or <strong><q><u>transfer description</u></q></strong> to your transfer:</div>
-                    <h5 class="card-title mt-3"><code class="text-white bg-success pt-1 pb-1 pl-4 pr-4"><b>{{ transfer.details.description }}</b></code></h5>
+                  <div id="transfernote" class="alert alert-danger card-title mt-4 pt-2 pb-2 mb-0 pb-2">
+                    <div class="card-text"><i class="fa fa-exclamation-triangle"></i> Add the following <strong><q><u>message</u></q></strong> or <strong><q><u>transfer description</u></q></strong> to your transfer:</div>
+                    <h5 class="card-title mt-3"><code class="text-white bg-danger pt-1 pb-1 pl-4 pr-4"><b>{{ transfer.details.description }}</b></code></h5>
                   </div>
                 </div>
               </div>
@@ -256,6 +264,7 @@ import Vue from 'vue'
 import VueTelInput from 'vue-tel-input'
 import 'vue-tel-input/dist/vue-tel-input.css'
 import swal from 'sweetalert'
+import QrcodeVue from 'qrcode.vue'
 
 Vue.use(VueTelInput)
 
@@ -263,6 +272,9 @@ const endpoint = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3001
 
 export default {
   name: 'home',
+  components: {
+    QrcodeVue
+  },
   data () {
     return {
       betaApproved: false,
@@ -282,12 +294,27 @@ export default {
       tag: '',
       iban: '',
       awaiting: false,
-      transfer: {}
+      transfer: {},
+      sepaQR: false
     }
   },
   created () {
   },
   computed: {
+    qrValue () {
+      return `BCD
+001
+1
+SCT
+BUNQNL2A
+XRParrot
+NL39BUNQ2291418335
+EUR50
+CHAR
+
+${this.transfer.details.description}
+XRParrot`
+    },
     simpleVerifycheck () {
       return this.phoneCheck.trim().match(/^[0-9]{6}$/)
     },
@@ -595,6 +622,22 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+  div.card {
+    .btn-qr {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      button {
+        &.btn {
+          margin-bottom: 8px !important;
+          padding-top: 0px !important;
+          padding-bottom: 0px !important;
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+          border-radius: 3px !important;
+        }
+      }
+    }
+  }
   // h1 { color:$primary !important; }
   span[disabled] {
     cursor: default;

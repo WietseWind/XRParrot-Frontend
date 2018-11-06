@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "detect-browser": "^3.0.1",
+    "qrcode.vue": "^1.6.1",
     "sweetalert": "^2.1.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
