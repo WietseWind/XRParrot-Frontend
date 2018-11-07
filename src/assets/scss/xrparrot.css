@@ -449,7 +449,7 @@ div.faq-item {
   div.raddress input {
     font-size: 13px; } }
 
-@media (max-width: 960px) {
+@media (max-width: 991px) {
   .navbar-brand img {
     max-width: 250px;
     margin-left: 10px;
