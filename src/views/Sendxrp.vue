@@ -563,6 +563,11 @@ XRParrot`
                   this.isBot = true
                 }
                 this.removeCaptcha()
+                if (r.order && r.transferDetails.details) {
+                  this.transfer = r.transferDetails
+                  this.betaApproved = true
+                  this.changePage('confirm', 3)
+                }
               })
           })
         })
