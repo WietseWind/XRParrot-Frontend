@@ -230,8 +230,9 @@
               <div class="card text-success alert-success border-success">
                 <div class="card-body">
                   <p class="card-text">
-                    <strong><i class="fal fa-hourglass"></i> And now you wait...</strong>
-                    It will take approximately one working day for your money to arrive at our bank.
+                    <i class="fal fa-hourglass mr-2"></i>
+                    <strong class="">After you transferred</strong> the money it will take approximately <strong>one working</strong> day for your money to arrive at our bank. 
+                    Immediately after your money arrives it be converted and your XRP and sent to you. We will send you a text message when this happens.
                   </p>
                 </div>
               </div>
