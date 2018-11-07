@@ -71,24 +71,31 @@
           </p>
           <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
             <div class="raddress" v-if="!awaiting">
+              <div class="text-center d-block"><small>XRP Address</small></div>
               <input type="text" spellcheck="false" class="form-control form-control-lg" placeholder="Destination XRP address" v-on:keydown.enter="checkDestination()" v-model="destination">
             </div>
             <div class="tag" @click="tagFocus()" v-if="!awaiting">
-              <ul class="tg-list">
-                <li class="tg-list-item">
-                  <input class="tgl tgl-light" id="cb1" type="checkbox" v-model="tagtoggle" />
-                  <label class="tgl-btn" for="cb1"></label>
-                </li>
-              </ul>
-              <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" :disabled="!tagtoggle" v-on:keydown.enter="checkDestination()" placeholder="Tag" v-model="tag">
-            </div>
-            <button class="btn btn-primary next" :disabled="awaiting" @click="checkDestination()">
-              <div v-if="!awaiting">OK</div>
-              <div v-else>
-                <i class="fas fa-spinner-third fa-spin"></i>
-                Checking...
+              <div class="text-center d-block"><small>Destination Tag</small></div>
+              <div class="d-block" style="position: relative;">
+                <ul class="tg-list d-block">
+                  <li class="tg-list-item">
+                    <input class="tgl tgl-light" id="cb1" type="checkbox" v-model="tagtoggle" />
+                    <label class="tgl-btn" for="cb1"></label>
+                  </li>
+                </ul>
+                <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" :disabled="!tagtoggle" v-on:keydown.enter="checkDestination()" placeholder="Tag" v-model="tag">
               </div>
-            </button>
+            </div>
+            <div class="d-block">
+              <div class="text-center d-block"><small>&nbsp;</small></div>
+              <button class="btn btn-primary next" :disabled="awaiting" @click="checkDestination()">
+                <div v-if="!awaiting">OK</div>
+                <div v-else>
+                  <i class="fas fa-spinner-third fa-spin"></i>
+                  Checking...
+                </div>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -220,6 +227,16 @@
               </div>
             </div>
             <div class="col-sm-12 mb-4">
+              <div class="card text-success alert-success border-success">
+                <div class="card-body">
+                  <p class="card-text">
+                    <strong><i class="fal fa-hourglass"></i> And now you wait...</strong>
+                    It will take approximately one working day for your money to arrive at our bank.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 mb-4">
               <div class="card">
                 <div class="card-header"><b><i class="fal fa-lightbulb-on"></i> Did you know...</b></div>
                 <div class="card-body">
@@ -251,8 +268,9 @@
             <p class="text-center"><b></b></p>
             <p class="text-center"><b>NL39BUNQ2291418335</b></p>
           </div> -->
-          <br /><br /><br />
+          <br /><br />
           <button class="mt-5 btn btn-dark next" @click="cleanup()"><i class="fas fa-undo"></i> Start over</button>
+          <br />&nbsp;
         </div>
       </div>
     </div>
