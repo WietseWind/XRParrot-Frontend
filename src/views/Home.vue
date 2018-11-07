@@ -12,10 +12,10 @@
     </div>
     <div class="container text-center cta">
       <router-link v-if="$parent.getAccepted()" class="btn btn-primary" to="sendxrp">
-        <img src="../assets/xrp-icon-white.svg" alt="" /><span>GET XRP</span>
+        <img src="../assets/xrp-icon-white.svg" alt="" /><span>START</span>
       </router-link>
       <a v-else href="#getXRP" class="btn btn-primary" data-toggle="modal" data-target="#getXRPModal">
-        <img src="../assets/xrp-icon-white.svg" alt="" /><span>GET XRP</span>
+        <img src="../assets/xrp-icon-white.svg" alt="" /><span>START</span>
       </a>
       <p>Turning your fiat to XRP. All it takes is a SEPA bank transfer 😃</p>
     </div>

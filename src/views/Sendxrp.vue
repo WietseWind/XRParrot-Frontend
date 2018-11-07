@@ -172,7 +172,7 @@
 
         <div v-if="activePage === 'confirm'" class="innerpage text-center confirm">
           <div class="row equal">
-            <div class="col-sm-6 mb-4">
+            <!-- <div class="col-sm-6 mb-4">
               <div class="card h">
                 <div class="card-header"><b>1. Verify</b></div>
                 <div class="card-body">
@@ -190,33 +190,41 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-sm-6 mb-4">
+            </div> -->
+            <div class="col-12">
               <div class="card h">
-                <div class="card-header"><b>2. Transfer money</b></div>
+                <!-- <div class="card-header"><b>2. Transfer money</b></div> -->
                 <div class="card-body">
-                  <p class="card-text pb-0 mb-2">
+                  <p class="card-text pb-0 mb-4">
                     <!-- Todo: max.: calculate based on existing limits -->
-                    Please use your existing online banking website/app and transfer your money (max. <span class="text-primary">&euro;500</span>) to:
+                    <strong><span class="text-primary"><i class="fa fa-check"></i> Please use your existing online banking website/app and transfer your money (max. <span class="text-primary">&euro;500</span>).</span></strong>
+                    <br />
+                    <br />
+                    <strong class="">After you transferred</strong> the money it will take approximately <strong>one working</strong> day for your money to arrive at our bank.
+                    Immediately after your money arrives it be converted and your XRP and sent to you. We will send you a text message when this happens.
                   </p>
-                  <div class="alert text-center mb-0 pb-0" v-if="sepaQR">
-                    <qrcode-vue :value="qrValue" size="150" level="H"></qrcode-vue>
-                    <small class="btn-qr"><button @click="sepaQR=false" class="btn btn-sm btn-primary"><i class="fa fa-arrow-left"></i> Show details</button></small>
-                  </div>
-                  <div class="row" v-else>
-                    <div class="col-12 mt-2 text-left">
+                  <div class="row">
+                    <div class="col-12 col-lg-9 col-md-8">
                       <div class="row">
-                        <span class="col-12 pb-0 col-lg-4 mt-2"><b class="">IBAN</b></span> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 text-center pt-2">
-                          <h6 class="card-title pb-2 mb-0">
-                            <b>NL39 BUNQ 2291 4183 35</b>
-                          </h6>
-                          <small class="btn-qr"><button @click="sepaQR=true" class="btn btn-sm btn-outline-dark bg-white text-dark"><i class="text-dark fas fa-qrcode"></i> Show QR</button></small>
-                        </code></div>
-                        <small class="col-12 pb-0 col-lg-4">BIC / Swift code </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">BUNQNL2A</code></div>
-                        <small class="col-12 pb-0 col-lg-4">Account name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">XRParrot</code></div>
-                        <small class="col-12 pb-0 col-lg-4">Address, ZIP, City </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">Tolweg 5, 3741 LM, Baarn</code></div>
-                        <small class="col-12 pb-0 col-lg-4">Country </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1">NL (The Netherlands)</code></div>
+                        <div class="col-12 mt-2 text-left">
+                          <div class="row">
+                            <span class="col-12 pb-0 col-lg-3 mt-1"><b class="">IBAN</b></span> <div class="col-12 col-lg-9 mb-3"><code class="d-block text-primary bg-light pl-1 pt-2 pb-2 clb" v-clipboard:copy="'NL39BUNQ2291418335'">
+                              <!-- <small class="float-right btn-qr"><button @click="sepaQR=true" class="btn btn-sm btn-outline-dark bg-white text-dark"><i class="text-dark fas fa-qrcode"></i> Show QR</button></small> -->
+                              <h6 class="card-title pb-0 mb-0">
+                                <b>NL39 BUNQ 2291 4183 35</b>
+                              </h6>
+                            </code></div>
+                            <small class="col-12 pb-0 col-lg-3">BIC / Swift code </small> <div class="col-12 col-lg-9 mb-1"><code class="d-block text-primary bg-light pl-1 clb" v-clipboard:copy="'BUNQNL2A'">BUNQNL2A</code></div>
+                            <small class="col-12 pb-0 col-lg-3">Account name </small> <div class="col-12 col-lg-9 mb-1"><code class="d-block text-primary bg-light pl-1 clb" v-clipboard:copy="'XRParrot'">XRParrot</code></div>
+                            <small class="col-12 pb-0 col-lg-3">Address, ZIP, City </small> <div class="col-12 col-lg-9 mb-1"><code class="d-block text-primary bg-light pl-1 clb" v-clipboard:copy="'Tolweg 5, 3741 LM, Baarn'">Tolweg 5, 3741 LM, Baarn</code></div>
+                            <small class="col-12 pb-0 col-lg-3">Country </small> <div class="col-12 col-lg-9 mb-1"><code class="d-block text-primary bg-light pl-1 clb" v-clipboard:copy="'NL (The Netherlands)'">NL (The Netherlands)</code></div>
+                          </div>
+                        </div>
                       </div>
+                    </div>
+                    <div class="col-12 col-lg-3 col-md-4">
+                      <div class="d-block d-lg-none">&nbsp;</div>
+                      <qrcode-vue :value="qrValue" size="150" level="H" class="mt-2"></qrcode-vue>
                     </div>
                   </div>
                   <div id="transfernote" class="alert alert-danger card-title mt-4 pt-2 pb-2 mb-0 pb-2">
@@ -226,17 +234,15 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-12 mb-4">
+            <!-- <div class="col-sm-12 mb-4">
               <div class="card text-success alert-success border-success">
                 <div class="card-body">
                   <p class="card-text">
                     <i class="fal fa-hourglass mr-2"></i>
-                    <strong class="">After you transferred</strong> the money it will take approximately <strong>one working</strong> day for your money to arrive at our bank. 
-                    Immediately after your money arrives it be converted and your XRP and sent to you. We will send you a text message when this happens.
                   </p>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="col-sm-12 mb-4">
               <div class="card">
                 <div class="card-header"><b><i class="fal fa-lightbulb-on"></i> Did you know...</b></div>
@@ -284,7 +290,10 @@ import VueTelInput from 'vue-tel-input'
 import 'vue-tel-input/dist/vue-tel-input.css'
 import swal from 'sweetalert'
 import QrcodeVue from 'qrcode.vue'
+import VueClipboard from 'vue-clipboard2'
 
+VueClipboard.config.autoSetContainer = true
+Vue.use(VueClipboard)
 Vue.use(VueTelInput)
 
 const endpoint = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3001/api/' : 'https://api.xrparrot.com/api/'
@@ -636,6 +645,31 @@ XRParrot`
 
 <style lang="scss">
   #getxrp { z-index: 99; position: relative; }
+  .clb {
+    cursor: pointer;
+    &:hover {
+      &::before {
+        position: absolute;
+        float: left;
+        margin-left: -20px;
+        margin-top: -1px;
+        content: "\f0c5";
+        font-family: 'Font Awesome 5 Pro';
+        font-weight: 400;
+      }
+    }
+    &:active {
+      &::before {
+        position: absolute;
+        float: left;
+        margin-left: -20px;
+        margin-top: -1px;
+        content: "\f00c";
+        font-family: 'Font Awesome 5 Pro';
+        font-weight: 400;
+      }
+    }
+  }
 </style>
 
 <style lang="scss" scoped>
@@ -645,6 +679,7 @@ XRParrot`
       padding-bottom: 0;
       button {
         &.btn {
+          font-size: 1.4em !important;
           margin-bottom: 8px !important;
           padding-top: 0px !important;
           padding-bottom: 0px !important;

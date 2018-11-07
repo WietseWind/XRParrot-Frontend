@@ -12,6 +12,7 @@
     "qrcode.vue": "^1.6.1",
     "sweetalert": "^2.1.0",
     "vue": "^2.5.17",
+    "vue-clipboard2": "^0.2.1",
     "vue-router": "^3.0.1",
     "vue-tel-input": "^2.0.5"
   },
