@@ -170,16 +170,16 @@
                 <div class="card-header"><b>1. Verify</b></div>
                 <div class="card-body">
                   <p class="card-text pb-0 mb-2">You will be sending your money from your account:</p>
-                  <h5 class="mt-3 card-title"><code class="bg-light alert pt-1 pb-1"><b>{{ iban }}</b></code></h5>
+                  <h5 class="mt-3 card-title"><code class="bg-light text-primary alert pt-1 pb-1"><b>{{ iban }}</b></code></h5>
                   <p class="card-text alert alert-warning text-center bg-white"><i class="fa fa-exclamation-triangle"></i> Please only send money from this account, or your transfer will be rejected and refunded.</p>
                   <p class="card-text pb-0 mb-2 mt-4">Your money will be converted to XRP and will be sent to:</p>
-                  <h5 class="mt-3 card-title"><code class="bg-light alert pt-1 pb-1"><b>{{ destination }}</b></code></h5>
+                  <h5 class="mt-3 card-title"><code class="bg-light text-primary alert pt-1 pb-1"><b>{{ destination }}</b></code></h5>
                   <div v-if="tagtoggle">
                     <p class="card-text pb-0 mb-2 mt-4">XRP deposit destination tag:</p>
-                    <h5 class="mt-3 card-title pb-0 mb-0"><code class="bg-light alert pt-1 pb-1"><b>{{ tag }}</b></code></h5>
+                    <h5 class="mt-3 card-title pb-0 mb-0"><code class="bg-light text-primary alert pt-1 pb-1"><b>{{ tag }}</b></code></h5>
                   </div>
                   <div v-else>
-                    <p class="card-text alert alert-warning text-center">No destination tag will be used for the XRP deposit.</p>
+                    <p class="card-text text-center">No destination tag will be used for the XRP deposit.</p>
                   </div>
                 </div>
               </div>
@@ -230,7 +230,7 @@
                     exceed <strong class="text-primary">€500 per calender month</strong>.
                   </p>
                   <p class="card-text">
-                    Any follow up deposits using your transfer description <code><strong>{{ transfer.details.description }}</strong></code>
+                    Any follow up deposits using your transfer description <code class="text-primary"><strong>{{ transfer.details.description }}</strong></code>
                     will be converted into XRP and sent to the destination account you specified.
                   </p>
                 </div>
