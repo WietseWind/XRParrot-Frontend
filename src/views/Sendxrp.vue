@@ -388,6 +388,9 @@ XRParrot`
     this.removeCaptcha()
   },
   methods: {
+    handleError (e) {
+      this.awaiting = false
+      swal({ title: 'Oops!', text: `Error. This is not your fault. Will be fixed soon! Sorry!\n\n${(e.message || 'No details...')}`, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {})
     checkBETA () {
       window.fetch(`${endpoint}beta`, {
         credentials: 'include',
@@ -407,6 +410,7 @@ XRParrot`
             })
           }
         })
+        .catch(this.handleError)
     },
     cleanup () {
       Object.keys(window.localStorage).forEach(k => {
@@ -438,6 +442,7 @@ XRParrot`
             })
           }
         })
+        .catch(this.handleError)
     },
     sendSMS () {
       this.awaiting = true
@@ -465,6 +470,7 @@ XRParrot`
             })
           }
         })
+        .catch(this.handleError)
     },
     checkIBAN () {
       this.awaiting = true
@@ -485,6 +491,7 @@ XRParrot`
             swal({ title: 'Oops!', text: text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } })
           }
         })
+        .catch(this.handleError)
     },
     checkDestination () {
       this.awaiting = true
@@ -562,6 +569,7 @@ XRParrot`
             swal({ title: 'Oops!', text: text, closeOnClickOutside: false, closeOnEsc: false, icon: 'error', buttons: { cancel: `× Close` } })
           }
         })
+        .catch(this.handleError)
     },
     removeCaptcha () {
       const captchaBadgeEl = document.querySelector('div.grecaptcha-badge')
@@ -597,6 +605,7 @@ XRParrot`
                   this.changePage('confirm', 3)
                 }
               })
+              .catch(this.handleError)
           })
         })
       }
