@@ -35,6 +35,7 @@
         <!-- awaitingAccept -->
       </div>
     </div>
+    <br /><br /><br />
     <footer>
       <img src="./assets/bird-icon.svg" class="bird fa-flip-horizontal" />
       <img src="./assets/footer-black.svg" class="dark" />
