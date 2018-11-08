@@ -52,7 +52,7 @@
           </span>
           <span :disabled="pageComplete < 3" @click="changePage('confirm', 3)" class="link confirm" :class="[{ 'active' : activePage === 'confirm' , 'history' : pageStep > 3 }]">
               <b>4</b>
-              <span>Confirm &amp; Transfer</span>
+              <span>Transfer money</span>
               <i v-if="pageComplete >= 3" class="fa fa-check-circle"></i>
           </span>
       </div>
@@ -197,27 +197,44 @@
                 <div class="card-body">
                   <p class="card-text pb-0 mb-4">
                     <!-- Todo: max.: calculate based on existing limits -->
-                    <strong><span class="text-primary"><i class="fa fa-check"></i> Please use your existing online banking website/app and transfer your money (max. <span class="text-primary">&euro;500</span>).</span></strong>
+                    <strong><span class="text-primary"><i class="fa fa-check"></i> Please <!-- use your existing online banking website/app and --> transfer your money (min. &euro;5, max. &euro;500) to the following account:</span></strong>
                     <br />
                     <br />
-                    <strong class="">After you transferred</strong> the money it will take approximately <strong>one working</strong> day for your money to arrive at our bank.
-                    Immediately after your money arrives it be converted and your XRP and sent to you. We will send you a text message when this happens.
+                    <strong class="">After you have transferred</strong> the money it will take approximately <strong>one working</strong> day for your money to arrive at our bank.
+                    Immediately after your money arrives it will be converted and your XRP sent to you.<br />
+                    We will send you a text message (SMS) when this happens.
                   </p>
+                  <p><strong>Payment details</strong>, click to copy:</p>
                   <div class="row">
                     <div class="col-12 col-lg-9 col-md-8">
                       <div class="row">
                         <div class="col-12 mt-2 text-left">
                           <div class="row">
-                            <span class="col-12 pb-0 col-lg-3 mt-1"><b class="">IBAN</b></span> <div class="col-12 col-lg-9 mb-3"><code class="d-block text-primary bg-light pl-1 pt-2 pb-2 clb" v-clipboard:copy="'NL39BUNQ2291418335'">
+                            <span class="col-12 pb-0 col-lg-4 mt-1"><b class="">IBAN</b></span> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pt-2 pb-2 clb" v-clipboard:copy="'NL39BUNQ2291418335'">
                               <!-- <small class="float-right btn-qr"><button @click="sepaQR=true" class="btn btn-sm btn-outline-dark bg-white text-dark"><i class="text-dark fas fa-qrcode"></i> Show QR</button></small> -->
                               <h6 class="card-title pb-0 mb-0">
                                 <b>NL39 BUNQ 2291 4183 35</b>
                               </h6>
                             </code></div>
-                            <small class="col-12 pb-0 col-lg-3">BIC / Swift code </small> <div class="col-12 col-lg-9 mb-1"><code class="d-block text-primary bg-light pl-1 clb" v-clipboard:copy="'BUNQNL2A'">BUNQNL2A</code></div>
-                            <small class="col-12 pb-0 col-lg-3">Account name </small> <div class="col-12 col-lg-9 mb-1"><code class="d-block text-primary bg-light pl-1 clb" v-clipboard:copy="'XRParrot'">XRParrot</code></div>
-                            <small class="col-12 pb-0 col-lg-3">Address, ZIP, City </small> <div class="col-12 col-lg-9 mb-1"><code class="d-block text-primary bg-light pl-1 clb" v-clipboard:copy="'Tolweg 5, 3741 LM, Baarn'">Tolweg 5, 3741 LM, Baarn</code></div>
-                            <small class="col-12 pb-0 col-lg-3">Country </small> <div class="col-12 col-lg-9 mb-1"><code class="d-block text-primary bg-light pl-1 clb" v-clipboard:copy="'NL (The Netherlands)'">NL (The Netherlands)</code></div>
+                            <span class="col-12 pb-0 col-lg-4 mt-1">
+                              <strong class="text-danger">Payment reference</strong>
+                            </span>
+                            <div class="col-12 col-lg-8 mb-1 transfernote"><code class="d-block text-danger bg-light pl-1 pt-2 pb-0 clb" v-clipboard:copy="transfer.details.description">
+                              <!-- <small class="float-right btn-qr"><button @click="sepaQR=true" class="btn btn-sm btn-outline-dark bg-white text-dark"><i class="text-dark fas fa-qrcode"></i> Show QR</button></small> -->
+                              <h6 class="card-title pb-0 mb-0">
+                                <i class="fa fa-exclamation-triangle float-right mr-2" style="margin-top: 2px;"></i> <b>{{ transfer.details.description }}</b>
+                                <br /><small class="pt-2 mb-0 pb-1">Please <strong>don't forget to include</strong>  the payment reference!</small>
+                              </h6>
+                            </code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">BIC / Swift code </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'BUNQNL2A'">BUNQNL2A</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Account name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'XRParrot'">XRParrot</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Address, ZIP, City </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'Tolweg 5, 3741 LM, Baarn'">Tolweg 5, 3741 LM, Baarn</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Country </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'NL (The Netherlands)'">NL (The Netherlands)</code></div>
+                          </div>
+                          <div class="row mt-3" style="opacity: .7;">
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">Sending IBAN </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ iban }}</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">XRP Destination </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ destination }}</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">Destination tag </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ tag }}</code></div>
                           </div>
                         </div>
                       </div>
@@ -227,10 +244,13 @@
                       <qrcode-vue :value="qrValue" size="150" level="H" class="mt-2"></qrcode-vue>
                     </div>
                   </div>
-                  <div id="transfernote" class="alert alert-danger card-title mt-4 pt-2 pb-2 mb-0 pb-2">
+                  <div id="transfernote" class="alert alert-danger card-title mt-4 pt-2 pb-2 mb-0 pb-2 d-none">
                     <div class="card-text"><i class="fa fa-exclamation-triangle"></i> Add the following <strong><q><u>message</u></q></strong> or <strong><q><u>transfer description</u></q></strong> to your transfer:</div>
                     <h5 class="card-title mt-3"><code class="text-white bg-danger pt-1 pb-1 pl-4 pr-4"><b>{{ transfer.details.description }}</b></code></h5>
                   </div>
+                  <button @click="sendByMail()" class="btn btn-primary btn-block mt-3 mb-0">
+                    Send by email  <i class="ml-1 fal fa-envelope-open"></i><i class="fal fa-arrow-right"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -243,7 +263,7 @@
                 </div>
               </div>
             </div> -->
-            <div class="col-sm-12 mb-4">
+            <div class="col-sm-12 mb-4 d-none">
               <div class="card">
                 <div class="card-header"><b><i class="fal fa-lightbulb-on"></i> Did you know...</b></div>
                 <div class="card-body">
@@ -276,7 +296,7 @@
             <p class="text-center"><b>NL39BUNQ2291418335</b></p>
           </div> -->
           <br /><br />
-          <button class="mt-5 btn btn-dark next" @click="cleanup()"><i class="fas fa-undo"></i> Start over</button>
+          <button class="mt-5 btn btn-dark next" @click="cleanup()"><i class="fas fa-undo"></i> Restart (new order)</button>
           <br />&nbsp;
         </div>
       </div>
@@ -391,6 +411,42 @@ XRParrot`
     handleError (e) {
       this.awaiting = false
       swal({ title: 'Oops!', text: `Error. This is not your fault. Will be fixed soon! Sorry!\n\n${(e.message || 'No details...')}`, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {})
+    },
+    sendByMail () {
+      swal({
+        title: 'Send info to your email address',
+        text: 'Please enter your email address to receive a copy of the transfer information for your own administration.',
+        content: 'input',
+        icon: false,
+        buttons: { cancel: `× Cancel`, confirm: `Send →` }
+      }).then(s => {
+        // window.console.log(s)
+        if (s && s.trim().match(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i)) {
+          window.fetch(`${endpoint}mail`, {
+            credentials: 'include',
+            method: 'POST',
+            body: JSON.stringify({ to: s.trim() }),
+            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+          })
+            .then(r => r.json())
+            .then(r => {
+              window.console.log('Mail sent', r)
+              if (r.error) throw new Error('Backend error: mail could not be sent.')
+              swal({
+                title: 'Sent!',
+                text: 'You should receive an email within a minute. If not, please check your spam folder.',
+                icon: 'success',
+                buttons: { cancel: `× Close` }
+              })
+            })
+            .catch(this.handleError)
+        } else {
+          if (s !== null && s !== false) {
+            swal({ title: 'Oops!', text: 'Invalid email address.', icon: 'error', buttons: { cancel: `× Close` } }).then(s => {})
+          }
+        }
+      })
+    },
     checkBETA () {
       window.fetch(`${endpoint}beta`, {
         credentials: 'include',
@@ -653,6 +709,7 @@ XRParrot`
 </script>
 
 <style lang="scss">
+  .vue-tel-input, .phonenumber { background-color: #fff !important; }
   #getxrp { z-index: 99; position: relative; }
   .clb {
     cursor: pointer;
@@ -714,19 +771,19 @@ XRParrot`
   }
 
   @keyframes yourAnimation {
-    0% { }
+    0% { background-color: rgba(241,84,86, .2); }
     100% { background-color: transparent; }
   }
   @-webkit-keyframes yourAnimation {
-    0% { }
+    0% { background-color: rgba(241,84,86, .2); }
     100% { background-color: transparent; }
   }
   @-moz-keyframes yourAnimation {
-    0% { }
+    0% { background-color: rgba(241,84,86, .2); }
     100% { background-color: transparent; }
   }
 
-  #transfernote {
+  #transfernote, .transfernote>code {
     -webkit-animation: yourAnimation 0.8s infinite 1s ease-in;
     -moz-animation: yourAnimation 0.8s infinite 1s ease-in;
     animation: yourAnimation 0.8s infinite 1s ease-in;
