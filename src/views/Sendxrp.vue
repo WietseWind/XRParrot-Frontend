@@ -200,8 +200,8 @@
                     <strong>
                       <span class="text-primary">
                         <!--<i class="fa fa-check"></i>-->
-                        Please 
-                        <!-- use your existing online banking website/app and --> 
+                        Please
+                        <!-- use your existing online banking website/app and -->
                         transfer your money (min. &euro;5, max. &euro;500) to the following account:
                       </span>
                     </strong>
