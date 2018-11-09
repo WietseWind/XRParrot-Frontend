@@ -197,10 +197,17 @@
                 <div class="card-body">
                   <p class="card-text pb-0 mb-4">
                     <!-- Todo: max.: calculate based on existing limits -->
-                    <strong><span class="text-primary"><i class="fa fa-check"></i> Please <!-- use your existing online banking website/app and --> transfer your money (min. &euro;5, max. &euro;500) to the following account:</span></strong>
+                    <strong>
+                      <span class="text-primary">
+                        <!--<i class="fa fa-check"></i>-->
+                        Please 
+                        <!-- use your existing online banking website/app and --> 
+                        transfer your money (min. &euro;5, max. &euro;500) to the following account:
+                      </span>
+                    </strong>
                     <br />
                     <br />
-                    <strong class="">After you have transferred</strong> the money it will take approximately <strong>one working</strong> day for your money to arrive at our bank.
+                    <strong class="">After you have transferred the money</strong> it will take approximately <strong>one working</strong> day for your money to arrive at our bank.
                     Immediately after your money arrives it will be converted and your XRP sent to you.<br />
                     We will send you a text message (SMS) when this happens.
                   </p>
@@ -233,8 +240,8 @@
                           </div>
                           <div class="row mt-3" style="opacity: .7;">
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">Sending IBAN </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ iban }}</code></div>
-                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">XRP Destination </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ destination }}</code></div>
-                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">Destination tag </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ tag }}</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">XRP destination </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ destination }}</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">Destination tag </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ tagtoggle ? tag : '-' }}</code></div>
                           </div>
                         </div>
                       </div>
@@ -431,7 +438,7 @@ XRParrot`
             .then(r => r.json())
             .then(r => {
               window.console.log('Mail sent', r)
-              if (r.error) throw new Error('Backend error: mail could not be sent.')
+              if (r.error) throw new Error(`Backend error, mail could not be sent${r.message && r.message !== '' ? ': ' + r.message : ''}.`)
               swal({
                 title: 'Sent!',
                 text: 'You should receive an email within a minute. If not, please check your spam folder.',
