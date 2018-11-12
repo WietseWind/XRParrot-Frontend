@@ -71,11 +71,11 @@
           </p>
           <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
             <div class="raddress" v-if="!awaiting">
-              <div class="text-center d-block"><small>XRP Address</small></div>
+              <div class="text-center d-block"><small>XRP address</small></div>
               <input type="text" spellcheck="false" class="form-control form-control-lg" placeholder="Destination XRP address" v-on:keydown.enter="checkDestination()" v-model="destination">
             </div>
             <div class="tag" @click="tagFocus()" v-if="!awaiting">
-              <div class="text-center d-block"><small>Destination Tag</small></div>
+              <div class="text-center d-block"><small>Destination tag</small></div>
               <div class="d-block" style="position: relative;">
                 <ul class="tg-list d-block">
                   <li class="tg-list-item">
@@ -192,6 +192,13 @@
               </div>
             </div> -->
             <div class="col-12">
+              <div class="alert alert-secondary bg-white">
+                <h5 class="pb-0 mb-2"><i class="far fa-info-circle"></i> Your Order ID is <strong class="text-dark">{{ transfer.details.description }}</strong>.</h5>
+                You <strong>must</strong> add this ID to your payment to XRParrot.
+                <br />Your Order ID is linked to your source IBAN and destination XRP adddres &amp; tag.
+                You <strong>can use this ID again</strong> for future payments.<br />
+                If you forget this ID or if you want to change your payment source or XRP destination, you can simply generate a new ID.
+              </div>
               <div class="card h">
                 <!-- <div class="card-header"><b>2. Transfer money</b></div> -->
                 <div class="card-body">
@@ -207,9 +214,8 @@
                     </strong>
                     <br />
                     <br />
-                    <strong class="">After you have transferred the money</strong> it will take approximately <strong>one working</strong> day for your money to arrive at our bank.
-                    Immediately after your money arrives it will be converted and your XRP sent to you.<br />
-                    We will send you a text message (SMS) when this happens.
+                    <strong class="">After you have transferred the money</strong> it will take around <strong>one working</strong> day for your money to arrive at our bank.
+                    Immediately after your money arrives it will be converted and your XRP sent to you. We will send you a text message (SMS) when this happens.
                   </p>
                   <p><strong>Payment details</strong>, click to copy:</p>
                   <div class="row">
@@ -233,8 +239,8 @@
                                 <br /><small class="pt-2 mb-0 pb-1">Please <strong>don't forget to include</strong>  the payment reference!</small>
                               </h6>
                             </code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Account name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'XRParrot NL'">XRParrot NL</code></div>
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">BIC / Swift code </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'BUNQNL2A'">BUNQNL2A</code></div>
-                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Account name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'XRParrot'">XRParrot</code></div>
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Address, ZIP, City </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'Tolweg 5, 3741 LM, Baarn'">Tolweg 5, 3741 LM, Baarn</code></div>
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Country </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'NL (The Netherlands)'">NL (The Netherlands)</code></div>
                           </div>
@@ -270,7 +276,7 @@
                 </div>
               </div>
             </div> -->
-            <div class="col-sm-12 mb-4 d-none">
+            <!-- <div class="col-sm-12 mb-4 d-none">
               <div class="card">
                 <div class="card-header"><b><i class="fal fa-lightbulb-on"></i> Did you know...</b></div>
                 <div class="card-body">
@@ -286,9 +292,8 @@
                   </p>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
-
           <!-- <div class="destinationtag">
             <p class="text-center">You entered this as the destination:</p>
             <p class="text-center"><b>{{ destination }}</b></p>
@@ -576,7 +581,7 @@ XRParrot`
               if (!this.tagtoggle && r.response.incomingTxCountWithTag && r.response.incomingTxCountWithTag > 5) {
                 await swal({
                   title: 'Continue without tag?',
-                  text: `This destination account recently received multiple transactions WITH a destination tag.\n\nAre you sure you want to continue without a tag?`,
+                  text: `This destination account received some transactions WITH a destination tag.\n\nAre you sure you want to continue without a tag?`,
                   closeOnClickOutside: false,
                   closeOnEsc: false,
                   icon: 'info',
@@ -662,7 +667,7 @@ XRParrot`
                   this.isBot = true
                 }
                 this.removeCaptcha()
-                if (r.order && r.transferDetails.details) {
+                if (r.order && r.transferDetails.details && this.iban !== '') {
                   this.transfer = r.transferDetails
                   this.betaApproved = true
                   this.changePage('confirm', 3)
@@ -763,6 +768,24 @@ XRParrot`
       }
     }
   }
+
+  div.tag {
+    // margin-left: -5px;
+    // padding-right: 10px;
+    ul.tg-list {
+      display: none !important;
+    }
+    input {
+      // margin-left: 55px !important;
+      // width: 160px;
+      padding-left: 20px;
+      cursor: pointer;
+      &:focus {
+        cursor: default;
+      }
+    }
+  }
+
   // h1 { color:$primary !important; }
   span[disabled] {
     cursor: default;
@@ -773,7 +796,7 @@ XRParrot`
 
   div.equal {
     div.card.h {
-      height: 100%;
+      // height: 100%;
     }
   }
 
