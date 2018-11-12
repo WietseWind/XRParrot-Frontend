@@ -240,9 +240,9 @@
                               </h6>
                             </code></div>
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Account name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'XRParrot NL'">XRParrot NL</code></div>
-                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">BIC / Swift code </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'BUNQNL2A'">BUNQNL2A</code></div>
-                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Address, ZIP, City </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'Tolweg 5, 3741 LM, Baarn'">Tolweg 5, 3741 LM, Baarn</code></div>
-                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Country </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'The Netherlands (NL)'">The Netherlands (NL)</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">BIC / Swift code </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'BUNQNL2A'">BUNQNL2A (or: BUNQNL2AXXX)</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Beneficiary address</small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'Tolweg 5, 3741 LM, Baarn, The Netherlands'">Tolweg 5, 3741 LM, Baarn, The Netherlands</code></div>
+                            <!-- <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Country </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'The Netherlands (NL)'">The Netherlands (NL)</code></div> -->
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Bank name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'Bunq Bank'">Bunq Bank</code></div>
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Bank address </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'Naritaweg 131, 1043 BS Amsterdam (NL)'">Naritaweg 131, 1043 BS Amsterdam (NL)</code></div>
                           </div>
