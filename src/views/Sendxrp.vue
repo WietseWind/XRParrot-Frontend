@@ -83,7 +83,7 @@
                     <label class="tgl-btn" for="cb1"></label>
                   </li>
                 </ul>
-                <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" :disabled="!tagtoggle" v-on:keydown.enter="checkDestination()" placeholder="Tag" v-model="tag">
+                <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" v-on:keydown.enter="checkDestination()" placeholder="Tag" v-model="tag">
               </div>
             </div>
             <div class="d-block">
@@ -111,7 +111,7 @@
           </p>
           <div class="d-lg-flex justify-content-center align-items-center text-center">
             <div class="iban" v-if="!awaiting">
-              <input type="text" spellcheck="false" v-on:keydown.enter="checkIBAN()" class="uppercase form-control form-control-lg" placeholder="NL 12 ABCD 012345678" v-model="iban">
+              <input type="text" spellcheck="false" v-on:keydown.enter="checkIBAN()" class="uppercase form-control form-control-lg" style="width: 450px; max-width: 100% !important;" placeholder="NL 12 ABCD 012345678" v-model="iban">
             </div>
             <button class="btn btn-primary next" :disabled="awaiting" @click="checkIBAN()">
               <div v-if="!awaiting">OK</div>
