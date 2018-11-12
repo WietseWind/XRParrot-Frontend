@@ -242,9 +242,11 @@
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Account name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'XRParrot NL'">XRParrot NL</code></div>
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">BIC / Swift code </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'BUNQNL2A'">BUNQNL2A</code></div>
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Address, ZIP, City </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'Tolweg 5, 3741 LM, Baarn'">Tolweg 5, 3741 LM, Baarn</code></div>
-                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Country </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'NL (The Netherlands)'">NL (The Netherlands)</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Country </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'The Netherlands (NL)'">The Netherlands (NL)</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Bank name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'Bunq Bank'">Bunq Bank</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Bank address </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'Naritaweg 131, 1043 BS Amsterdam (NL)'">Naritaweg 131, 1043 BS Amsterdam (NL)</code></div>
                           </div>
-                          <div class="row mt-3" style="opacity: .7;">
+                          <div class="row mt-3">
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">Sending IBAN </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ iban }}</code></div>
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">XRP destination </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ destination }}</code></div>
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">Destination tag </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ tagtoggle ? tag : '-' }}</code></div>
