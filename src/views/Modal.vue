@@ -15,7 +15,7 @@
             <div class="list-item__checkbox" :class="[{ 'list-item__checkbox--active' : checkStranger }]"></div>
             <div class="list-item__description">
               <p>
-                <strong>You're using this service on your own initiative.</strong> <br>
+                <strong>You're using this service on your own initiative</strong> <br>
                 Please only deposit <span class="text-primary">from</span> and <span class="text-primary">to</span> accounts under your own control. Don't use XRParrot on receiving a request by a 3rd party.
               </p>
             </div>
@@ -25,7 +25,7 @@
             <div class="list-item__checkbox" :class="[{ 'list-item__checkbox--active' : checkLimits }]"></div>
             <div class="list-item__description">
               <p>
-                <strong>Limits: exceeding deposits will be returned.</strong> <br>
+                <strong>Limits: exceeding deposits will be returned</strong> <br>
                 Max. <span class="text-primary">€500 per month</span> per unique phone number / IBAN account / Deposit destination.
               </p>
             </div>
@@ -35,7 +35,7 @@
             <div class="list-item__checkbox" :class="[{ 'list-item__checkbox--active' : checkAge }]"></div>
             <div class="list-item__description">
               <p>
-                <strong>You are at least 18 years old.</strong> <br>
+                <strong>You are at least 18 years old</strong> <br>
                 If you are under <span class="text-primary">18</span> please contact your parent, guardian, or custodian.
               </p>
             </div>
