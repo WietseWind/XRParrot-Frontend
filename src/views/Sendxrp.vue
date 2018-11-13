@@ -489,6 +489,7 @@ XRParrot`
       document.location.reload()
     },
     verifySMS () {
+      clearTimeout(window.awaitSMSInputTimeout)
       this.awaiting = true
       window.fetch(`${endpoint}finish`, {
         credentials: 'include',
@@ -515,6 +516,7 @@ XRParrot`
         .catch(this.handleError)
     },
     sendSMS () {
+      clearTimeout(window.awaitSMSInputTimeout)
       this.awaiting = true
       window.fetch(`${endpoint}phone`, {
         credentials: 'include',
@@ -531,6 +533,16 @@ XRParrot`
             this.inputFocus()
             if (r.verified || false) {
               this.verifySMS()
+            } else {
+              window.awaitSMSInputTimeout = setTimeout(() => {
+                if (this.activePage === 'verify') {
+                  swal({ title: 'Well...', text: `You should have received a text message by now. Please check your number (carefully), and try again.`, closeOnClickOutside: false, closeOnEsc: false, icon: 'warning', buttons: { cancel: `OK →` } }).then(s => {
+                    this.phonestep = 0
+                    this.changePage('verify', 2)
+                    this.inputFocus()
+                  })
+                }
+              }, 60 * 1000)
             }
           } else {
             const text = 'The entered phone number seems to be invalid:' + `\n\n${r.error}`
