@@ -750,6 +750,13 @@ XRParrot`
     }
   },
   watch: {
+    tag () {
+      if (this.tag.trim().match(/[0-9]/)) {
+        this.tagtoggle = true
+      } else {
+        this.tagtoggle = false
+      }
+    },
     pageStep () {
       if (this.pageComplete < this.pageStep) {
         this.pageComplete = this.pageStep
