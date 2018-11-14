@@ -72,7 +72,7 @@
           <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
             <div class="raddress" v-if="!awaiting">
               <div class="text-center d-block"><small>XRP address</small></div>
-              <input type="text" spellcheck="false" class="form-control form-control-lg" placeholder="Destination XRP address" v-on:keydown.enter="checkDestination()" v-model="destination">
+              <input type="text" spellcheck="false" class="form-control form-control-lg" :disabled="prefilled" placeholder="Destination XRP address" v-on:keydown.enter="checkDestination()" v-model="destination">
             </div>
             <div class="tag" @click="tagFocus()" v-if="!awaiting">
               <div class="text-center d-block"><small>Destination tag</small></div>
@@ -83,7 +83,7 @@
                     <label class="tgl-btn" for="cb1"></label>
                   </li>
                 </ul>
-                <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" class="form-control form-control-lg" v-on:keydown.enter="checkDestination()" placeholder="Tag" v-model="tag">
+                <input type="text" spellcheck="false" @blur="tagBlur()" ref="dtag" :disabled="prefilled" class="form-control form-control-lg" v-on:keydown.enter="checkDestination()" placeholder="Tag" v-model="tag">
               </div>
             </div>
             <div class="d-block">
@@ -339,7 +339,7 @@ export default {
   },
   data () {
     return {
-      betaApproved: false,
+      betaApproved: true,
       betaCode: '',
       pageComplete: 0,
       awaitingCaptcha: true,
@@ -357,7 +357,8 @@ export default {
       iban: '',
       awaiting: false,
       transfer: {},
-      sepaQR: false
+      sepaQR: false,
+      prefilled: false
     }
   },
   created () {
@@ -393,6 +394,8 @@ XRParrot`
     }
   },
   mounted () {
+    this.checkPrefilledDestination()
+    
     if (typeof window.localStorage['betaApproved'] !== 'undefined') {
       this.betaCode = window.localStorage['betaApproved']
     }
@@ -401,12 +404,14 @@ XRParrot`
     this.loadCaptcha()
     if (swal.getState().isOpen) swal.close()
 
-    if (typeof window.localStorage['destination'] === 'string') {
-      const destination = window.localStorage['destination'].split(':')
-      this.destination = destination[0]
-      if (destination.length > 1) {
-        this.tag = destination[1]
-        this.tagtoggle = true
+    if (!this.prefilled) {
+      if (typeof window.localStorage['destination'] === 'string') {
+        const destination = window.localStorage['destination'].split(':')
+        this.destination = destination[0]
+        if (destination.length > 1) {
+          this.tag = destination[1]
+          this.tagtoggle = true
+        }
       }
     }
 
@@ -422,6 +427,22 @@ XRParrot`
     this.removeCaptcha()
   },
   methods: {
+    checkPrefilledDestination () {
+      if (document.location.hash && typeof document.location.hash === 'string' && document.location.hash.length > 0) {
+        if (document.location.hash.match(/^#r[a-zA-Z0-9]{20,}:?[0-9]*$/)) {
+          var addr = document.location.hash.slice(1).split(':')
+          this.prefilled = true
+          this.destination = addr[0]
+          this.tag = addr.length > 1 ? addr[1] : ''
+          this.phonestep = 0
+          this.phoneCheck = ''
+          this.pageComplete = 0
+          this.tagtoggle = addr.length > 1 ? true : false
+          this.changePage('destination', 0)
+          this.transfer = {}
+        }
+      }
+    },
     handleError (e) {
       this.awaiting = false
       swal({ title: 'Oops!', text: `Error. This is not your fault. Will be fixed soon! Sorry!\n\n${(e.message || 'No details...')}`, icon: 'error', buttons: { cancel: `× Close` } }).then(s => {})
@@ -681,7 +702,7 @@ XRParrot`
                   this.isBot = true
                 }
                 this.removeCaptcha()
-                if (r.order && r.transferDetails.details && this.iban !== '') {
+                if (r.order && r.transferDetails.details && this.iban !== '' && !this.prefilled) {
                   this.transfer = r.transferDetails
                   this.betaApproved = true
                   this.changePage('confirm', 3)
