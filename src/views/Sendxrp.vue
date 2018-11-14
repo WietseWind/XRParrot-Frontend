@@ -59,16 +59,27 @@
 
       <div class="mt-5 pt-5 sendflow">
         <div v-if="activePage === 'destination'" class="innerpage">
-          <p class="text-center">
-            Please enter the destination account (wallet address) your XRP should be delivered to.
-          </p>
-          <p class="text-center">
-            The destination XRP address should start with a lowercase <code class="alert-primary pl-1 pr-1">r</code>.
-          </p>
-          <p class="text-center alert alert-warning">
-            If you want to send your XRP to a third party (shared wallet, platform, exchange, ...) make sure
-            you enter your (destination) tag.
-          </p>
+          <div v-if="!prefilled">
+            <p class="text-center">
+              Please enter the destination account (wallet address) your XRP should be delivered to.
+            </p>
+            <p class="text-center">
+              The destination XRP address should start with a lowercase <code class="alert-primary pl-1 pr-1">r</code>.
+            </p>
+            <p class="text-center alert alert-warning">
+              If you want to send your XRP to a third party (shared wallet, platform, exchange, ...) make sure
+              you enter your (destination) tag.
+            </p>
+          </div>
+          <div v-else>
+            <p class="text-center">
+              <i class="fas fa-info-circle"></i>
+              The destination XRP address
+              <span v-if="tagtoggle">and destination tag are </span>
+              <span v-else>is </span>
+              <strong>prefilled</strong>.
+            </p>
+          </div>
           <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
             <div class="raddress" v-if="!awaiting">
               <div class="text-center d-block"><small>XRP address</small></div>
@@ -248,8 +259,8 @@
                           </div>
                           <div class="row mt-3">
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">Sending IBAN </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ iban }}</code></div>
-                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">XRP destination </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ destination }}</code></div>
-                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">Destination tag </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ tagtoggle ? tag : '-' }}</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">XRP destination </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ this.transfer.details.address }}</code></div>
+                            <small class="col-12 pb-0 col-lg-4 pt-1 pb-1 text-muted">Destination tag </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-muted bg-light pl-1 pb-1 pt-1">{{ this.transfer.details.tag ? this.transfer.details.tag : '-' }}</code></div>
                           </div>
                         </div>
                       </div>
@@ -702,7 +713,7 @@ XRParrot`
                   this.isBot = true
                 }
                 this.removeCaptcha()
-                if (r.order && r.transferDetails.details && this.iban !== '' && !this.prefilled) {
+                if (r.order && r.transferDetails.details && this.iban !== '' && !this.prefilled && r.transferDetails !== this.destination) {
                   this.transfer = r.transferDetails
                   this.betaApproved = true
                   this.changePage('confirm', 3)
