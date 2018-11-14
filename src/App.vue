@@ -83,6 +83,11 @@ export default {
         window.jQuery('#getXRPModal').modal({ keyboard: false, show: true, backdrop: 'static' })
       }
     }
+
+    let DocHash = (document.location.hash || '')
+    if (DocHash.length === 64 + 1) {
+      document.location.href = 'https://xrpcharts.ripple.com/#/transactions/' + DocHash.slice(1)
+    }
   },
   methods: {
     modalAccept () {
