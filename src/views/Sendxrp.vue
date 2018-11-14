@@ -395,7 +395,7 @@ XRParrot`
   },
   mounted () {
     this.checkPrefilledDestination()
-    
+
     if (typeof window.localStorage['betaApproved'] !== 'undefined') {
       this.betaCode = window.localStorage['betaApproved']
     }
@@ -437,7 +437,7 @@ XRParrot`
           this.phonestep = 0
           this.phoneCheck = ''
           this.pageComplete = 0
-          this.tagtoggle = addr.length > 1 ? true : false
+          this.tagtoggle = addr.length > 1
           this.changePage('destination', 0)
           this.transfer = {}
         }
