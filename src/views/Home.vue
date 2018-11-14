@@ -1,5 +1,6 @@
 <template>
   <div class="container page mt-5 pt-5">
+    <p class="mb-5 text-center">XRParrot, turning your fiat to XRP. All it takes is a SEPA bank transfer 😃</p>
     <div class="d-none d-lg-flex justify-content-center align-items-center text-center visuals">
       <div class="col-12 col-lg-4 d-none d-md-block"><img src="../assets/visual-form.svg" alt="" class="visual" /></div>
       <div class="col-12 col-lg-4 d-none d-md-block"><img src="../assets/visual-iban.svg" alt="" class="visual" /></div>
@@ -17,7 +18,7 @@
       <a v-else href="#getXRP" class="btn btn-primary" data-toggle="modal" data-target="#getXRPModal">
         <img src="../assets/xrp-icon-white.svg" alt="" /><span>START</span>
       </a>
-      <p>Turning your fiat to XRP. All it takes is a SEPA bank transfer 😃</p>
+      <br />&nbsp;
     </div>
   </div>
 </template>
