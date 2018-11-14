@@ -5,7 +5,7 @@
           <router-link class="navbar-brand" to="/">
             <img src="./assets/bird-icon.svg" width="58" style="float:left;" />
             <h1>XRPARROT</h1>
-            <h2>Send XRP by SEPA (IBAN) transfer</h2>
+            <h2 class="pl-0 ml-0">BUY XRP with a SEPA (IBAN) transfer</h2>
           </router-link>
           <button v-if="userAgentValid" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars"></i>
@@ -103,6 +103,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .navbar-nav {
+    a.nav-item.nav-link {
+      white-space: nowrap !important;
+      margin-left: 30px !important;
+    }
+  }
   .navbar-brand {
     position: relative; display: block;
     width: 315px; height: 75px;
@@ -111,8 +117,8 @@ export default {
       position: absolute; top:0; right:0;
     }
     h2 {
-      color:#333; text-transform:uppercase; float:left; display:block; clear:both;
-      font-size: 13px; position: absolute; right: 7px; bottom: 0px; font-weight: 400;
+      color:#333; text-transform:uppercase; right: -7px; display:block; clear:both;
+      font-size: 13px; position: absolute; bottom: 0px; font-weight: 400;
     }
   }
 </style>

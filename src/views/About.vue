@@ -56,5 +56,6 @@
       be stored in the XRParrot database for at least 5 (five) years.
       In response to a duly justified request, XRParrot shall provide your information to the official authorities.
     </p>
+    <br />&nbsp;
   </div>
 </template>
