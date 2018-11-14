@@ -4,11 +4,11 @@
         <div class="faq-item">
             <input id="ac-1" type="checkbox" />
             <label class="faq-header" id="faq-1" for="ac-1">
-                <h4>Can I reuse my Payment reference (Order ID)?</h4>
+                <h4>Can I reuse my Payment reference (Payment ID)?</h4>
                 <i class="fa fa-angle-down"></i>
             </label>
             <div class="faq-body">
-                Yes, you can. Your Payment reference (Order ID) should be added to your
+                Yes, you can. Your Payment reference (Payment ID) should be added to your
                 money transfer description (also called: Payment reference / Payment note / etc.).
                 We can identify your payment using this ID. As long as the IBAN account you will be
                 sending your funds from, and the destination XRP address (+ tag) are the same,
@@ -23,7 +23,7 @@
             </label>
             <div class="faq-body">
                 You can just enter your new details in the order form, to receive a new
-                Payment reference (Order ID) associated with your new source IBAN / destination XRP account.
+                Payment reference (Payment ID) associated with your new source IBAN / destination XRP account.
             </div>
         </div>
         <div class="faq-item">
@@ -56,7 +56,7 @@
             </label>
             <div class="faq-body">
                 Yes! Definitely! You can just configure an automated money transfer with your bank to the XRParrot bank account, with
-                your Payment reference (Order ID).
+                your Payment reference (Payment ID).
             </div>
         </div>
         <div class="faq-item">
@@ -92,7 +92,7 @@
         <div class="faq-item">
             <input id="ac-4" type="checkbox" />
             <label class="faq-header" id="faq-4" for="ac-4">
-                <h4>What happens if I forget to add the Payment reference (Order ID) to the deposit?</h4>
+                <h4>What happens if I forget to add the Payment reference (Payment ID) to the deposit?</h4>
                 <i class="fa fa-angle-down"></i>
             </label>
             <div class="faq-body">
@@ -193,7 +193,7 @@
         <div class="faq-item">
             <input id="ac-15" type="checkbox" />
             <label class="faq-header" id="faq-15" for="ac-15">
-                <h4>What if my bank tells me my Payment reference (Order ID) is invalid?</h4>
+                <h4>What if my bank tells me my Payment reference (Payment ID) is invalid?</h4>
                 <i class="fa fa-angle-down"></i>
             </label>
             <div class="faq-body">

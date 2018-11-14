@@ -193,9 +193,9 @@
             </div> -->
             <div class="col-12">
               <div class="alert alert-secondary bg-white">
-                <h5 class="pb-0 mb-2"><i class="far fa-info-circle"></i> Your Order ID is <strong class="text-dark">{{ transfer.details.description }}</strong>.</h5>
+                <h5 class="pb-0 mb-2"><i class="far fa-info-circle"></i> Your Payment ID is <strong class="text-dark">{{ transfer.details.description }}</strong>.</h5>
                 You <strong>must</strong> add this ID to your payment to XRParrot.
-                <br />Your Order ID is linked to your source IBAN and destination XRP adddres &amp; tag.
+                <br />Your Payment ID is linked to your source IBAN and destination XRP adddres &amp; tag.
                 You <strong>can use this ID again</strong> for future payments.<br />
                 If you forget this ID or if you want to change your payment source or XRP destination, you can simply generate a new ID.
               </div>
@@ -236,7 +236,7 @@
                               <!-- <small class="float-right btn-qr"><button @click="sepaQR=true" class="btn btn-sm btn-outline-dark bg-white text-dark"><i class="text-dark fas fa-qrcode"></i> Show QR</button></small> -->
                               <h6 class="card-title pb-0 mb-0">
                                 <i class="fa fa-exclamation-triangle float-right mr-2" style="margin-top: 2px;"></i> <b>{{ transfer.details.description }}</b>
-                                <br /><small class="pt-2 mb-0 pb-1">Please <strong>don't forget to include</strong>  the payment reference!</small>
+                                <br /><small class="pt-2 mb-0 pb-1">Please <strong><u>don't forget to include</u></strong> this ID with your transaction when sending your payment!</small>
                               </h6>
                             </code></div>
                             <small class="col-12 pb-0 col-lg-4 pt-1 pb-1">Account name </small> <div class="col-12 col-lg-8 mb-1"><code class="d-block text-primary bg-light pl-1 pb-1 pt-1 clb" v-clipboard:copy="'XRParrot NL'">XRParrot NL</code></div>
