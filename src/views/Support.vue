@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="getsupport" class="pb-5">
     <div class="container mt-1 pt-5 page" v-if="awaitingCaptcha">
       <div class="alert alert-warning text-center pb-5 pt-5">
         <i class="fas fa-spinner-third fa-spin"></i>
