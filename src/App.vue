@@ -19,6 +19,7 @@
 
               <router-link class="nav-item nav-link" :class="[{ 'active' : $route.name === 'faq' }]" to="faq">FAQ</router-link>
               <router-link class="nav-item nav-link" :class="[{ 'active' : $route.name === 'support' }]" to="support">SUPPORT</router-link>
+              <router-link class="nav-item nav-link" :class="[{ 'active' : $route.name === 'about' }]" to="about">ABOUT</router-link>
             </div>
           </div>
         </div>
