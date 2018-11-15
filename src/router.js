@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Sendxrp from './views/Sendxrp.vue'
-import Faq from './views/Faq.vue'
-import Support from './views/Support.vue'
+import FourOFour from './views/404.vue'
 
 Vue.use(Router)
 
@@ -19,17 +17,17 @@ export default new Router({
     {
       path: '/sendxrp',
       name: 'sendxrp',
-      component: Sendxrp
+      component: () => import(/* webpackChunkName: "sendxrp" */ './views/Sendxrp.vue')
     },
     {
       path: '/faq',
       name: 'faq',
-      component: Faq
+      component: () => import(/* webpackChunkName: "faq" */ './views/Faq.vue')
     },
     {
       path: '/support',
       name: 'support',
-      component: Support
+      component: () => import(/* webpackChunkName: "support" */ './views/Support.vue')
     },
     {
       path: '/about',
@@ -38,6 +36,11 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+    },
+    {
+      path: '*',
+      name: '404',
+      component: FourOFour
     }
   ]
 })
