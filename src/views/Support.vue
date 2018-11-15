@@ -9,7 +9,7 @@
     <div class="container mt-1 pt-5 page" v-if="isBot">
       <div class="alert alert-danger text-center pb-4 pt-5">
         <i class="fas fa-star-exclamation"></i>
-        Oops. Looks like something is wrong with your browser.
+        Oops. Looks like something is wrong. You probably have a strict cookie blocker, or you are using a VPN or Tor proxy.
         <br />
         <small class="text-muted">Ref: <code class="bg-light text-muted pl-1 pr-1">#GCBT01</code></small>
       </div>
