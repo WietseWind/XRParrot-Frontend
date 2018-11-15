@@ -2,7 +2,7 @@
   <div class="about container mt-1 pt-5 page">
     <h3>About XRParrot</h3>
     <p>
-      XRParrot is a service by <a href="https://twitter.com/WietseWind" target="_blank">@WietseWind</a>. Wietse is a big XRP enthousiast (he loves the tech.) and the creator of
+      XRParrot is a service by <a href="https://twitter.com/WietseWind" target="_blank">@WietseWind</a>. Wietse is a big XRP enthusiast (he loves the tech.) and the creator of
       the <a href="https://xrptipbot.com" target="_blank">XRP Tip Bot</a>. He created XRParrot to make it easier for people in Europe (with a IBAN bank account)
       to acquire some XRP.
     </p>
