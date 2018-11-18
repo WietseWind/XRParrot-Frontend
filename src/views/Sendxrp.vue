@@ -709,7 +709,7 @@ XRParrot`
               .then(r => r.json())
               .then(r => {
                 this.awaitingCaptcha = false
-                if (r.response.score <= 0.5) {
+                if (r.response.score <= 0.3) {
                   this.isBot = true
                 }
                 this.removeCaptcha()
