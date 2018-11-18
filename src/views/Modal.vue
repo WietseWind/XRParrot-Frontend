@@ -31,6 +31,16 @@
             </div>
           </div>
 
+          <div class="list-item" @click="checkDataStorage = !checkDataStorage">
+            <div class="list-item__checkbox" :class="[{ 'list-item__checkbox--active' : checkDataStorage }]"></div>
+            <div class="list-item__description">
+              <p>
+                <strong>Data retention policy</strong> <br>
+                Once you send a deposit to XRParrot, your source IBAN, phone number and destination XRP address will be stored (safely) for five years.
+              </p>
+            </div>
+          </div>
+
           <div class="list-item" @click="checkAge = !checkAge">
             <div class="list-item__checkbox" :class="[{ 'list-item__checkbox--active' : checkAge }]"></div>
             <div class="list-item__description">
@@ -113,7 +123,8 @@ export default {
       checkFunds: false,
       checkRate: false,
       checkDoubt: false,
-      checkFees: false
+      checkFees: false,
+      checkDataStorage: false
     }
   },
   created () {
@@ -133,7 +144,7 @@ export default {
   },
   computed: {
     disabled () {
-      return !this.checkLimits || !this.checkStranger || !this.checkAge || !this.checkFunds || !this.checkRate || !this.checkDoubt || !this.checkFees
+      return !this.checkLimits || !this.checkStranger || !this.checkAge || !this.checkFunds || !this.checkRate || !this.checkDoubt || !this.checkFees || !this.checkDataStorage
     }
   },
   watch: {

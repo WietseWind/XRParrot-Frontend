@@ -60,6 +60,22 @@
             </div>
         </div>
         <div class="faq-item">
+            <input id="ac-21" type="checkbox" />
+            <label class="faq-header" id="faq-21" for="ac-21">
+                <h4>How long will you store my data and will it be shared?</h4>
+                <i class="fa fa-angle-down"></i>
+            </label>
+            <div class="faq-body">
+                Once you send a deposit to XRParrot, your source IBAN, phone number and destination XRP address will be stored (safely) for five years.
+                We will not share your data with third parties. But: your data may be shared <b>upon specific request</b> in case of KYC/AML/law enforcement inquiries with:
+                <ul>
+                    <li>The bank XRParrot is using to receive EUR deposits</li>
+                    <li>The liquidity (XRP) provider</li>
+                    <li>Official authorities (finance, law)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="faq-item">
             <input id="ac-9" type="checkbox" />
             <label class="faq-header" id="faq-9" for="ac-9">
                 <h4>How much does XRParrot cost (what's the fee)?</h4>
