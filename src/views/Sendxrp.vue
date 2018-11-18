@@ -120,6 +120,13 @@
             <small>If your deposit comes in from another IBAN account, your transfer will
             be cancelled and refunded.</small>
           </p>
+          <p class="text-center mb-5 text-muted">
+            <strong class="text-danger"><i class="fa fa-exclamation-triangle"></i> Please note! You can only send from your own bank account.</strong><br />
+            <small>
+              Services like TransferWise will use a third party bank account that's not in your name.<br /> Thus, a deposit using such a service won't work and
+              result in a refund.
+            </small>
+          </p>
           <div class="d-lg-flex justify-content-center align-items-center text-center">
             <div class="iban" v-if="!awaiting">
               <input type="text" spellcheck="false" v-on:keydown.enter="checkIBAN()" class="uppercase form-control form-control-lg" style="width: 450px; max-width: 100% !important;" placeholder="NL 12 ABCD 012345678" v-model="iban">

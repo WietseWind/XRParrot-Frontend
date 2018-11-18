@@ -136,6 +136,17 @@
             </div>
         </div>
         <div class="faq-item">
+            <input id="ac-23" type="checkbox" />
+            <label class="faq-header" id="faq-23" for="ac-23">
+                <h4>Can I use a currency conversion service (like TransferWise)?</h4>
+                <i class="fa fa-angle-down"></i>
+            </label>
+            <div class="faq-body">
+                No, you <b>can't</b>. Services like TransferWise will use a third party bank account that's not in your name. Thus, a deposit using such a service won't work and
+                result in a refund.
+            </div>
+        </div>
+        <div class="faq-item">
             <input id="ac-8" type="checkbox" />
             <label class="faq-header" id="faq-8" for="ac-8">
                 <h4>Do you perform KYC/AML checks?</h4>
