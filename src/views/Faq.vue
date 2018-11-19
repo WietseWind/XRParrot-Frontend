@@ -98,7 +98,7 @@
         <div class="faq-item">
             <input id="ac-3" type="checkbox" />
             <label class="faq-header" id="faq-3" for="ac-3">
-                <h4>What happens if exceed montly limit?</h4>
+                <h4>What happens if exceed monthly limit?</h4>
                 <i class="fa fa-angle-down"></i>
             </label>
             <div class="faq-body">
