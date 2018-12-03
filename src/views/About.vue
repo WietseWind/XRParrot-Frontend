@@ -25,11 +25,11 @@
         <tbody>
           <tr>
             <td width="300">Company name</td>
-            <td>XRParrot (registered trade name, legal entity: <q>The Integrators BV</q>)</td>
+            <td>XRParrot (registered trade name, legal entity: <q>Nodum B.V.</q>)</td>
           </tr>
           <tr>
             <td>Chamber of Commerce no. (NL)</td>
-            <td><a href="https://www.kvk.nl/zoeken/?source=all&q=64731464" target="_blank">64731464</a></td>
+            <td><a href="https://www.kvk.nl/zoeken/?source=all&q=64731537" target="_blank">64731537</a></td>
           </tr>
           <tr>
             <td>Phone (SMS Text message only)</td>
@@ -41,7 +41,7 @@
           </tr>
           <tr>
             <td>EU VAT no.</td>
-            <td>NL855805547B01</td>
+            <td>NL855805614B01</td>
           </tr>
           <tr>
             <td>Address</td>
