@@ -26,7 +26,8 @@
             <div class="list-item__description">
               <p>
                 <strong>Limits: exceeding deposits will be returned</strong> <br>
-                Max. <span class="text-primary">€500 per month</span> per unique phone number / IBAN account / Deposit destination.
+                Max. <span class="text-primary">€500 per month <b>*</b></span> per unique phone number / IBAN account / Deposit destination.
+                <small class="text-muted"><span class="text-primary"><b>*</b></span> Rolling limit, based on your deposits.</small>
               </p>
             </div>
           </div>
@@ -36,7 +37,7 @@
             <div class="list-item__description">
               <p>
                 <strong>Data retention policy</strong> <br>
-                Once you send a deposit to XRParrot, your source IBAN, phone number and destination XRP address will be stored (safely) for five years.
+                Once you send a deposit to XRParrot, your source IBAN, phone number and destination XRP address will be stored (safely) for seven years.
               </p>
             </div>
           </div>
@@ -99,6 +100,17 @@
                 </small>
                 <br />
                 <small class="text-muted">When sending <span class="text-primary">non-EUR</span> funds (like CHF, GBP) <b>our</b> bank also charges a currency conversion fee of <span class="text-primary">1.5&percnt;</span>. <b>Your</b> bank may also charge a fee.</small>
+                <small class="text-muted">If you send a non-EUR SWIFT payment instead of a SEPA payment <span class="text-primary">€5</span> will be charged.</small>
+              </p>
+            </div>
+          </div>
+
+          <div class="list-item" @click="checkRegulation = !checkRegulation">
+            <div class="list-item__checkbox" :class="[{ 'list-item__checkbox--active' : checkRegulation }]"></div>
+            <div class="list-item__description">
+              <p>
+                <strong>Dutch (NL) law applies</strong> <br>
+                  As a Dutch company, XRParrot is governed by Dutch (NL) law. It is your own responsibility to follow those rules and laws in your country of residence and/or country from which you access this site and services.
               </p>
             </div>
           </div>
@@ -124,7 +136,8 @@ export default {
       checkRate: false,
       checkDoubt: false,
       checkFees: false,
-      checkDataStorage: false
+      checkDataStorage: false,
+      checkRegulation: false
     }
   },
   created () {
@@ -144,7 +157,7 @@ export default {
   },
   computed: {
     disabled () {
-      return !this.checkLimits || !this.checkStranger || !this.checkAge || !this.checkFunds || !this.checkRate || !this.checkDoubt || !this.checkFees || !this.checkDataStorage
+      return !this.checkLimits || !this.checkStranger || !this.checkAge || !this.checkFunds || !this.checkRate || !this.checkDoubt || !this.checkFees || !this.checkDataStorage || !this.checkRegulation
     }
   },
   watch: {

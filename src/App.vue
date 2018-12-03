@@ -73,7 +73,7 @@ export default {
     if (browser.name && browser.version && browser.name === 'ie' && parseInt(browser.version.split('.')[0]) < 11) {
       this.userAgentValid = false
     }
-    if (this.$route.name !== 'sendxrp') {
+    if (this.$route.name !== 'sendxrp' && window.location.pathname !== '/sendxrp') {
       this.awaitingAccept = false
     } else {
       // Send XRP
