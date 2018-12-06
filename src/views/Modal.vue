@@ -8,6 +8,9 @@
           <button v-if="$route.name !== 'sendxrp'" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+          <button v-if="$route.name === 'sendxrp'" type="button" class="close" onclick="document.location.href = '/'">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
         <div class="modal-body">
           <h6 class="text-primary mt-0 pt-0 pb-3 text-center"><i class="fa fa-check"></i> Please check the boxes.</h6>
