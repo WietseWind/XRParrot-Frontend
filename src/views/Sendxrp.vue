@@ -213,7 +213,7 @@
               <div class="alert alert-secondary bg-white">
                 <h5 class="pb-0 mb-2"><i class="far fa-info-circle"></i> Your Payment ID is <strong class="text-dark">{{ transfer.details.description }}</strong>.</h5>
                 You <strong>must</strong> add this ID to your payment to XRParrot.
-                <br />Your Payment ID is linked to your source IBAN and destination XRP adddres &amp; tag.
+                <br />Your Payment ID is linked to your source IBAN and destination XRP address &amp; tag.
                 You <strong>can use this ID again</strong> for future payments.<br />
                 If you forget this ID or if you want to change your payment source or XRP destination, you can simply generate a new ID.
               </div>
