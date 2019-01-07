@@ -29,7 +29,7 @@
             <div class="list-item__description">
               <p>
                 <strong>Limits: exceeding deposits will be returned</strong> <br>
-                Max. <span class="text-primary">€500 per month <b>*</b></span> per unique phone number / IBAN account / Deposit destination.
+                Max. <span class="text-primary">€2000 per month <b>*</b></span> per unique phone number / IBAN account / Deposit destination.
                 <small class="text-muted"><span class="text-primary"><b>*</b></span> Rolling limit, based on your deposits.</small>
               </p>
             </div>

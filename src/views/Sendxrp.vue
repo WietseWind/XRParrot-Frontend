@@ -227,7 +227,7 @@
                         <!--<i class="fa fa-check"></i>-->
                         Please
                         <!-- use your existing online banking website/app and -->
-                        transfer your money (min. &euro;5, max. &euro;500) to the following account:
+                        transfer your money (min. &euro;5, max. &euro;2000) to the following account:
                       </span>
                     </strong>
                     <br />
@@ -304,7 +304,7 @@
                   <p class="card-text">
                     The IBAN deposit account and transfer description <strong class="text-primary">can be reused</strong>.
                     You can send additional deposits whenever you like, as long as your deposit sum will not
-                    exceed <strong class="text-primary">€500 per calender month</strong>.
+                    exceed <strong class="text-primary">€2000 per calender month</strong>.
                   </p>
                   <p class="card-text">
                     Any follow up deposits using your transfer description <code class="text-primary"><strong>{{ transfer.details.description }}</strong></code>
