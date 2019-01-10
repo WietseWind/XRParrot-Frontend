@@ -103,7 +103,7 @@
             </label>
             <div class="faq-body">
                 XRParrot works with a <i>rolling limit</i>, meaning 30 days after a payment the value of that payment becomes available for you to deposit again.
-                Imagine sending €125 every week, the fifth week you can deposit €125 again, because your first payment isn't part of your <i>last 30 days rolling limit</i>. Your full €2000 monthly limit will be available 30 days after your last payment.
+                Imagine sending €500 every week, the fifth week you can deposit €500 again, because your first payment isn't part of your <i>last 30 days rolling limit</i>. Your full €2000 monthly limit will be available 30 days after your last payment.
             </div>
         </div>
         <div class="faq-item">
