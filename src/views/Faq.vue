@@ -98,7 +98,7 @@
         <div class="faq-item">
             <input id="ac-25" type="checkbox" />
             <label class="faq-header" id="faq-25" for="ac-25">
-                <h4>How does the montly limit work? When does my <q>new month</q> start?</h4>
+                <h4>How does the monthly limit work? When does my <q>new month</q> start?</h4>
                 <i class="fa fa-angle-down"></i>
             </label>
             <div class="faq-body">
