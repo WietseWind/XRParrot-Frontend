@@ -20,6 +20,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "sendxrp" */ './views/Sendxrp.vue')
     },
     {
+      path: '/refer/:token/:account/:tag',
+      name: 'refer',
+      component: () => import(/* webpackChunkName: "sendxrp" */ './views/Refer.vue')
+    },
+    {
       path: '/faq',
       name: 'faq',
       component: () => import(/* webpackChunkName: "faq" */ './views/Faq.vue')

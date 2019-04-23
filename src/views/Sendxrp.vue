@@ -77,7 +77,13 @@
               The destination XRP address
               <span v-if="tagtoggle">and destination tag are </span>
               <span v-else>is </span>
-              <strong>prefilled</strong>.
+              <strong class="text-dark">prefilled</strong>
+              for:<br />
+              <span class="h4 mt-1 d-block text-primary">
+                <i class="fab" :class="[ `fa-${prefilledData.network}` ]"></i>&nbsp;
+                <strong>{{ prefilledData.name }}</strong>
+                ({{ prefilledData.origin }})
+              </span>
             </p>
           </div>
           <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
@@ -349,6 +355,7 @@ Vue.use(VueClipboard)
 Vue.use(VueTelInput)
 
 const endpoint = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3001/api/' : 'https://api.xrparrot.com/api/'
+const captcha_threshold = process.env.NODE_ENV === 'development' ? 0.1 : 0.3
 
 export default {
   name: 'home',
@@ -376,7 +383,8 @@ export default {
       awaiting: false,
       transfer: {},
       sepaQR: false,
-      prefilled: false
+      prefilled: false,
+      prefilledData: { name: null, network: null, origin: null }
     }
   },
   created () {
@@ -446,18 +454,28 @@ XRParrot`
   },
   methods: {
     checkPrefilledDestination () {
-      if (document.location.hash && typeof document.location.hash === 'string' && document.location.hash.length > 0) {
-        if (document.location.hash.match(/^#r[a-zA-Z0-9]{20,}:?[0-9]*$/)) {
-          var addr = document.location.hash.slice(1).split(':')
+      if (typeof this.$router.currentRoute.params === 'object' && this.$router.currentRoute.params !== null) {
+        if (Object.keys(this.$router.currentRoute.params).indexOf('handle') > -1) {
+          // http://localhost:8080/refer/417786ddeae02b1fea86ed8af5d8b8c2dffea312/rPEPPER7kfTD9w2To4CQk6UCfuHM9c6GDY/495
           this.prefilled = true
-          this.destination = addr[0]
-          this.tag = addr.length > 1 ? addr[1] : ''
+          this.prefilledData.name = this.$router.currentRoute.params.handle
+          this.prefilledData.network = this.$router.currentRoute.params.network
+          this.prefilledData.origin = this.$router.currentRoute.params.origin
+          this.destination = this.$router.currentRoute.params.account
+          this.tag = this.$router.currentRoute.params.tag || ''
           this.phonestep = 0
           this.phoneCheck = ''
           this.pageComplete = 0
-          this.tagtoggle = addr.length > 1
+          this.tagtoggle = this.$router.currentRoute.params.tag !== ''
           this.changePage('destination', 0)
           this.transfer = {}
+        }
+      }
+      if (!this.prefilled) {
+        if (typeof window.localStorage['token'] !== 'undefined') {
+          const dest = window.localStorage['token']
+          delete window.localStorage['token']
+          document.location.href = dest
         }
       }
     },
@@ -716,7 +734,7 @@ XRParrot`
               .then(r => r.json())
               .then(r => {
                 this.awaitingCaptcha = false
-                if (r.response.score < 0.3) {
+                if (r.response.score < captcha_threshold) {
                   this.isBot = true
                 }
                 this.removeCaptcha()
