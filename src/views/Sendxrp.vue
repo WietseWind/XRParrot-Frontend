@@ -352,7 +352,7 @@ import VueClipboard from 'vue-clipboard2'
 
 VueClipboard.config.autoSetContainer = true
 Vue.use(VueClipboard)
-Vue.use(VueTelInput)
+// Vue.use(VueTelInput)
 
 const endpoint = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3001/api/' : 'https://api.xrparrot.com/api/'
 const captchaThreshold = process.env.NODE_ENV === 'development' ? 0.1 : 0.3
@@ -360,7 +360,8 @@ const captchaThreshold = process.env.NODE_ENV === 'development' ? 0.1 : 0.3
 export default {
   name: 'home',
   components: {
-    QrcodeVue
+    QrcodeVue,
+    VueTelInput
   },
   data () {
     return {
