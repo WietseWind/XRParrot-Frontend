@@ -355,7 +355,7 @@ Vue.use(VueClipboard)
 Vue.use(VueTelInput)
 
 const endpoint = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3001/api/' : 'https://api.xrparrot.com/api/'
-const captcha_threshold = process.env.NODE_ENV === 'development' ? 0.1 : 0.3
+const captchaThreshold = process.env.NODE_ENV === 'development' ? 0.1 : 0.3
 
 export default {
   name: 'home',
@@ -734,7 +734,7 @@ XRParrot`
               .then(r => r.json())
               .then(r => {
                 this.awaitingCaptcha = false
-                if (r.response.score < captcha_threshold) {
+                if (r.response.score < captchaThreshold) {
                   this.isBot = true
                 }
                 this.removeCaptcha()
