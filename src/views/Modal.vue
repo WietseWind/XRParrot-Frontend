@@ -40,7 +40,7 @@
             <div class="list-item__description">
               <p>
                 <strong>Data retention policy</strong> <br>
-                Once you send a deposit to XRParrot, your source IBAN, phone number and destination XRP address will be stored (safely) for seven years.
+                Once you send a deposit to XRParrot, your source IBAN, phone number and destination XRP address will be stored (safely) for five years.
               </p>
             </div>
           </div>
