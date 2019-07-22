@@ -64,11 +64,17 @@
               Please enter the destination account (wallet address) your XRP should be delivered to.
             </p>
             <p class="text-center">
-              The destination XRP address should start with a lowercase <code class="alert-primary pl-1 pr-1">r</code>.
+              The destination XRP address should start with a lowercase <code class="alert-primary pl-1 pr-1">r</code> or an uppercase
+              <code class="alert-primary pl-1 pr-1">X</code> if you use an
+              <a href="https://xrpaddress.info" target="_blank"><b>X</b>-encoded</a> destination.
             </p>
-            <p class="text-center alert alert-warning">
-              If you want to send your XRP to a third party (shared wallet, platform, exchange, ...) make sure
-              you enter your (destination) tag.
+            <p class="text-center alert alert-warning px-3 py-2" v-show="!isXaddress">
+              If you want to send your XRP to a third party (wallet, exchange, ...) make sure
+              to use an <a href="https://xrpaddress.info" target="_blank"><b>X</b>-address</a> or to enter your destination tag.
+            </p>
+            <p class="text-center alert alert-warning px-3 py-2 invisible" v-show="isXaddress">
+              If you want to send your XRP to a third party (wallet, exchange, ...) make sure
+              to use an <a href="https://xrpaddress.info" target="_blank"><b>X</b>-address</a> or to enter your destination tag.
             </p>
           </div>
           <div v-else>
@@ -89,9 +95,9 @@
           <div class="mt-5 d-lg-flex justify-content-center align-items-center text-center">
             <div class="raddress" v-if="!awaiting">
               <div class="text-center d-block"><small>XRP address</small></div>
-              <input type="text" spellcheck="false" class="form-control form-control-lg" :disabled="prefilled" placeholder="Destination XRP address" v-on:keydown.enter="checkDestination()" v-model="destination">
+              <input type="text" spellcheck="false" class="form-control form-control-lg" :class="{xaddress: isXaddress}" :disabled="prefilled" placeholder="Destination XRP address" v-on:keydown.enter="checkDestination()" v-model="destination">
             </div>
-            <div class="tag" @click="tagFocus()" v-if="!awaiting">
+            <div class="tag" @click="tagFocus()" v-if="!awaiting && !isXaddress">
               <div class="text-center d-block"><small>Destination tag</small></div>
               <div class="d-block" style="position: relative;">
                 <ul class="tg-list d-block">
@@ -256,10 +262,10 @@
                             <span class="col-12 pb-0 col-lg-4 mt-1">
                               <strong class="text-danger">Payment reference</strong>
                             </span>
-                            <div class="col-12 col-lg-8 mb-1 transfernote"><code class="d-block text-danger bg-light pl-1 pt-2 pb-0 clb" v-clipboard:copy="transfer.details.description">
+                            <div class="col-12 col-lg-8 mb-1 transfernote"><code class="d-block text-danger bg-light pl-1 pt-2 pb-0 clb" v-clipboard:copy="transfer.details.description.replace(/\./, ' ')">
                               <!-- <small class="float-right btn-qr"><button @click="sepaQR=true" class="btn btn-sm btn-outline-dark bg-white text-dark"><i class="text-dark fas fa-qrcode"></i> Show QR</button></small> -->
                               <h6 class="card-title pb-0 mb-0">
-                                <i class="fa fa-exclamation-triangle float-right mr-2" style="margin-top: 2px;"></i> <b>{{ transfer.details.description }}</b>
+                                <i class="fa fa-exclamation-triangle float-right mr-2" style="margin-top: 2px;"></i> <b>{{ transfer.details.description.replace(/\./, ' ') }}</b>
                                 <br /><small class="pt-2 mb-0 pb-1">Please <strong><u>don't forget to include</u></strong> this ID with your transaction when sending your payment!</small>
                               </h6>
                             </code></div>
@@ -391,6 +397,9 @@ export default {
   created () {
   },
   computed: {
+    isXaddress () {
+      return this.destination.trim().match(/^X/)
+    },
     qrValue () {
       return `BCD
 001
@@ -830,6 +839,14 @@ XRParrot`
 </style>
 
 <style lang="scss" scoped>
+  .xaddress {
+    width: 650px;
+    max-width: 100%;
+  }
+  .invisible {
+    visibility: hidden;
+  }
+
   div.card {
     .btn-qr {
       margin-bottom: 0;
