@@ -355,6 +355,7 @@ import 'vue-tel-input/dist/vue-tel-input.css'
 import swal from 'sweetalert'
 import QrcodeVue from 'qrcode.vue'
 import VueClipboard from 'vue-clipboard2'
+import * as codec from 'xrpl-tagged-address-codec'
 
 VueClipboard.config.autoSetContainer = true
 Vue.use(VueClipboard)
@@ -398,7 +399,7 @@ export default {
   },
   computed: {
     isXaddress () {
-      return this.destination.trim().match(/^X/)
+      return this.destination === '' || this.destination.trim().match(/^X/)
     },
     qrValue () {
       return `BCD
@@ -414,20 +415,20 @@ CHAR
 ${this.transfer.details.description}
 XRParrot`
     },
-    simpleVerifycheck () {
-      return this.phoneCheck.trim().match(/^[0-9]{6}$/)
-    },
-    simplePhonecheck () {
-      return this.phoneNumber.trim().match(/[0-9 -]{5,}/)
-    },
-    simpleIbanCheck () {
-      return this.iban.trim().match(/^[a-z]{2}[a-z0-9 ]{6,}/i)
-    },
-    simpleDestinationCheck () {
-      const destinationCheck = typeof this.destination === 'string' && this.destination.trim().match(/^r/) && this.destination.trim().length > 20
-      const tagCheck = !this.tagtoggle || (this.tagtoggle && (this.tag + '').trim().match(/^[0-9]{1,10}$/) && !isNaN(parseInt(this.tag)) && parseInt(this.tag) <= 4294967295)
-      return destinationCheck && tagCheck
-    }
+    // simpleVerifycheck () {
+    //   return this.phoneCheck.trim().match(/^[0-9]{6}$/)
+    // },
+    // simplePhonecheck () {
+    //   return this.phoneNumber.trim().match(/[0-9 -]{5,}/)
+    // },
+    // simpleIbanCheck () {
+    //   return this.iban.trim().match(/^[a-z]{2}[a-z0-9 ]{6,}/i)
+    // },
+    // simpleDestinationCheck () {
+    //   const destinationCheck = typeof this.destination === 'string' && this.destination.trim().match(/^r/) && this.destination.trim().length > 20
+    //   const tagCheck = !this.tagtoggle || (this.tagtoggle && (this.tag + '').trim().match(/^[0-9]{1,10}$/) && !isNaN(parseInt(this.tag)) && parseInt(this.tag) <= 4294967295)
+    //   return destinationCheck && tagCheck
+    // }
   },
   mounted () {
     this.checkPrefilledDestination()
@@ -644,10 +645,27 @@ XRParrot`
     },
     checkDestination () {
       this.awaiting = true
+      let destination = this.destination.trim()
+      if (this.isXaddress) {
+        try {
+          const decoded = codec.Decode(destination)
+          if (typeof decoded === 'object' && decoded !== null && typeof decoded.account === 'string') {
+            destination = decoded.account
+            if (decoded.tag !== null) {
+              this.tag = decoded.tag + ''
+              this.tagtoggle = true
+            } else {
+              this.tag = ''
+              this.tagtoggle = false
+            }
+          }
+        } catch (e) {}
+      }
+
       window.fetch(`${endpoint}xrpl-destination`, {
         credentials: 'include',
         method: 'POST',
-        body: JSON.stringify({ account: this.destination.trim(), tag: this.tagtoggle ? this.tag.trim() : null }),
+        body: JSON.stringify({ account: destination, tag: this.tagtoggle ? this.tag.trim() : null }),
         headers: { 'Content-Type': 'application/json; charset=utf-8' }
       })
         .then(r => r.json())
@@ -676,7 +694,7 @@ XRParrot`
               }
               if (goToNextPage) {
                 this.changePage('iban', 1)
-                window.localStorage['destination'] = this.destination + (this.tagtoggle ? ':' + this.tag : '')
+                window.localStorage['destination'] = this.destination + (!this.isXaddress && this.tagtoggle ? ':' + this.tag : '')
               }
             }
             if (!r.response.accountActivated) {
@@ -693,8 +711,9 @@ XRParrot`
               }).then(continueValid)
             } else if (r.response.accountNameInfo && typeof r.response.accountNameInfo.name !== 'undefined') {
               swal({
+                className: 'wide',
                 title: 'Please confirm account',
-                text: `The destination account:\n${r.response.account}\n\n... is known as: \n"${r.response.accountNameInfo.name.toUpperCase()}"\n\nShould your XRP be sent here?`,
+                text: `The destination account:\n${this.destination}\n\n... is known as: \n"${r.response.accountNameInfo.name.toUpperCase()}"\n\nShould your XRP be sent here?`,
                 closeOnClickOutside: false,
                 closeOnEsc: false,
                 icon: 'info',
@@ -809,6 +828,12 @@ XRParrot`
 </script>
 
 <style lang="scss">
+  div.swal-modal {
+    &.wide {
+      width: 520px;
+      max-width: 90%;
+    }
+  }
   .vue-tel-input, .phonenumber { background-color: #fff !important; }
   #getxrp { z-index: 99; position: relative; }
   .clb {
@@ -840,7 +865,7 @@ XRParrot`
 
 <style lang="scss" scoped>
   .xaddress {
-    width: 650px;
+    width: 715px;
     max-width: 100%;
   }
   .invisible {
