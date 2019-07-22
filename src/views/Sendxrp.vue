@@ -173,9 +173,6 @@
                       </div>
                     </button>
                 </div>
-                <!-- <div class="nextnav text-center">
-                  <button class="btn btn-primary" disabled>NEXT <i class="fa fa-angle-right"></i></button>
-                </div> -->
             </div>
 
             <div v-if="phonestep === 1">
@@ -193,34 +190,12 @@
                     <i class="fa fa-arrow-left fa-sm xfa-flip-horizontal"></i> Go back (change number)
                   </button>
                 </div>
-                <!-- <div class="nextnav text-center">
-                  <button class="btn btn-primary next" @click="changePage('iban', 1)">NEXT <i class="fa fa-angle-right"></i></button>
-                </div> -->
             </div>
 
         </div>
 
         <div v-if="activePage === 'confirm'" class="innerpage text-center confirm">
           <div class="row equal">
-            <!-- <div class="col-sm-6 mb-4">
-              <div class="card h">
-                <div class="card-header"><b>1. Verify</b></div>
-                <div class="card-body">
-                  <p class="card-text pb-0 mb-2">You will be sending your money from your account:</p>
-                  <h5 class="mt-3 card-title"><code class="bg-light text-primary alert pt-1 pb-1"><b>{{ iban }}</b></code></h5>
-                  <p class="card-text alert alert-warning text-center bg-white"><i class="fa fa-exclamation-triangle"></i> Please only send money from this account, or your transfer will be rejected and refunded.</p>
-                  <p class="card-text pb-0 mb-2 mt-4">Your money will be converted to XRP and will be sent to:</p>
-                  <h5 class="mt-3 card-title"><code class="bg-light text-primary alert pt-1 pb-1"><b>{{ destination }}</b></code></h5>
-                  <div v-if="tagtoggle">
-                    <p class="card-text pb-0 mb-2 mt-4">XRP deposit destination tag:</p>
-                    <h5 class="mt-3 card-title pb-0 mb-0"><code class="bg-light text-primary alert pt-1 pb-1"><b>{{ tag }}</b></code></h5>
-                  </div>
-                  <div v-else>
-                    <p class="card-text text-center">No destination tag will be used for the XRP deposit.</p>
-                  </div>
-                </div>
-              </div>
-            </div> -->
             <div class="col-12">
               <div class="alert alert-secondary bg-white">
                 <h5 class="pb-0 mb-2"><i class="far fa-info-circle"></i> Your Payment ID is <strong class="text-dark">{{ transfer.details.description }}</strong>.</h5>
@@ -299,46 +274,7 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="col-sm-12 mb-4">
-              <div class="card text-success alert-success border-success">
-                <div class="card-body">
-                  <p class="card-text">
-                    <i class="fal fa-hourglass mr-2"></i>
-                  </p>
-                </div>
-              </div>
-            </div> -->
-            <!-- <div class="col-sm-12 mb-4 d-none">
-              <div class="card">
-                <div class="card-header"><b><i class="fal fa-lightbulb-on"></i> Did you know...</b></div>
-                <div class="card-body">
-                  <h5 class="card-title">You can send recurring deposits to XRParrot:</h5>
-                  <p class="card-text">
-                    The IBAN deposit account and transfer description <strong class="text-primary">can be reused</strong>.
-                    You can send additional deposits whenever you like, as long as your deposit sum will not
-                    exceed <strong class="text-primary">€2000 per calender month</strong>.
-                  </p>
-                  <p class="card-text">
-                    Any follow up deposits using your transfer description <code class="text-primary"><strong>{{ transfer.details.description }}</strong></code>
-                    will be converted into XRP and sent to the destination account you specified.
-                  </p>
-                </div>
-              </div>
-            </div> -->
           </div>
-          <!-- <div class="destinationtag">
-            <p class="text-center">You entered this as the destination:</p>
-            <p class="text-center"><b>{{ destination }}</b></p>
-            <p class="text-center" v-if="tag.length > 0">
-              Tag: <span class="badge badge-primary">{{  }}</span>
-            </p>
-          </div> -->
-          <!-- <div class="ibanconf">
-            <hr>
-            <p class="text-center">And this as the IBAN:</p>
-            <p class="text-center"><b></b></p>
-            <p class="text-center"><b>NL39BUNQ2291418335</b></p>
-          </div> -->
           <br /><br />
           <button class="mt-5 btn btn-dark next" @click="cleanup()"><i class="fas fa-undo"></i> Restart (new order)</button>
           <br />&nbsp;
@@ -414,21 +350,7 @@ CHAR
 
 ${this.transfer.details.description}
 XRParrot`
-    },
-    // simpleVerifycheck () {
-    //   return this.phoneCheck.trim().match(/^[0-9]{6}$/)
-    // },
-    // simplePhonecheck () {
-    //   return this.phoneNumber.trim().match(/[0-9 -]{5,}/)
-    // },
-    // simpleIbanCheck () {
-    //   return this.iban.trim().match(/^[a-z]{2}[a-z0-9 ]{6,}/i)
-    // },
-    // simpleDestinationCheck () {
-    //   const destinationCheck = typeof this.destination === 'string' && this.destination.trim().match(/^r/) && this.destination.trim().length > 20
-    //   const tagCheck = !this.tagtoggle || (this.tagtoggle && (this.tag + '').trim().match(/^[0-9]{1,10}$/) && !isNaN(parseInt(this.tag)) && parseInt(this.tag) <= 4294967295)
-    //   return destinationCheck && tagCheck
-    // }
+    }
   },
   mounted () {
     this.checkPrefilledDestination()
@@ -659,7 +581,9 @@ XRParrot`
               this.tagtoggle = false
             }
           }
-        } catch (e) {}
+        } catch (e) {
+          window.console.log(e)
+        }
       }
 
       window.fetch(`${endpoint}xrpl-destination`, {
@@ -891,14 +815,10 @@ XRParrot`
   }
 
   div.tag {
-    // margin-left: -5px;
-    // padding-right: 10px;
     ul.tg-list {
       display: none !important;
     }
     input {
-      // margin-left: 55px !important;
-      // width: 160px;
       padding-left: 20px;
       cursor: pointer;
       &:focus {
@@ -907,19 +827,12 @@ XRParrot`
     }
   }
 
-  // h1 { color:$primary !important; }
   span[disabled] {
     cursor: default;
     pointer-events: none;
   }
 
   .uppercase { text-transform: uppercase }
-
-  div.equal {
-    div.card.h {
-      // height: 100%;
-    }
-  }
 
   @keyframes yourAnimation {
     0% { background-color: rgba(241,84,86, .2); }
